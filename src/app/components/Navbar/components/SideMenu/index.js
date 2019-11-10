@@ -32,21 +32,12 @@ export default class SideMenu extends Component {
   }
 
   render() {
-    const width = window.innerWidth
+    if (window.innerWidth > 767) return null
 
-    if (width > 767) return null
-
-    const { genres, path, display } = this.state
-
-    let contStyle
-    if (display === false) {
-      contStyle = { transform: 'translate3d(-9rem, 0px, 0px)' }
-    } else {
-      contStyle = { transform: 'translate3d(0px, 0px, 0px)' }
-    }
+    const { genres, path } = this.state
 
     return(
-      <div id="side-menu" style={contStyle}>
+      <div id="side-menu" style={this.containerStyle()}>
         <ul className="navbar-nav">
           <NavItem
             id="home-link"
@@ -75,12 +66,20 @@ export default class SideMenu extends Component {
               id={`genre-link-${index}`}
               path={path}
               href={genre.url}
-              text={genre.name}
+              text={genre.title}
             />
           )}
         </ul>
       </div>
     )
+  }
+
+  containerStyle = () => {
+    if (this.state.display) {
+      return { transform: 'translate3d(0px, 0px, 0px)' }
+    } else {
+      return { transform: 'translate3d(-9rem, 0px, 0px)' }
+    }
   }
 }
 
