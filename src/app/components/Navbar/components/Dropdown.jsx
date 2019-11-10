@@ -10,16 +10,9 @@ export default class Dropdown extends Component {
   state = {
     id: this.props.id,
     dropdownId: this.props.dropdownId,
-    path: this.props.path,
     text: this.props.text,
     links: this.props.links,
     show: false
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      path: nextProps.path
-    })
   }
 
   render() {
@@ -36,6 +29,7 @@ export default class Dropdown extends Component {
           {text}
           <FontAwesomeIcon icon={faAngleDown} />
         </button>
+
         <div
           id={id}
           className={this.menuClass()}
@@ -63,7 +57,7 @@ export default class Dropdown extends Component {
   }
 
   itemClass = () => {
-    if (this.state.path.match(/\/genres/)) {
+    if (this.props.path.match(/\/genres/)) {
       return "nav-item dropdown active"
     } else {
       return "nav-item dropdown"

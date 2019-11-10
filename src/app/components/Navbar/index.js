@@ -15,29 +15,10 @@ import { SearchInput } from './components/SearchBar/components/SearchInput'
 
 export default class Navbar extends Component {
   state = {
-    width: this.props.width,
-    displayMobile: false,
     displayMenu: false
   }
 
-  componentWillReceiveProps(nextProps) {
-    const width = nextProps.width
-
-    if (width < 768) {
-      this.addShadow()
-      window.removeEventListener('scroll', this.handleScroll)
-      this.setState({ width: width, displayMobile: true })
-
-    } else {
-      this.removeShadow()
-      window.addEventListener('scroll', this.handleScroll)
-      this.setState({ width: width, displayMobile: false })
-    }
-  }
-
   render() {
-    const { displayMenu } = this.state
-
     return (
       <div id="navbar">
         <nav className="navbar navbar-expand-md fixed-top">
@@ -51,32 +32,28 @@ export default class Navbar extends Component {
           </Link>
 
           <Route
-            render={(routeProps) => <NavCollapse {...this.props} {...routeProps} />}
-          />
+            render={(routeProps) =>
+              <>
+                <NavCollapse {...this.props} {...routeProps} />
 
-          <Route
-            render={(routeProps) => (
-              <div id="mobileSearchInput">
-                <div className="form-inline">
-                  <SearchInput
-                    location={routeProps.location.pathname}
-                    history={routeProps.history}
-                    placeholder="Search"
-                  />
+                <div id="mobileSearchInput">
+                  <div className="form-inline">
+                    <SearchInput
+                      location={routeProps.location.pathname}
+                      history={routeProps.history}
+                      placeholder="Search"
+                    />
+                  </div>
                 </div>
-              </div>
-            )}
-          />
 
-          <Route
-            render={(routeProps) => (
-              <SideMenu
-                genres={this.props.genres}
-                display={displayMenu}
-                {...routeProps}
-                toggleDisplay={this.toggleDisplay}
-              />
-            )}
+                <SideMenu
+                  genres={this.props.genres}
+                  display={this.state.displayMenu}
+                  {...routeProps}
+                  toggleDisplay={this.toggleDisplay}
+                />
+              </>
+            }
           />
         </nav>
       </div>
@@ -90,15 +67,21 @@ export default class Navbar extends Component {
   }
 
   componentDidMount() {
-    if (this.state.width < 768) {
+    this.assignEventListener()
+  }
+
+  componentDidUpdate() {
+    this.assignEventListener()
+  }
+
+  assignEventListener = () => {
+    if (this.props.width < 768) {
       this.addShadow()
       window.removeEventListener('scroll', this.handleScroll)
-      this.setState({ displayMobile: true })
 
     } else {
       this.removeShadow()
       window.addEventListener('scroll', this.handleScroll)
-      this.setState({ displayMobile: false })
     }
   }
 
