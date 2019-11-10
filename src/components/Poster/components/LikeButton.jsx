@@ -8,12 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp  } from '@fortawesome/free-solid-svg-icons'
 
 export default class LikeButton extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      liked: this.props.liked,
-      movie: this.props.movie
-    }
+  state = {
+    liked: this.props.liked,
+    movie: this.props.movie
   }
 
   componentWillReceiveProps(nextProps) {
@@ -31,8 +28,7 @@ export default class LikeButton extends Component {
     return(
       <li className={`poster-btn poster-btn-like ${itemClass}`}>
         <button onClick={() => this.toggleLikeMovie(liked, movie)}>
-          {/* <i className={iconClass}></i> */}
-          <FontAwesomeIcon icon={faThumbsUp} swapOpacity/>
+          <FontAwesomeIcon icon={faThumbsUp} />
         </button>
       </li>
     )

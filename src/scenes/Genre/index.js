@@ -11,26 +11,6 @@ export default class Genre extends Component {
     movies: null
   }
 
-  componentWillReceiveProps(nextProps) {    
-    const genreSlug = nextProps.match.params.slug
-
-    if (genreSlug === this.state.genre.slug) return
-
-    let genreData = sessionStorage.getItem(`Genre_${genreSlug}`)
-
-    if (genreData === null) {
-      this.fetchGenre(genreSlug)
-
-    } else {
-      genreData = JSON.parse(genreData)
-
-      this.setState({
-        genre: genreData.genre,
-        movies: genreData.movies
-      })
-    }
-  }
-
   render() {
     const { genre, movies } = this.state
 
@@ -84,7 +64,7 @@ export default class Genre extends Component {
         })
       })
       .catch(error => {
-        console.error('Error in GenreDisplay.fetchMovies()')
+        console.error('Error in Genre.fetchMovies()')
         console.error(error)
       })
   }

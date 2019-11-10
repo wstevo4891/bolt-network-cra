@@ -11,7 +11,6 @@ import HomePage from './components/HomePage'
 export default class Home extends Component {
   state = {
     slideLength: this.props.slideLength,
-    genres: this.props.genres,
     moviesIndex: null
   }
 
@@ -36,13 +35,13 @@ export default class Home extends Component {
   }
 
   render() {
-    const { slideLength, genres, moviesIndex } = this.state
+    const { slideLength, moviesIndex } = this.state
 
     if (moviesIndex === null) return null
 
     return(
       <HomePage
-        genres={genres}
+        genres={this.props.genres}
         slideLength={slideLength}
         moviesIndex={moviesIndex}
       />

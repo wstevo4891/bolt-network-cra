@@ -18,7 +18,13 @@ const Routes = (props) => (
 
     <Route
       path={`/genres/:slug`}
-      render={(routeProps) => <Genre {...props} {...routeProps} />}
+      render={(routeProps) =>
+        <Genre
+          {...props}
+          {...routeProps}
+          key={routeProps.match.params.slug}
+        />
+      }
     />
 
     <Route
