@@ -32,9 +32,11 @@ export default class SideMenu extends Component {
   }
 
   render() {
+    // console.log('SideMenu Rendering')
+
     if (window.innerWidth > 767) return null
 
-    const { genres, path } = this.state
+    const path = this.props.location.pathname
 
     return(
       <div id="side-menu" style={this.containerStyle()}>
@@ -60,7 +62,7 @@ export default class SideMenu extends Component {
             text="Recently Added"
           />
 
-          {genres.map((genre, index) =>
+          {this.state.genres.map((genre, index) =>
             <NavItem
               key={index}
               id={`genre-link-${index}`}
@@ -75,7 +77,7 @@ export default class SideMenu extends Component {
   }
 
   containerStyle = () => {
-    if (this.state.display) {
+    if (this.props.display) {
       return { transform: 'translate3d(0px, 0px, 0px)' }
     } else {
       return { transform: 'translate3d(-9rem, 0px, 0px)' }

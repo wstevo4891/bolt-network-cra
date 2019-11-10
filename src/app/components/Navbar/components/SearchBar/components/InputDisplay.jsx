@@ -3,6 +3,9 @@
 import React, { Component } from 'react'
 import { Motion, spring } from 'react-motion'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
 // Components
 import { SearchInput } from './SearchInput'
 import { SearchClose } from './SearchClose'
@@ -32,7 +35,11 @@ export default class InputDisplay extends Component {
       <Motion defaultStyle={{ x: start }} style={{ x: spring(end) }}>
         {value => (
           <div id="searchInput" style={{ width: `${value.x}px` }}>
-            <i className="fa fa-search" id="searchIcon" aria-hidden="true"></i>
+            <FontAwesomeIcon
+              icon={faSearch}
+              id="searchIcon"
+              aria-hidden="true"
+            />
 
             <div className="form-inline">
               <SearchInput
@@ -72,7 +79,7 @@ export default class InputDisplay extends Component {
 
   componentWillUnmount() {
     // Remove the mouseUp event listener
-    window.removeEventListener('mouseup', this.handleMouseUp)
+    document.removeEventListener('mouseup', this.handleMouseUp)
   }
 
   handleMouseUp = (event) => {
@@ -84,7 +91,7 @@ export default class InputDisplay extends Component {
     const targetClass = event.target.className
 
     if (this.targetCheck($input, searchValue, targetClass)) {
-      this.updateBar()
+      this.shrinkAndHide()
     }
   }
 
@@ -92,7 +99,7 @@ export default class InputDisplay extends Component {
     return input && value.length === 0 && !this.searchClasses.includes(target)
   }
 
-  updateBar = () => {
+  shrinkAndHide = () => {
     this.setState({
       start: 270,
       end: 0
@@ -104,7 +111,7 @@ export default class InputDisplay extends Component {
         end: 270
       })
 
-      this.props.closeDisplay()
+      this.props.hideDisplay()
     }, 400)
   }
 

@@ -11,33 +11,30 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import InputDisplay from './components/InputDisplay'
 
 export default class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      location: this.props.location,
-      history: this.props.history,
-      display: false
-    }
+  state = {
+    // location: this.props.location,
+    // history: this.props.history,
+    display: false
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.location === '/search') {
-      this.setState({
-        history: nextProps.history
-      })
-    } else {
-      this.setState({
-        location: nextProps.location,
-        history: nextProps.history
-      })
-    }
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.location === '/search') {
+  //     this.setState({
+  //       history: nextProps.history
+  //     })
+  //   } else {
+  //     this.setState({
+  //       location: nextProps.location,
+  //       history: nextProps.history
+  //     })
+  //   }
+  // }
 
   // When we click on the hour glass button, we'll hide it,
   // render the searchInput div, and animate its width to 270px.
   render() {
-    const { location, history, display } = this.state
+    const { display } = this.state
+    const { location, history } = this.props
 
     const boxClass = display ? 'searchBox d-none' : 'searchBox'
     const wrapperClass = display ? 'searchWrapper' : 'searchWrapper d-none'
@@ -57,7 +54,7 @@ export default class SearchBar extends Component {
             location={location}
             history={history}
             display={display}
-            closeDisplay={this.closeDisplay}
+            hideDisplay={this.hideDisplay}
           />
         </div>
       </li>
@@ -70,7 +67,7 @@ export default class SearchBar extends Component {
     })
   }
 
-  closeDisplay = () => {
+  hideDisplay = () => {
     this.setState({
       display: false
     })
