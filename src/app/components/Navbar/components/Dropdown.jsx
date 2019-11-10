@@ -23,37 +23,22 @@ export default class Dropdown extends Component {
   }
 
   render() {
-    const { id, dropdownId, path, text, links, show } = this.state
-
-    let itemClass
-    if (path.match(/\/genres/)) {
-      itemClass = "nav-item dropdown active"
-    } else {
-      itemClass = "nav-item dropdown"
-    }
-
-    let menuClass
-    if (show) {
-      menuClass = "dropdown-menu show"
-    } else {
-      menuClass = "dropdown-menu"
-    }
+    const { id, dropdownId, text, links } = this.state
 
     return(
-      <li id={id} className={itemClass}>
+      <li id={id} className={this.itemClass()}>
         <button
           className="nav-link"
           id={dropdownId}
           aria-haspopup="true"
           aria-expanded="false"
-          onClick={(event) => this.handleClick(event)}
         >
           {text}
           <FontAwesomeIcon icon={faAngleDown} />
         </button>
         <div
           id={id}
-          className={menuClass}
+          className={this.menuClass()}
           aria-labelledby={dropdownId}
         >
           {
@@ -73,6 +58,18 @@ export default class Dropdown extends Component {
     )
   }
 
+  menuClass = () => {
+    return this.state.show ? 'dropdown-menu show' : 'dropdown-menu'
+  }
+
+  itemClass = () => {
+    if (this.state.path.match(/\/genres/)) {
+      return "nav-item dropdown active"
+    } else {
+      return "nav-item dropdown"
+    }
+  }
+
   componentDidMount() {
     // Add the event listener that toggles the menu
     document.addEventListener('mouseup', this.handleMouseUp)
@@ -81,11 +78,6 @@ export default class Dropdown extends Component {
   componentWillUnmount() {
     // Remove the mouseUp event listener
     window.removeEventListener('mouseup', this.handleMouseUp)
-  }
-
-  handleClick = (event) => {
-    event.preventDefault()
-    event.stopPropagation()
   }
 
   handleMouseUp = (event) => {
@@ -101,14 +93,8 @@ export default class Dropdown extends Component {
   }
 
   toggleShow = () => {
-    if (this.state.show) {
-      this.setState({
-        show: false
-      })
-    } else {
-      this.setState({
-        show: true
-      })
-    }
+    this.setState({
+      show: !this.state.show
+    })
   }
 }

@@ -11,7 +11,7 @@ import './styles/main.scss'
 import NavCollapse from './components/NavCollapse'
 import SideMenu from './components/SideMenu/index'
 import Hamburger from './components/Hamburger'
-import { SearchInput } from './components/SearchBar/SearchInput'
+import { SearchInput } from './components/SearchBar/components/SearchInput'
 
 export default class Navbar extends Component {
   state = {
@@ -41,7 +41,10 @@ export default class Navbar extends Component {
     return (
       <div id="navbar">
         <nav className="navbar navbar-expand-md fixed-top">
-          <Hamburger dataTarget="navbarContent" onClickHandler={this.toggleDisplay} />
+          <Hamburger
+            dataTarget="navbarContent"
+            handleClick={this.toggleDisplay}
+          />
 
           <Link className="navbar-brand" to="/">
             <img src={logo} alt="Bolt Network logo" className="logo" />
@@ -81,17 +84,9 @@ export default class Navbar extends Component {
   }
 
   toggleDisplay = () => {
-    const displayMenu = this.state.displayMenu
-
-    if (displayMenu) {
-      this.setState({
-        displayMenu: false
-      })
-    } else {
-      this.setState({
-        displayMenu: true
-      })
-    }
+    this.setState({
+      displayMenu: !this.state.displayMenu
+    })
   }
 
   componentDidMount() {

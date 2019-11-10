@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 // Components
-import InputDisplay from './InputDisplay'
+import InputDisplay from './components/InputDisplay'
 
 export default class SearchBar extends Component {
   constructor(props) {

@@ -14,7 +14,7 @@ const Hamburger = (props) => (
     aria-controls={props.dataTarget}
     aria-expanded="false"
     aria-label="Toggle navigation"
-    onClick={props.onClickHandler}
+    onClick={props.handleClick}
   >
     <FontAwesomeIcon icon={faBars} />
   </button>

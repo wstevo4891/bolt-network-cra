@@ -35,10 +35,10 @@ export default class SliderContainer extends Component {
 
     const slideOver = new ContainerStyle(this.state).call()
 
-    const contClass = this.deterContClass(next, prev)
+    const container = this.containerClass(next, prev)
 
     return(
-      <div className={contClass} style={slideOver}>
+      <div className={container} style={slideOver}>
         {
           slides.map((slide, index) =>
             <Poster
@@ -84,7 +84,7 @@ export default class SliderContainer extends Component {
     })
   }
 
-  deterContClass = (next, prev) => {
+  containerClass = (next, prev) => {
     if (next || prev) {
       return "sliderContent animating"
     } else {
