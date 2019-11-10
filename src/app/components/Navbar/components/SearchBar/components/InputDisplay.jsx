@@ -9,9 +9,6 @@ import { SearchClose } from './SearchClose'
 
 export default class InputDisplay extends Component {
   state = {
-    location: this.props.location,
-    history: this.props.history,
-    display: this.props.display,
     start: 0,
     end: 270,
     queryExists: false
@@ -25,19 +22,11 @@ export default class InputDisplay extends Component {
     'form-control'
   ]
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      location: nextProps.location,
-      history: nextProps.history,
-      display: nextProps.display
-    })
-  }
-
   // Render the searchInput div, and animate its width to 270px.
   render() {
-    if (this.state.display === false) return null
+    if (this.props.display === false) return null
 
-    const { location, history, start, end, queryExists } = this.state
+    const { start, end, queryExists } = this.state
 
     return(
       <Motion defaultStyle={{ x: start }} style={{ x: spring(end) }}>
@@ -48,8 +37,8 @@ export default class InputDisplay extends Component {
             <div className="form-inline">
               <SearchInput
                 update={this.updateQuery}
-                location={location}
-                history={history}
+                location={this.props.location}
+                history={this.props.history}
                 placeholder="Titles, people, genres"
               />
             </div>
@@ -120,10 +109,9 @@ export default class InputDisplay extends Component {
   }
 
   handleClick = () => {
-    const { history, location } = this.state
-    const search = document.getElementById('search')
-    search.value = ''
-    this.updateQuery(null)
+    const { history, location } = this.props
+    document.getElementById('search').value = ''
+    this.setState({ queryExists: false })
     
     if (location === '/search') {
       history.push('/')

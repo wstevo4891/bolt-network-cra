@@ -44,7 +44,11 @@ export default class SearchBar extends Component {
 
     return(
       <li className="d-sm-inline-block nav-item">
-        <button className={boxClass} id="nav-item" onClick={this.handleClick}>
+        <button
+          className={boxClass}
+          id="nav-item"
+          onClick={this.handleClick}
+        >
           <FontAwesomeIcon icon={faSearch} />
         </button>
 
