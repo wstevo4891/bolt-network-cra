@@ -1,0 +1,18 @@
+// Not Found Styles
+
+@mixin bp-tablet {
+	@media only screen and (min-width: 768px) {
+		@content;
+	}
+}
+
+.not-found {
+  margin-top: 5rem;
+  color: white;
+
+  .not-found-query {
+    @include bp-tablet {
+      white-space: nowrap;
+    }
+  }
+}

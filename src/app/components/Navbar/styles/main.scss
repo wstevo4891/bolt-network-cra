@@ -1,0 +1,99 @@
+// Navbar Styles
+
+@import "mixins.scss";
+
+.logo {
+  width: 150px;
+}
+
+#navbar {
+  .navbar {
+    transition: background .4s;
+
+    @include bp-mobile {
+      width: 100%;
+    }
+  }
+
+  .navbar-toggler {
+    padding: 0;
+
+    &:focus {
+      outline: none;
+    }
+
+    span {
+      color: white;
+      font-size: 2rem;
+    }
+  }
+
+  .navbar-brand {
+    margin-left: 1rem;
+    margin-right: auto;
+
+    @media screen and (min-width: 768px) {
+      margin-left: unset;
+      margin-right: 1rem;
+    }
+  }
+
+  .navbar .navbar-collapse .navbar-nav {
+    li a {
+      color: white;
+      transition: color .4s;
+
+      &:hover {
+        color: #b3b3b3;
+      }
+    }
+
+    li {
+      transition: all .4s;
+    }
+
+    li.active {
+      @include bp-tablet {
+        font-weight: bold;
+        transform: scale(1.1);
+      }
+
+      a:hover {
+        color: white;
+      }
+    }
+
+    .dropdown .dropdown-menu {
+      width: 400px;
+      max-height: 175px;
+      background: rgba(0,0,0,.75);
+      border-radius: 0;
+      border: 1px solid rgba(255,255,255,.35);
+    }
+
+    .dropdown .dropdown-menu .dropdown-item {
+      display: inline-block;
+      width: 125px;
+
+      &:hover {
+        color: white;
+        background: transparent;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.nav-link .fa, .nav-link svg {
+  margin-left: .2rem;
+}
+
+button.nav-link {
+  background: transparent;
+  border: none;
+  color: white;
+}
+
+.nav-shadow {
+  background: rgb(20, 20, 20);
+}

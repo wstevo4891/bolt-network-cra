@@ -1,0 +1,98 @@
+// Carousel Slide Styles
+
+$azure-radiance: #0393FF;
+
+@mixin slide {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100%;
+}
+
+.pirates-slide {
+  @include slide;
+  background-image: url('/pirates-slide.jpg');
+}
+
+.avengers-slide {
+  @include slide;
+  background-image: url('/avengers-slide.jpg');
+}
+
+.skyfall-slide {
+  @include slide;
+  background-image: url('/skyfall-slide.jpg');
+}
+
+.slide-info {
+  z-index: 1;
+  width: 40%;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+  left: 60%;
+  color: white;
+  text-align: left;
+  font-weight: 400;
+  font-size: 1.5vw;
+
+  span {
+    display: inline;
+    margin-right: 0.5em;
+    color: $azure-radiance;
+    text-shadow: 2px 2px 4px #333;
+  }
+
+  p {
+    float: left;
+    padding-right: 1rem;
+    margin: 0.5em 0 1em 0;
+    font-size: 14px;
+    text-shadow: 2px 2px 4px #333;
+  }
+}
+
+.movie-logo {
+  position: relative;
+  top: 0;
+}
+
+.movie-content {
+  position: relative;
+  bottom: 0;
+  margin-left: 1em;
+}
+
+.slide-buttons {
+  margin: 0.5em 0;
+
+  a, button {
+    width: 14vw;
+    font-size: 1.7vw;
+    margin-right: 0.5em;
+  }
+
+  svg {
+    margin-right: 6px;
+  }
+}
+
+.btn-blue {
+  // @extend .btn;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  color: $azure-radiance;
+  background: rgba(0,0,0,.75);
+  border: solid 1px $azure-radiance;
+  border-radius: 0;
+  padding: 0.5em 1.25em;
+  line-height: 1.5;
+
+  &:hover {
+    color: #d6d6d6;
+    background-color: $azure-radiance;
+    border-color: $azure-radiance;
+    text-decoration: none;
+  }
+}

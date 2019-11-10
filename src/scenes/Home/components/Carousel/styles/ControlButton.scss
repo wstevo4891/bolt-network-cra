@@ -1,0 +1,14 @@
+// Carousel ControlButton Styles
+
+.slider-arrow {
+  color: white;
+  font-size: 2.5em;
+  z-index: 5;
+  transition: all .3s ease;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.5);
+  }
+}
