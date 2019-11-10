@@ -9,17 +9,8 @@ import './styles/index.scss'
 import MoviePage from './components/MoviePage'
 
 export default class MovieDisplay extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      movie: null
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const movieSlug = nextProps.match.params.slug
-
-    this.fetchMovie(movieSlug)
+  state = {
+    movie: null
   }
 
   render() {

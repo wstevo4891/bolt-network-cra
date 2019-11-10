@@ -29,7 +29,13 @@ const Routes = (props) => (
 
     <Route
       path={`/movies/:slug`}
-      render={(routeProps) => <Movie {...props} {...routeProps} />}
+      render={(routeProps) =>
+        <Movie
+          {...props}
+          {...routeProps}
+          key={routeProps.match.params.slug}
+        />
+      }
     />
 
     <Route path="/recent">
