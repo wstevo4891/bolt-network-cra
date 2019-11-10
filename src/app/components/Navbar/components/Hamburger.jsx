@@ -2,6 +2,9 @@
 
 import React from 'react'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBars } from '@fortawesome/free-solid-svg-icons'
+
 const Hamburger = (props) => (
   <button
     className="navbar-toggler"
@@ -13,7 +16,7 @@ const Hamburger = (props) => (
     aria-label="Toggle navigation"
     onClick={props.onClickHandler}
   >
-    <span className="fa fa-bars"></span>
+    <FontAwesomeIcon icon={faBars} />
   </button>
 )
 

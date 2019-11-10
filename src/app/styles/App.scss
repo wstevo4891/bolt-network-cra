@@ -2,14 +2,6 @@
 
 @import "colors.scss";
 @import "mixins.scss";
-
-body {
-  background-color: #141414;
-}
-
-.display-container {
-  // @extend .container-fluid;
-  width: 100%;
-  padding: 0 4%;
-  margin: 5rem auto 0 auto;
-}
+@import "global.scss";
+@import "containers.scss";
+@import "Footer.scss";

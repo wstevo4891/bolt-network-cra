@@ -5,9 +5,10 @@ import API from './services/API'
 
 import './styles/App.scss'
 
-import MainContainer from './components/MainContainer/index'
+import MainContainer from './components/MainContainer'
 import Navbar from './components/Navbar'
 import Routes from './components/Routes'
+import Footer from './components/Footer'
 
 class App extends Component {
   state = {
@@ -30,6 +31,8 @@ class App extends Component {
             </>
           )}
         </MainContainer>
+
+        <Footer />
       </Router>
     )
   }
