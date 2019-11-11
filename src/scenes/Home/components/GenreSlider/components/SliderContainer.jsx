@@ -11,29 +11,13 @@ import Poster from '../../../../../components/Poster'
 
 export default class SliderContainer extends Component {
   state = {
-    slides: this.props.slides,
-    slideLength: this.props.slideLength,
-    start: this.props.start,
-    next: this.props.next,
-    prev: this.props.prev,
     hoverItem: null
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      slides: nextProps.slides,
-      slideLength: nextProps.slideLength,
-      start: nextProps.start,
-      next: nextProps.next,
-      prev: nextProps.prev
-    })
-  }
-
   render() {
-    const { slides, slideLength, start,
-            next, prev, hoverItem } = this.state
+    const { slides, slideLength, start, next, prev } = this.props
 
-    const slideOver = new ContainerStyle(this.state).call()
+    const slideOver = new ContainerStyle(this.props).call()
 
     const container = this.containerClass(next, prev)
 
@@ -49,7 +33,7 @@ export default class SliderContainer extends Component {
               start={start}
               next={next}
               prev={prev}
-              hoverItem={hoverItem}
+              hoverItem={this.state.hoverItem}
               mouseOver={this.handleMouseOver}
               mouseLeave={this.handleMouseLeave}
               service={SliderPosterService}
