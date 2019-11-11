@@ -77,30 +77,36 @@ export default class PosterControls extends Component {
     }
   }
 
-  toggleLike = () => {
-    const liked = this.state.liked
+  toggleLike = (likeState, movie) => {
+    if (likeState === true) {
+      new LikeButtonService(movie).remove()
 
-    if (liked) {
       this.setState({
         liked: null
       })
+
     } else {
+      new LikeButtonService(movie).add()
+
       this.setState({
         liked: true
       })
     }
   }
 
-  toggleUnlike = () => {
-    const liked = this.state.liked
+  toggleUnlike = (likeState, movie) => {
+    if (likeState === false) {
+      new UnlikeButtonService(movie).remove()
 
-    if (liked === null) {
-      this.setState({
-        liked: false
-      })
-    } else if (liked === false) {
       this.setState({
         liked: null
+      })
+
+    } else {
+      new UnlikeButtonService(movie).add()
+
+      this.setState({
+        liked: false
       })
     }
   }
