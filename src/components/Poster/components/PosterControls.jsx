@@ -17,27 +17,12 @@ import MyListButton from './MyListButton'
 
 export default class PosterControls extends Component {
   state = {
-    slideItem: this.props.slideItem,
-    hoverItem: this.props.hoverItem,
-    movie: this.props.movie,
     liked: undefined
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.hoverItem === this.state.hoverItem) return
-
-    const likeState = this.determineLike(nextProps.movie)
-
-    this.setState({
-      slideItem: nextProps.slideItem,
-      hoverItem: nextProps.hoverItem,
-      movie: nextProps.movie,
-      liked: likeState
-    })
-  }
-
   render() {
-    const { slideItem, hoverItem, movie, liked } = this.state
+    const { slideItem, hoverItem, movie } = this.props
+    const liked = this.state.liked
 
     if (hoverItem !== slideItem) return <span></span>
 
@@ -71,26 +56,24 @@ export default class PosterControls extends Component {
   }
 
   componentDidMount() {
-    const movie = this.state.movie
-    const likeState = this.determineLike(movie)
-
-    this.setState({
-      liked: likeState
-    })
-  }
-
-  determineLike = (movie) => {
+    const movie = this.props.movie
     const foundLike = new LikeButtonService(movie).findMovie()
     const foundUnlike = new UnlikeButtonService(movie).findMovie()
 
-    if (foundLike === false && foundUnlike === false) {
-      return null
+    this.setState({
+      liked: this.determineLike(foundLike, foundUnlike)
+    })
+  }
 
-    } else if (foundLike === true) {
+  determineLike = (like, unlike) => {
+    if (like === true) {
       return true
 
-    } else if (foundUnlike === true) {
+    } else if (unlike === true) {
       return false
+
+    } else {
+      return null
     }
   }
 
