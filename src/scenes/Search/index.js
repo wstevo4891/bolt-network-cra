@@ -14,8 +14,6 @@ import SearchResults from './components/SearchResults'
 
 export default class Search extends Component {
   state = {
-    slideLength: this.props.slideLength,
-    search: this.props.location.search,
     query: null,
     genres: null,
     movies: null
@@ -23,42 +21,37 @@ export default class Search extends Component {
   
   _mounted = false
 
-  componentWillReceiveProps(nextProps) {
-    const slideLength = nextProps.slideLength
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const query = this.parseQuery(nextProps.location.search)
 
-    if (query === this.state.query) {
-      if (this.state.slideLength === slideLength) return
+    if (query && query !== '') {
+      if (query === this.state.query) return
 
-      this.setState({
-        slideLength: slideLength
-      })
-
-    } else {
-      if (query && query !== '') {
-        this.fetchResults(query, slideLength)
-      }
+      this.fetchResults(query)
     }
   }
 
   render() {
-    const { genres, movies } = this.state
+    const { genres, movies, query } = this.state
 
     if (genres === null && movies === null) return null
 
-    return <SearchResults data={this.state} />
+    return(
+      <SearchResults
+        genres={genres}
+        movies={movies}
+        query={query}
+        slideLength={this.props.slideLength}
+      />
+    )
   }
 
   componentDidMount() {
     this._mounted = true
 
-    const { slideLength, search, query } = this.state
+    const query = this.parseQuery(this.props.location.search)
 
-    if (query === null) {
-      const query = this.parseQuery(search)
-
-      this.fetchResults(query, slideLength)
-    }
+    this.fetchResults(query)
   }
 
   componentWillUnmount() {
@@ -70,7 +63,7 @@ export default class Search extends Component {
     return decodeURIComponent(q)
   }
 
-  fetchResults = (query, slideLength) => {
+  fetchResults = (query) => {
     API.search.get(query)
       .then(response => {
         // =====================================================
@@ -79,7 +72,6 @@ export default class Search extends Component {
         if (this._mounted === false) return
 
         this.setState({
-          slideLength: slideLength,
           query: query,
           genres: response.data.genres,
           movies: response.data.movies

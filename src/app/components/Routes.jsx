@@ -51,7 +51,12 @@ const Routes = (props) => (
 
     <Route
       path="/search"
-      render={(routeProps) => <Search {...props} {...routeProps} />}
+      render={(routeProps) =>
+        <Search
+          {...props}
+          {...routeProps}
+        />
+      }
     />
   </Switch>
 )

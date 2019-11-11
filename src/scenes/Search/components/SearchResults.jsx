@@ -6,13 +6,12 @@ import MobileView from './MobileView'
 import DesktopView from './DesktopView'
 
 const SearchResults = (props) => {
-  const { genres, movies, query, slideLength } = props.data
-  const width = window.innerWidth
+  const { genres, movies, query, slideLength } = props
 
   if (genres.length === 0 && movies.length === 0) {
     return <NotFound query={query} />
 
-  } else if (width < 768) {
+  } else if (window.innerWidth < 768) {
     return(
       <MobileView
         query={query}
