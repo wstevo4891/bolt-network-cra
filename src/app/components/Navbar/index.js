@@ -19,6 +19,8 @@ export default class Navbar extends Component {
   }
 
   render() {
+    const display = this.state.displayMenu
+
     return (
       <div id="navbar">
         <nav className="navbar navbar-expand-md fixed-top">
@@ -48,7 +50,7 @@ export default class Navbar extends Component {
 
                 <SideMenu
                   genres={this.props.genres}
-                  display={this.state.displayMenu}
+                  display={display}
                   {...routeProps}
                   toggleDisplay={this.toggleDisplay}
                 />

@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 
 // Components
-import NavItem from '../NavItem'
+import MenuItem from './components/MenuItem'
 
 import './styles.scss'
 
@@ -14,26 +14,7 @@ export default class SideMenu extends Component {
     display: this.props.display
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { path, display } = this.state
-    const pathname = nextProps.location.pathname
-    const width = window.innerWidth
-
-    if (width < 768 && pathname !== path && display === true) {
-      setTimeout(() => {
-        this.props.toggleDisplay()
-      }, 1000)
-    }
-
-    this.setState({
-      path: nextProps.location.pathname,
-      display: nextProps.display
-    })
-  }
-
   render() {
-    // console.log('SideMenu Rendering')
-
     if (window.innerWidth > 767) return null
 
     const path = this.props.location.pathname
@@ -41,39 +22,49 @@ export default class SideMenu extends Component {
     return(
       <div id="side-menu" style={this.containerStyle()}>
         <ul className="navbar-nav">
-          <NavItem
+          <MenuItem
             id="home-link"
             path={path}
             href="/"
             text="Home"
+            handleClick={this.handleClick}
           />
 
-          <NavItem
+          <MenuItem
             id="my-list-link"
             path={path}
             href="/my-list"
             text="My List"
+            handleClick={this.handleClick}
           />
 
-          <NavItem
+          <MenuItem
             id="recent-link"
             path={path}
             href="/recent"
             text="Recently Added"
+            handleClick={this.handleClick}
           />
 
           {this.state.genres.map((genre, index) =>
-            <NavItem
+            <MenuItem
               key={index}
               id={`genre-link-${index}`}
               path={path}
               href={genre.url}
               text={genre.title}
+              handleClick={this.handleClick}
             />
           )}
         </ul>
       </div>
     )
+  }
+
+  handleClick = () => {
+    setTimeout(() => {
+      this.props.toggleDisplay()
+    }, 1000)
   }
 
   containerStyle = () => {
