@@ -10,7 +10,45 @@ import HomePage from './components/HomePage'
 
 export default class Home extends Component {
   state = {
+    slideLength: null,
     moviesIndex: null
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('Getting Derived State')
+
+    const slideLength = props.slideLength
+
+    if (
+      state.slideLength === null ||
+      slideLength === state.slideLength
+    ) return null
+
+    const moviesIndex = sessionStorage.getItem(`MoviesIndex_${slideLength}`)
+
+    if (moviesIndex !== null) {
+      return {
+        slideLength: slideLength,
+        moviesIndex: JSON.parse(moviesIndex)
+      }
+    } else {
+      return API.moviesIndex.get(slideLength)
+        .then(response => {
+          sessionStorage.setItem(
+            `MoviesIndex_${slideLength}`,
+            JSON.stringify(response.data)
+          )
+
+          return {
+            slideLength: slideLength,
+            moviesIndex: response.data
+          }
+        })
+        .catch(err => {
+          console.error('Error in Home.fetchMoviesIndex()')
+          console.error(err)
+        })
+    }
   }
 
   render() {
@@ -37,6 +75,7 @@ export default class Home extends Component {
 
     } else {
       this.setState({
+        slideLength: slideLength,
         moviesIndex: JSON.parse(moviesIndex)
       })
     }

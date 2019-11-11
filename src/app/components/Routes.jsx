@@ -16,7 +16,6 @@ const Routes = (props) => (
       <Home
         slideLength={props.slideLength}
         genres={props.genres}
-        key={props.slideLength}
       />
     </Route>
 
