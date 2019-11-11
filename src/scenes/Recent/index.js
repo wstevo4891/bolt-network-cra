@@ -7,28 +7,11 @@ import Results from '../../components/Results'
 
 export default class Recent extends Component {
   state = {
-    slideLength: this.props.slideLength,
     movies: null
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.slideLength === this.state.slideLength) return
-
-    const movies = sessionStorage.getItem('RecentMovies')
-
-    if (movies === null) {
-      this.fetchMovies(nextProps.slideLength)
-
-    } else {
-      this.setState({
-        slideLength: nextProps.slideLength,
-        movies: JSON.parse(movies)
-      })
-    }
-  }
-
   render() {
-    const { slideLength, movies } = this.state
+    const movies = this.state.movies
 
     if (movies === null) return null
 
@@ -40,20 +23,16 @@ export default class Recent extends Component {
           </div>
         </div>
 
-        <Results movies={movies} slideLength={slideLength} />
+        <Results movies={movies} slideLength={this.props.slideLength} />
       </div>
     )
   }
 
   componentDidMount() {
-    let { slideLength, movies } = this.state
-
-    if (movies !== null) return
-
-    movies = sessionStorage.getItem('RecentMovies')
+    const movies = sessionStorage.getItem('RecentMovies')
 
     if (movies === null) {
-      this.fetchMovies(slideLength)
+      this.fetchMovies()
 
     } else {
       this.setState({
@@ -62,13 +41,15 @@ export default class Recent extends Component {
     }
   }
 
-  fetchMovies = (slideLength) => {
+  fetchMovies = () => {
     API.movies.recent()
       .then(response => {
-        sessionStorage.setItem('RecentMovies', JSON.stringify(response.data))
+        sessionStorage.setItem(
+          'RecentMovies',
+          JSON.stringify(response.data)
+        )
 
         this.setState({
-          slideLength: slideLength,
           movies: response.data
         })
       })
