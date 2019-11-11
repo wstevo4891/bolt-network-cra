@@ -10,50 +10,27 @@ import HomePage from './components/HomePage'
 
 export default class Home extends Component {
   state = {
-    slideLength: this.props.slideLength,
     moviesIndex: null
   }
 
-  componentWillReceiveProps(nextProps) {
-    let slideLength = this.state.slideLength
-
-    if (nextProps.slideLength === slideLength) return
-
-    slideLength = nextProps.slideLength
-
-    let moviesIndex = sessionStorage.getItem(`MoviesIndex_${slideLength}`)
-
-    if (moviesIndex === null) {
-      this.fetchMoviesIndex(slideLength)
-
-    } else {
-      this.setState({
-        slideLength: slideLength,
-        moviesIndex: JSON.parse(moviesIndex)
-      })
-    }
-  }
-
   render() {
-    const { slideLength, moviesIndex } = this.state
+    const moviesIndex = this.state.moviesIndex
 
     if (moviesIndex === null) return null
 
     return(
       <HomePage
         genres={this.props.genres}
-        slideLength={slideLength}
+        slideLength={this.props.slideLength}
         moviesIndex={moviesIndex}
       />
     )
   }
 
   componentDidMount() {
-    let { slideLength, moviesIndex } = this.state
+    const slideLength = this.props.slideLength
 
-    if (moviesIndex !== null) return
-
-    moviesIndex = sessionStorage.getItem(`MoviesIndex_${slideLength}`)
+    const moviesIndex = sessionStorage.getItem(`MoviesIndex_${slideLength}`)
 
     if (moviesIndex === null) {
       this.fetchMoviesIndex(slideLength)

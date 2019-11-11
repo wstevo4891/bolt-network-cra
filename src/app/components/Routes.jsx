@@ -13,7 +13,11 @@ import Search from '../../scenes/Search'
 const Routes = (props) => (
   <Switch>
     <Route exact path="/">
-      <Home slideLength={props.slideLength} genres={props.genres} />
+      <Home
+        slideLength={props.slideLength}
+        genres={props.genres}
+        key={props.slideLength}
+      />
     </Route>
 
     <Route
