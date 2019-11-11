@@ -36,13 +36,13 @@ export default class MovieDisplay extends Component {
 
     if (movie !== null) return
 
-    const movieSlug = this.props.match.params.slug
+    const movieID = this.props.match.params.movieID
 
-    this.fetchMovie(movieSlug)
+    this.fetchMovie(movieID)
   }
 
-  fetchMovie = (movieSlug) => {
-    API.movies.show(movieSlug)
+  fetchMovie = (movieID) => {
+    API.movies.show(movieID)
       .then(response => {
         // localStorage.setItem(`Movie_${movieId}`, JSON.stringify(response.data))
 

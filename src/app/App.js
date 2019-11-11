@@ -52,14 +52,14 @@ class App extends Component {
   fetchGenres() {
     API.genres.index()
       .then(response => {
-        sessionStorage.setItem('Genres', JSON.stringify(response.data));
+        sessionStorage.setItem('Genres', JSON.stringify(response.data))
 
         this.setState({
           genres: response.data
         });
       })
       .catch(error => {
-        console.error(error);
+        console.error(error)
       })
   }
 }

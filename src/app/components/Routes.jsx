@@ -31,7 +31,7 @@ const Routes = (props) => (
     />
 
     <Route
-      path={`/movies/:slug`}
+      path={`/movies/:movieID`}
       render={(routeProps) =>
         <Movie
           {...props}

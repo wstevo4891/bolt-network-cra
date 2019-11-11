@@ -6,7 +6,7 @@ export default {
   movies: {
     index: () => axios.get(URI),
 
-    show: (slug) => axios.get(`${URI}/${slug}`),
+    show: (movieID) => axios.get(`${URI}/${movieID}`),
 
     byGenre: (genreId) => axios.get(`${URI}/by-genre/${genreId}`),
 

@@ -37,7 +37,7 @@ const Poster = (props) => {
       onMouseOver={props.mouseOver}
       onMouseLeave={props.mouseLeave}
     >
-      <Link to={`/movies/${movie.slug}`}>
+      <Link to={`/movies/${movie.id}`}>
         <div className="poster" style={posterImage}></div>
         <div className="poster-overlay"></div>
       </Link>
