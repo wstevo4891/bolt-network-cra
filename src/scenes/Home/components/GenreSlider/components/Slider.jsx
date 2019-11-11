@@ -7,30 +7,16 @@ import SlideBuilder from './SlideBuilder'
 import SliderArrow from './SliderArrow'
 
 export default class Slider extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      genre: this.props.genre,
-      moviesList: this.props.moviesList,
-      slideLength: this.props.slideLength,
-      position: 1,
-      start: true,
-      next: false,
-      prev: false
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      slideLength: nextProps.slideLength,
-      moviesList: nextProps.moviesList
-    })
+  state = {
+    position: 1,
+    start: true,
+    next: false,
+    prev: false
   }
 
   render() {
-    const { genre, moviesList, slideLength,
-            position, start, next, prev } = this.state
+    const { genre, moviesList, slideLength } = this.props
+    const { position, start, next, prev } = this.state
 
     return (
       <div id={`${genre.title}_slider`} className='genre-slider'>
@@ -102,7 +88,7 @@ export default class Slider extends Component {
   }
 
   nextPosition = (position) => {
-    const listLength = this.state.moviesList._length
+    const listLength = this.props.moviesList._length
 
     if (position === listLength) {
       return 1
@@ -112,7 +98,7 @@ export default class Slider extends Component {
   }
 
   prevPosition = (position) => {
-    const listLength = this.state.moviesList._length
+    const listLength = this.props.moviesList._length
 
     if (position === 1) {
       return listLength
