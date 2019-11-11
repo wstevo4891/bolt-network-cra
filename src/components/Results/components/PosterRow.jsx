@@ -6,25 +6,12 @@ import Poster from '../../Poster'
 import StaticPosterService from '../services/StaticPosterService'
 
 export default class PosterRow extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      movies: props.movies,
-      slideLength: props.slideLength,
-      hoverItem: null
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      movies: nextProps.movies,
-      slideLength: nextProps.slideLength
-    })
+  state = {
+    hoverItem: null
   }
 
   render() {
-    const { movies, slideLength, hoverItem } = this.state
+    const { movies, slideLength } = this.props
 
     if (movies.length === 0) return null
 
@@ -37,7 +24,7 @@ export default class PosterRow extends Component {
               index={index}
               movie={movie}
               slideLength={slideLength}
-              hoverItem={hoverItem}
+              hoverItem={this.state.hoverItem}
               mouseOver={this.handleMouseOver}
               mouseLeave={this.handleMouseLeave}
               service={StaticPosterService}
