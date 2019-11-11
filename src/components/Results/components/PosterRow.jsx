@@ -10,6 +10,8 @@ export default class PosterRow extends Component {
     hoverItem: null
   }
 
+  _mounted = false
+
   render() {
     const { movies, slideLength } = this.props
 
@@ -47,15 +49,23 @@ export default class PosterRow extends Component {
     setTimeout(() => {
       if (mouseOut) return
 
-      this.setState({
+      this._mounted && this.setState({
         hoverItem: slideIndex
       })
     }, 500)
   }
 
   handleMouseLeave = () => {
-    this.setState({
+    this._mounted && this.setState({
       hoverItem: null
     })
+  }
+
+  componentDidMount() {
+    this._mounted = true
+  }
+
+  componentWillUnmount() {
+    this._mounted = false
   }
 }

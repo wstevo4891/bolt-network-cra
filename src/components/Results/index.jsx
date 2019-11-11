@@ -5,9 +5,7 @@ import React from 'react'
 import PosterRow from './components/PosterRow'
 import StaticSlides from './services/StaticSlides'
 
-const Results = (props) => {
-  const { movies, slideLength } = props
-
+const Results = ({ movies, slideLength }) => {
   const slides = new StaticSlides(movies, slideLength).call()
 
   const resultsCol = {

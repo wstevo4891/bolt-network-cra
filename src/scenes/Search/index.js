@@ -24,11 +24,9 @@ export default class Search extends Component {
   UNSAFE_componentWillReceiveProps(nextProps) {
     const query = this.parseQuery(nextProps.location.search)
 
-    if (query && query !== '') {
-      if (query === this.state.query) return
+    if (query === this.state.query) return
 
-      this.fetchResults(query)
-    }
+    this.fetchResults(query)
   }
 
   render() {
