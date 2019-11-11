@@ -7,20 +7,11 @@ import Results from '../../components/Results'
 
 export default class MyList extends Component {
   state = {
-    slideLength: this.props.slideLength,
     movies: null
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.slideLength === this.state.slideLength) return
-
-    this.setState({
-      slideLength: nextProps.slideLength
-    })
-  }
-
   render() {
-    const { slideLength, movies } = this.state
+    const movies = this.state.movies
 
     if (movies === null) return null
 
@@ -32,36 +23,28 @@ export default class MyList extends Component {
           </div>
         </div>
 
-        {this.renderList(movies, slideLength)}
+        {this.renderList(movies, this.props.slideLength)}
       </div>
     )
   }
 
-  componentDidMount() {
-    const movies = this.state.movies
+  renderList = (movies, slideLength) => {
+    if (movies.length === 0) return <ListEmpty />
+    
+    return <Results movies={movies} slideLength={slideLength} />
+  }
 
-    if (movies !== null) return
+  componentDidMount() {
+    if (this.state.movies !== null) return
 
     this.fetchMyList()
   }
 
-  renderList = (movies, slideLength) => {
-    if (movies.length === 0) {
-      return <ListEmpty />
-    } else {
-      return <Results movies={movies} slideLength={slideLength} />
-    }
-  }
-
   fetchMyList = () => {
-    let list = JSON.parse(sessionStorage.getItem('MyList'))
-
-    if (list === null) {
-      list = []
-    }
+    const list = JSON.parse(sessionStorage.getItem('MyList'))
 
     this.setState({
-      movies: list
+      movies: list === null ? [] : Object.values(list)
     })
   }
 }

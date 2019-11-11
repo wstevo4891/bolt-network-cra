@@ -1,33 +1,31 @@
-// app/javascript/main/scenes/services/MyListService.js
+// MyListService.js
 
 export default class MyListService {
   constructor(movie) {
     this.movie = movie
-    this.list = JSON.parse(sessionStorage.getItem('MyList'))
+    this.list = this.setList()
+  }
+
+  setList = () => {
+    const list = JSON.parse(sessionStorage.getItem('MyList'))
+
+    if (list === null) return {}
+    
+    return list
   }
 
   add = () => {
-    if (this.list === null) this.list = []
+    this.list[this.movie.id] = this.movie
 
-    const found = this.findMovie()
+    sessionStorage.setItem('MyList', JSON.stringify(this.list))
 
-    if (found === false) {
-      return this.addToList()
-    } else {
-      console.log('This movie is already in your list')
-      return true
-    }
+    console.log('Movie added to your list')
+
+    return true
   }
 
   remove = () => {
-    for (let item of this.list) {
-      if (item.id === this.movie.id) {
-        const index = this.list.indexOf(item)
-
-        this.list.splice(index, 1)
-        break
-      }
-    }
+    delete this.list[this.movie.id]
 
     sessionStorage.setItem('MyList', JSON.stringify(this.list))
 
@@ -37,27 +35,6 @@ export default class MyListService {
   }
 
   findMovie = () => {
-    if (this.list === null || this.list.length === 0) return false
-
-    let found = false
-
-    for (let item of this.list) {
-      if (item.id === this.movie.id) {
-        found = true
-      }
-    }
-
-    return found
-  }
-
-  addToList = () => {
-    this.list.push(this.movie)
-
-    sessionStorage.setItem('MyList', JSON.stringify(this.list))
-
-    console.log('Movie added to your list')
-
-    return true
+    return this.list[this.movie.id] ? true : false
   }
 }
-
