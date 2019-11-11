@@ -19,14 +19,6 @@ const UnlikeButton = ({liked, movie, toggleUnlike }) => {
     }
   }
 
-  // const iconClass = () => {
-  //   if (liked === false) {
-  //     return 'fa fa-thumbs-down'
-  //   } else {
-  //     return 'fa fa-thumbs-o-down'
-  //   }
-  // }
-
   return(
     <li className={buttonClass()}>
       <button onClick={() => toggleUnlike(liked, movie)}>

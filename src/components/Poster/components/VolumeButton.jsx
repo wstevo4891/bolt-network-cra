@@ -7,40 +7,31 @@ import { faVolumeUp, faVolumeMute  } from '@fortawesome/free-solid-svg-icons'
 
 export default class VolumeButton extends Component {
   state = {
-    liked: this.props.liked,
     volume: true
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      liked: nextProps.liked
-    })
-  }
-
   render() {
-    const { liked, volume } = this.state
-
-    const itemClass = this.deterItemClass(liked)
-    const buttonIcon = this.determineIcon(volume)
+    const liked = this.props.liked
+    const volume = this.state.volume
 
     return(
-      <li className={`poster-btn poster-btn-volume ${itemClass}`}>
-        <button onClick={() => this.toggleVolume(volume)}>
-          <FontAwesomeIcon icon={buttonIcon} />
+      <li className={this.buttonClass(liked)}>
+        <button onClick={this.toggleVolume}>
+          <FontAwesomeIcon icon={this.buttonIcon(volume)} />
         </button>
       </li>
     )
   }
 
-  deterItemClass = (liked) => {
+  buttonClass = (liked) => {
     if (liked === null) {
-      return 'static'
+      return 'poster-btn poster-btn-volume static'
     } else {
-      return 'move-down'
+      return 'poster-btn poster-btn-volume move-down'
     }
   }
 
-  determineIcon = (volume) => {
+  buttonIcon = (volume) => {
     if (volume) {
       return faVolumeUp
     } else {
@@ -48,16 +39,9 @@ export default class VolumeButton extends Component {
     }
   }
 
-  toggleVolume = (volume) => {
-    if (volume) {
-      this.setState({
-        volume: false
-      })
-    } else {
-      this.setState({
-        volume: true
-      })
-    }
+  toggleVolume = () => {
+    this.setState({
+      volume: !this.state.volume
+    })
   }
 }
-
