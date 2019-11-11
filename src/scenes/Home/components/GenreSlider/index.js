@@ -13,25 +13,24 @@ import Slider from './components/Slider'
 
 export default class GenreSlider extends Component {
   state = {
-    genre: this.props.genre,
-    movies: this.props.movies,
-    slideLength: this.props.slideLength,
+    slideLength: null,
     moviesList: null
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.slideLength === this.state.slideLength) return
+  static getDerivedStateFromProps(props, state) {
+    if (props.slideLength === state.slideLength) return null
 
-    const moviesList = new MoviesList(nextProps).call()
+    const moviesList = new MoviesList(props).call()
 
-    this.setState({
-      slideLength: nextProps.slideLength,
+    return {
+      slideLength: props.slideLength,
       moviesList: moviesList
-    })
+    }
   }
 
   render() {
-    const { genre, slideLength, moviesList } = this.state
+    const moviesList = this.state.moviesList
+    const { genre, slideLength } = this.props
 
     if (moviesList === null) return null
 
@@ -53,13 +52,10 @@ export default class GenreSlider extends Component {
   }
 
   componentDidMount() {
-    let moviesList = this.state.moviesList
-
-    if (moviesList !== null) return
-
-    moviesList = new MoviesList(this.state).call()
+    const moviesList = new MoviesList(this.props).call()
 
     this.setState({
+      slideLength: this.props.slideLength,
       moviesList: moviesList
     })
   }

@@ -15,8 +15,6 @@ export default class Home extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log('Getting Derived State')
-
     const slideLength = props.slideLength
 
     if (
@@ -32,6 +30,7 @@ export default class Home extends Component {
         moviesIndex: JSON.parse(moviesIndex)
       }
     } else {
+      // Must return the promise or this will throw a silent error
       return API.moviesIndex.get(slideLength)
         .then(response => {
           sessionStorage.setItem(
@@ -39,6 +38,7 @@ export default class Home extends Component {
             JSON.stringify(response.data)
           )
 
+          // The state object returned by the promise
           return {
             slideLength: slideLength,
             moviesIndex: response.data
