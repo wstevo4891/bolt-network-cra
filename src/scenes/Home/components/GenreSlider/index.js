@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 
 // Services
-import MoviesList from './services/MoviesListPlus'
+import MoviesList from './services/MoviesList'
 
 // Styles
 import './styles/index.scss'

@@ -13,8 +13,8 @@ export default class LinkedList {
     const node = new Node(value);
 
     if (this._length > 0) {
-      this.tail.next = node;
       node.previous = this.tail;
+      this.tail.next = node;
       this.tail = node;
     } else {
       this.head = node;

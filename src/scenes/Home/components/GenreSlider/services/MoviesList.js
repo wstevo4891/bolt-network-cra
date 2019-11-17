@@ -2,42 +2,62 @@
 
 import LinkedList from '../structures/LinkedList';
 
-// Service for building linked list of movie objects
+const LENGTH_MAP = {
+  6: 24,
+  5: 20,
+  4: 20,
+  3: 18,
+  2: 12
+}
+
+/**
+ * @class MoviesList
+ * 
+ * @description Service for building linked list of slides
+ * for GenreSlider. Each slide is an array of movie objects.
+ * 
+ * @param {Object} props
+ * 
+ * @property {Integer} slideLength
+ * @property {Array<Object>} movies
+ * @property {LinkedList<Node>} list
+ */
 export default class MoviesList {
   constructor(props) {
-    this.movies = props.movies
     this.slideLength = props.slideLength
-    this.last = props.movies.length
+    this.movies = this.sliceMovies(props.movies)
     this.list = new LinkedList()
-    this.slideIndex = 1
-    this.movieIndex = 0
-    this.arr = []
+  }
+
+  sliceMovies = (movies) => {
+    if (this.slideLength === 6) return movies
+
+    const lastIndex = LENGTH_MAP[this.slideLength]
+
+    return movies.slice(0, lastIndex)
   }
 
   call = () => {
     if (this.movies === null || this.movies.length <= 1) return []
 
-    for (let movie of this.movies) {
-      this.arr.push(movie)
-      this.movieIndex++
-  
-      this.addToList()
-    }
+    this.buildList()
 
     return this.list
   }
 
-  addToList = () => {
-    if (this.movieIndex === this.last) {
-      this.list.add(this.arr)
+  buildList = () => {
+    let slideCount = 0
+    let slide = []
 
-    } else if (this.slideIndex < this.slideLength) {
-      this.slideIndex++
+    for (let movie of this.movies) {
+      slide.push(movie)
+      slideCount++
 
-    } else {
-      this.list.add(this.arr)
-      this.arr = []
-      this.slideIndex = 1
+      if (slideCount === this.slideLength) {
+        this.list.add(slide)
+        slide = []
+        slideCount = 0
+      }
     }
   }
 }

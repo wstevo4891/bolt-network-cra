@@ -9,8 +9,6 @@ import './styles/index.scss'
 
 const SideMenu = (props) => {
 
-  if (window.innerWidth > 767) return null
-
   const path = props.location.pathname
 
   const handleClick = () => {
