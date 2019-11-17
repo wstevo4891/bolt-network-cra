@@ -75,15 +75,13 @@ export default class Navbar extends Component {
   }
 
   componentDidMount() {
-    this.assignEventListener()
+    this.assignScrollListener()
+
+    window.addEventListener('resize', this.assignScrollListener)
   }
 
-  componentDidUpdate() {
-    this.assignEventListener()
-  }
-
-  assignEventListener = () => {
-    if (this.props.width < 768) {
+  assignScrollListener = () => {
+    if (window.innerWidth < 768) {
       this.addShadow()
       window.removeEventListener('scroll', this.handleScroll)
 
@@ -94,6 +92,7 @@ export default class Navbar extends Component {
   }
 
   componentWillUnmount() {
+    window.removeEventListener('resize', this.assignScrollListener)
     window.removeEventListener('scroll', this.handleScroll)
   }
 

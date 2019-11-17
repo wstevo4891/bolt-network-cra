@@ -15,11 +15,13 @@ export default class MainContainer extends Component {
   breakpoints = [1400, 1100, 800, 500]
 
   render() {
-    if (this.state.slideLength === null) return null
+    const slideLength = this.state.slideLength
+
+    if (slideLength === null) return null
 
     return (
       <div id="main-container">
-        {this.props.children(this.state)}
+        {this.props.children(slideLength)}
       </div>
     )
   }

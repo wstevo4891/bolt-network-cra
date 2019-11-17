@@ -25,15 +25,15 @@ class App extends Component {
     return (
       <Router>
         <MainContainer>
-          {mcState => (
+          {slideLength => (
             <>
-              <Navbar genresIndex={genresIndex} width={mcState.width} />
+              <Navbar genresIndex={genresIndex} />
 
               <Routes
                 genres={genres}
                 genresIndex={genresIndex}
                 moviesIndex={moviesIndex}
-                slideLength={mcState.slideLength}
+                slideLength={slideLength}
               />
             </>
           )}
