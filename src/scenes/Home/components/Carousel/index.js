@@ -108,18 +108,17 @@ export default class CarouselApp extends Component {
     }
   }
 
-  fetchMovies = () => {
-    API.movies.search(this.state.titles)
-      .then(response => {
-        sessionStorage.setItem('CarouselMovies', JSON.stringify(response.data))
+  fetchMovies = async () => {
+    try {
+      const data = await API.movies.search(this.state.titles)
 
-        this.setState({
-          movies: response.data
-        })
-      })
-      .catch(error => {
-        console.error('Error in Carousel.fetchMovies')
-        console.error(error)
-      })
+      sessionStorage.setItem('CarouselMovies', JSON.stringify(data))
+
+      this.setState({ movies: data })
+
+    } catch(error) {
+      console.error('Error in Carousel.fetchMovies')
+      console.error(error)
+    }
   }
 }

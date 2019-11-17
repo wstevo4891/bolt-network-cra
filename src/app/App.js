@@ -75,60 +75,56 @@ class App extends Component {
     return index
   }
 
-  // fetchGenres() {
-  //   const URI = 'http://localhost:3001/api/v1'
-
-  //   // create a new XMLHttpRequest
-  //   const xhr = new XMLHttpRequest()
-
-  //   // get a callback when the server responds
-  //   xhr.addEventListener('load', () => {
-  //     console.log('XHR Response')
-  //     console.log(xhr.responseText)
-
-  //     this.setState({
-  //       genres: JSON.parse(xhr.responseText)
-  //     })
-  //   })
-
-  //   xhr.open('GET', URI + '/genres')
-
-  //   xhr.send()
-  // }
-
-  // fetchGenres() {
-  //   API.genresXHR.index()
-  //     .then(response => {
-  //       sessionStorage.setItem('Genres', JSON.stringify(response.data))
-
-  //       this.setState({
-  //         genres: response.data
-  //       });
-  //     })
-  //     .catch(error => {
-  //       console.error(error)
-  //     })
-  // }
-
   fetchMoviesIndex = async () => {
     try {
-      const response = await API.moviesIndex.get()
+      const data = await API.moviesIndex.get()
 
-      sessionStorage.setItem(
-        'MoviesIndex',
-        JSON.stringify(response.data)
-      )
+      sessionStorage.setItem('MoviesIndex', JSON.stringify(data))
 
-      const genres = Object.keys(response.data)
+      const genres = Object.keys(data)
 
       this.setState({
         genres: genres,
         genresIndex: this.genresIndex(genres),
-        moviesIndex: response.data
+        moviesIndex: data
       })
 
     } catch(error) {
       console.error('Error in App.fetchMoviesIndex()')
+      console.error(error)
+    }
+  }
+
+  fetchMoviesIndexXHR = () => {
+    try {
+      const xhr = new XMLHttpRequest()
+
+      xhr.addEventListener('load', () => {
+        console.log('XHR Response')
+        console.log(xhr.responseText)
+
+        sessionStorage.setItem(
+          'MoviesIndex',
+          xhr.responseText
+        )
+
+        const data = JSON.parse(xhr.responseText)
+
+        const genres = Object.keys(data)
+
+        this.setState({
+          genres: genres,
+          genresIndex: this.genresIndex(genres),
+          moviesIndex: data
+        })
+      })
+
+      xhr.open('GET', 'http://localhost:3001/api/v1/movies-index')
+
+      xhr.send()
+
+    } catch(error) {
+      console.error('Error in App.fetchMoviesIndexXHR()')
       console.error(error)
     }
   }

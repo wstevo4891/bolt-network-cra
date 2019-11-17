@@ -41,17 +41,17 @@ export default class Movie extends Component {
     this.fetchMovie(movieID)
   }
 
-  fetchMovie = (movieID) => {
-    API.movies.show(movieID)
-      .then(response => {
+  fetchMovie = async (movieID) => {
+    try {
+      const movie = await API.movies.show(movieID)
 
-        this.setState({
-          movie: response.data
-        })
+      this.setState({
+        movie: movie
       })
-      .catch(error => {
-        console.error('Error in Movie.fetchMovie()')
-        console.error(error)
-      })
+
+    } catch(error) {
+      console.error('Error in Movie.fetchMovie()')
+      console.error(error)
+    }
   }
 }

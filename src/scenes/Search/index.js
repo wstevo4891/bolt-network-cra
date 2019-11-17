@@ -61,23 +61,22 @@ export default class Search extends Component {
     return decodeURIComponent(q)
   }
 
-  fetchResults = (query) => {
-    API.search.get(query)
-      .then(response => {
-        // =====================================================
-        // Prevent this.setState() if component is unmounted
-        // =====================================================
-        if (this._mounted === false) return
+  fetchResults = async (query) => {
+    try {
+      const data = await API.search.get(query)
 
-        this.setState({
-          query: query,
-          genres: response.data.genres,
-          movies: response.data.movies
-        })
+      // Prevent this.setState() if component is unmounted
+      if (this._mounted === false) return
+
+      this.setState({
+        query: query,
+        genres: data.genres,
+        movies: data.movies
       })
-      .catch(error => {
-        console.error('Error in Search.fetchResults()')
-        console.error(error);
-      })
+
+    } catch(error) {
+      console.error('Error in Search.fetchResults()')
+      console.error(error)
+    }
   }
 }
