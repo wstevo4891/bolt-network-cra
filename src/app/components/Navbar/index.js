@@ -50,6 +50,7 @@ export default class Navbar extends Component {
                       location={routeProps.location.pathname}
                       history={routeProps.history}
                       placeholder="Search"
+                      handleChange={this.props.fetchResults}
                     />
                   </div>
                 </div>

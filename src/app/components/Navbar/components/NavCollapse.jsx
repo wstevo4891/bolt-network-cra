@@ -45,7 +45,11 @@ const NavCollapse = (props) => {
       </ul>
 
       <ul className="navbar-nav navbar-right">
-        <SearchBar location={path} history={history} />
+        <SearchBar
+          location={path}
+          history={history}
+          fetchResults={props.fetchResults}
+        />
       </ul>
     </div>
   )

@@ -47,6 +47,7 @@ export default class InputDisplay extends Component {
                 location={this.props.location}
                 history={this.props.history}
                 placeholder="Titles, people, genres"
+                handleChange={this.props.fetchResults}
               />
             </div>
 

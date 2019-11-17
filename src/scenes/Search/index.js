@@ -1,10 +1,7 @@
-// app/javascript/main/scenes/Search/components/SearchResults.jsx
+// Search Scene
 
-import React, { Component } from 'react'
+import React from 'react'
 import queryString from 'query-string'
-
-// Services
-import API from './services/API'
 
 // Styles
 import './styles/index.scss'
@@ -12,71 +9,26 @@ import './styles/index.scss'
 // Components
 import SearchResults from './components/SearchResults'
 
-export default class Search extends Component {
-  state = {
-    query: null,
-    genres: null,
-    movies: null
-  }
-  
-  _mounted = false
+const Search = (props) => {
+  if (props.searchResults === null) return null
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    const query = this.parseQuery(nextProps.location.search)
-
-    if (query === this.state.query) return
-
-    this.fetchResults(query)
-  }
-
-  render() {
-    const { genres, movies, query } = this.state
-
-    if (genres === null && movies === null) return null
-
-    return(
-      <SearchResults
-        genres={genres}
-        movies={movies}
-        query={query}
-        slideLength={this.props.slideLength}
-      />
-    )
-  }
-
-  componentDidMount() {
-    this._mounted = true
-
-    const query = this.parseQuery(this.props.location.search)
-
-    this.fetchResults(query)
-  }
-
-  componentWillUnmount() {
-    this._mounted = false
-  }
-
-  parseQuery = (search) => {
-    const q = queryString.parse(search).q
+  const parseQuery = () => {
+    const q = queryString.parse(props.location.search).q
     return decodeURIComponent(q)
   }
 
-  fetchResults = async (query) => {
-    try {
-      const data = await API.search.get(query)
+  const query = parseQuery()
 
-      // Prevent this.setState() if component is unmounted
-      if (this._mounted === false) return
+  const { genres, movies } = props.searchResults
 
-      this.setState({
-        query: query,
-        genres: data.genres,
-        movies: data.movies
-      })
-
-    } catch(error) {
-      console.error('Error in Search.fetchResults()')
-      console.error(error)
-    }
-  }
+  return(
+    <SearchResults
+      genres={genres}
+      movies={movies}
+      query={query}
+      slideLength={props.slideLength}
+    />
+  )
 }
+
+export default Search

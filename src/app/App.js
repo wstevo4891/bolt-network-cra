@@ -14,11 +14,12 @@ class App extends Component {
   state = {
     genres: null,
     genresIndex: null,
-    moviesIndex: null
+    moviesIndex: null,
+    searchResults: null
   }
 
   render() {
-    const { genres, genresIndex, moviesIndex } = this.state
+    const { genres, genresIndex, moviesIndex, searchResults } = this.state
 
     if (genres === null) return null
 
@@ -27,13 +28,17 @@ class App extends Component {
         <MainContainer>
           {slideLength => (
             <>
-              <Navbar genresIndex={genresIndex} />
+              <Navbar
+                genresIndex={genresIndex}
+                fetchResults={this.fetchSearchResults}
+              />
 
               <Routes
                 genres={genres}
                 genresIndex={genresIndex}
                 moviesIndex={moviesIndex}
                 slideLength={slideLength}
+                searchResults={searchResults}
               />
             </>
           )}
@@ -91,6 +96,25 @@ class App extends Component {
 
     } catch(error) {
       console.error('Error in App.fetchMoviesIndex()')
+      console.error(error)
+    }
+  }
+
+  fetchSearchResults = async (query) => {
+    try {
+      if (!query || query === '') return
+
+      const data = await API.search.get(query)
+
+      // Prevent this.setState() if component is unmounted
+      // if (this._mounted === false) return
+
+      this.setState({
+        searchResults: data
+      })
+
+    } catch(error) {
+      console.error('Error in App.fetchSearchResults()')
       console.error(error)
     }
   }

@@ -21,6 +21,8 @@ export const SearchInput = (props) => {
     }
 
     if (props.update) props.update(query)
+
+    props.handleChange(query)
   }
 
   return(

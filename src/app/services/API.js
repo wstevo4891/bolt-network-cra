@@ -11,5 +11,15 @@ export default {
 
       return data
     }
+  },
+
+  search: {
+    get: async (query) => {
+      const resp = await fetch(`${URI}/search/${query}`)
+
+      const data = await resp.json()
+
+      return data
+    }
   }
 }
