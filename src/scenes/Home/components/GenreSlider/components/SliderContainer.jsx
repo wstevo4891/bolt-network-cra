@@ -14,6 +14,8 @@ export default class SliderContainer extends Component {
     hoverItem: null
   }
 
+  _mounted = false
+
   render() {
     const { slides, slideLength, start, next, prev } = this.props
 
@@ -44,35 +46,41 @@ export default class SliderContainer extends Component {
     )
   }
 
-  handleMouseOver = (event) => {
-    let mouseOut = false
-    const target = event.target.closest('.poster-container')
-    const slideIndex = parseInt(target.classList[1].slice(-1), 10)
-
-    target.onmouseout = () => {
-      mouseOut = true
-    }
-    
-    setTimeout(() => {
-      if (mouseOut) return
-
-      this.setState({
-        hoverItem: slideIndex
-      })
-    }, 500)
-  }
-
-  handleMouseLeave = () => {
-    this.setState({
-      hoverItem: null
-    })
-  }
-
   containerClass = (next, prev) => {
     if (next || prev) {
       return "sliderContent animating"
     } else {
       return "sliderContent"
     }
+  }
+
+  handleMouseOver = (event) => {
+    let mouseOut = false
+    const target = event.target.closest('.poster-container')
+    const slideIndex = parseInt(target.classList[1].slice(-1), 10)
+
+    target.onmouseout = () => mouseOut = true
+
+    setTimeout(() => {
+      if (mouseOut) return
+
+      this._mounted && this.setState({
+        hoverItem: slideIndex
+      })
+    }, 500)
+  }
+
+  handleMouseLeave = () => {
+    this._mounted && this.setState({
+      hoverItem: null
+    })
+  }
+
+  componentDidMount() {
+    this._mounted = true
+  }
+
+  componentWillUnmount() {
+    this._mounted = false
   }
 }

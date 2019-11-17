@@ -50,18 +50,39 @@ class App extends Component {
   }
 
   fetchGenres() {
-    API.genres.index()
-      .then(response => {
-        sessionStorage.setItem('Genres', JSON.stringify(response.data))
+    const URI = 'http://localhost:3001/api/v1'
 
-        this.setState({
-          genres: response.data
-        });
+    // create a new XMLHttpRequest
+    const xhr = new XMLHttpRequest()
+
+    // get a callback when the server responds
+    xhr.addEventListener('load', () => {
+      console.log('XHR Response')
+      console.log(xhr.responseText)
+
+      this.setState({
+        genres: JSON.parse(xhr.responseText)
       })
-      .catch(error => {
-        console.error(error)
-      })
+    })
+
+    xhr.open('GET', URI + '/genres')
+
+    xhr.send()
   }
+
+  // fetchGenres() {
+  //   API.genresXHR.index()
+  //     .then(response => {
+  //       sessionStorage.setItem('Genres', JSON.stringify(response.data))
+
+  //       this.setState({
+  //         genres: response.data
+  //       });
+  //     })
+  //     .catch(error => {
+  //       console.error(error)
+  //     })
+  // }
 }
 
 export default App;

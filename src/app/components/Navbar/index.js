@@ -25,7 +25,7 @@ export default class Navbar extends Component {
       <div id="navbar">
         <nav className="navbar navbar-expand-md fixed-top">
           <Hamburger
-            dataTarget="navbarContent"
+            dataTarget="side-menu"
             handleClick={this.toggleDisplay}
           />
 
