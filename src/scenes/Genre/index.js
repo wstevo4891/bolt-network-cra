@@ -1,71 +1,28 @@
-// app/javascript/main/scenes/Genre/components/GenreDisplay.jsx
+// Genre Scene
 
-import React, { Component } from 'react'
-import API from './services/API'
+import React from 'react'
 
 import Results from '../../components/Results'
 
-export default class Genre extends Component {
-  state = {
-    genre: null,
-    movies: null
-  }
+const Genre = (props) => {
+  const genre = props.genresIndex[props.genreSlug].text
 
-  render() {
-    const { genre, movies } = this.state
+  const movies = props.moviesIndex[genre]
 
-    if (genre === null) return null
-
-    return(
-      <div className="display-container">
-        <div className="row">
-          <div className="col-12 mb-4">
-            <h1 style={{ color: 'white' }}>{genre.title}</h1>
-          </div>
+  return (
+    <div className="display-container">
+      <div className="row">
+        <div className="col-12 mb-4">
+          <h1 style={{ color: 'white' }}>{genre}</h1>
         </div>
-
-        <Results
-          movies={movies}
-          slideLength={this.props.slideLength}
-        />
       </div>
-    )
-  }
 
-  componentDidMount() {
-    const genreSlug = this.props.match.params.slug
-
-    let genreData = sessionStorage.getItem(`Genre_${genreSlug}`)
-
-    if (genreData === null) {
-      this.fetchGenre(genreSlug)
-
-    } else {
-      genreData = JSON.parse(genreData)
-
-      this.setState({
-        genre: genreData.genre,
-        movies: genreData.movies
-      })
-    }
-  }
-
-  fetchGenre = (genreSlug) => {
-    API.genres.show(genreSlug)
-      .then(response => {
-        sessionStorage.setItem(
-          `Genre_${genreSlug}`,
-          JSON.stringify(response.data)
-        )
-
-        this.setState({
-          genre: response.data.genre,
-          movies: response.data.movies
-        })
-      })
-      .catch(error => {
-        console.error('Error in Genre.fetchMovies()')
-        console.error(error)
-      })
-  }
+      <Results
+        movies={movies}
+        slideLength={props.slideLength}
+      />
+    </div>
+  )
 }
+
+export default Genre

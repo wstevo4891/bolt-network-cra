@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 export default class MainContainer extends Component {
   state = {
-    width: null,
     slideLength: null
   }
 
@@ -38,21 +37,26 @@ export default class MainContainer extends Component {
   }
 
   updateSlideLength = () => {
+    const newLength = this.findSlideLength()
+
+    if (newLength === this.state.slideLength) return
+
+    this.setState({
+      slideLength: newLength
+    })
+  }
+
+  findSlideLength = () => {
     const width = window.innerWidth
-    let num = null
+    let slideLength = null
 
     for (let point of this.breakpoints) {
       if (width >= point) {
-        num = this.slideLengthIndex[point]
+        slideLength = this.slideLengthIndex[point]
         break
       }
     }
 
-    if (num == null) num = 2
-
-    this.setState({
-      width: width,
-      slideLength: num
-    })
+    return slideLength === null ? 2 : slideLength
   }
 }

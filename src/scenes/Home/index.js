@@ -1,102 +1,45 @@
-// Home Page Stateful Component
+// Home Page Functional Component
 
-import React, { Component } from 'react'
-
-import API from './services/API'
+import React from 'react'
 
 import './styles/HomePage.scss'
 
-import HomePage from './components/HomePage'
+import Carousel from './components/Carousel'
+import GenreSlider from './components/GenreSlider'
 
-export default class Home extends Component {
-  state = {
-    slideLength: null,
-    moviesIndex: null
-  }
+const Home = (props) => (
+  <main className="application">
+    <Carousel />
 
-  static getDerivedStateFromProps(props, state) {
-    const slideLength = props.slideLength
+    <div className="container">
+      <div className="row justify-content-center">
+        <div className="supporting col-12">
+          <h1>A world of movies at your fingertips</h1>
+          <p>Choose from the latest titles, with new movies added every day</p>
+        </div>
+      </div>
+    </div>
 
-    if (
-      state.slideLength === null ||
-      slideLength === state.slideLength
-    ) return null
-
-    const moviesIndex = sessionStorage.getItem(`MoviesIndex_${slideLength}`)
-
-    if (moviesIndex !== null) {
-      return {
-        slideLength: slideLength,
-        moviesIndex: JSON.parse(moviesIndex)
-      }
-    } else {
-      // Must return the promise or this will throw a silent error
-      return API.moviesIndex.get(slideLength)
-        .then(response => {
-          sessionStorage.setItem(
-            `MoviesIndex_${slideLength}`,
-            JSON.stringify(response.data)
-          )
-
-          // The state object returned by the promise
-          return {
-            slideLength: slideLength,
-            moviesIndex: response.data
-          }
-        })
-        .catch(err => {
-          console.error('Error in Home.fetchMoviesIndex()')
-          console.error(err)
-        })
-    }
-  }
-
-  render() {
-    const moviesIndex = this.state.moviesIndex
-
-    if (moviesIndex === null) return null
-
-    return(
-      <HomePage
-        genres={this.props.genres}
-        slideLength={this.props.slideLength}
-        moviesIndex={moviesIndex}
-      />
-    )
-  }
-
-  componentDidMount() {
-    const slideLength = this.props.slideLength
-
-    const moviesIndex = sessionStorage.getItem(`MoviesIndex_${slideLength}`)
-
-    if (moviesIndex === null) {
-      this.fetchMoviesIndex(slideLength)
-
-    } else {
-      this.setState({
-        slideLength: slideLength,
-        moviesIndex: JSON.parse(moviesIndex)
-      })
-    }
-  }
-
-  fetchMoviesIndex = (slideLength) => {
-    API.moviesIndex.get(slideLength)
-      .then(response => {
-        sessionStorage.setItem(
-          `MoviesIndex_${slideLength}`,
-          JSON.stringify(response.data)
+    <div className='genre-sliders-container'>
+      {
+        props.genres.map((genre, index) =>
+          <GenreSlider
+            key={index}
+            genre={genre}
+            movies={props.moviesIndex[genre]}
+            slideLength={props.slideLength}
+          />
         )
+      }
+    </div>
 
-        this.setState({
-          slideLength: slideLength,
-          moviesIndex: response.data
-        })
-      })
-      .catch(err => {
-        console.error('Error in Home.fetchMoviesIndex()')
-        console.error(err)
-      })
-  }
-}
+    <div className="feature">
+      <div className="container">
+        <h2>Available everywhere</h2>
+        <p>Start watching on one device, and pick up where you left off on another device</p>
+      </div>
+    </div>
+  </main>
+)
+
+export default Home

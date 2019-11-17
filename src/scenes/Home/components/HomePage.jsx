@@ -24,7 +24,7 @@ const HomePage = (props) => (
           <GenreSlider
             key={index}
             genre={genre}
-            movies={props.moviesIndex[genre.title]}
+            movies={props.moviesIndex[genre]}
             slideLength={props.slideLength}
           />
         )

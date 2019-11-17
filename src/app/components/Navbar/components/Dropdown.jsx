@@ -8,15 +8,11 @@ import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 
 export default class Dropdown extends Component {
   state = {
-    id: this.props.id,
-    dropdownId: this.props.dropdownId,
-    text: this.props.text,
-    links: this.props.links,
     show: false
   }
 
   render() {
-    const { id, dropdownId, text, links } = this.state
+    const { id, dropdownId, text, links } = this.props
 
     return(
       <li id={id} className={this.itemClass()}>
@@ -43,7 +39,7 @@ export default class Dropdown extends Component {
                 className="dropdown-item"
                 to={link.url}
               >
-                {link.title}
+                {link.text}
               </Link>
             )
           }
@@ -77,7 +73,7 @@ export default class Dropdown extends Component {
   handleMouseUp = (event) => {
     const targetId = event.target.id
 
-    if (targetId === this.state.dropdownId) {
+    if (targetId === this.props.dropdownId) {
       this.toggleShow()
     } else {
       this.setState({

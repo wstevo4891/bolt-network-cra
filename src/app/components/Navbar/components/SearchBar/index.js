@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 
-import './styles.scss'
+import './styles/index.scss'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
@@ -12,23 +12,8 @@ import InputDisplay from './components/InputDisplay'
 
 export default class SearchBar extends Component {
   state = {
-    // location: this.props.location,
-    // history: this.props.history,
     display: false
   }
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (nextProps.location === '/search') {
-  //     this.setState({
-  //       history: nextProps.history
-  //     })
-  //   } else {
-  //     this.setState({
-  //       location: nextProps.location,
-  //       history: nextProps.history
-  //     })
-  //   }
-  // }
 
   // When we click on the hour glass button, we'll hide it,
   // render the searchInput div, and animate its width to 270px.

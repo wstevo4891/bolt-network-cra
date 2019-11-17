@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 
 // Services
-import MoviesList from './services/MoviesList'
+import MoviesList from './services/MoviesListPlus'
 
 // Styles
 import './styles/index.scss'
@@ -37,8 +37,8 @@ export default class GenreSlider extends Component {
     return (
       <div id={`${genre.title}_row`} className='genre-slider-row'>
         <h2 className='rowHeader'>
-          <a className='rowTitle' href={`/genres/${genre.slug}`}>
-            <div className='row-header-title'>{genre.title}</div>
+          <a className='rowTitle' href={`/genres/${genre.toLowerCase()}`}>
+            <div className='row-header-title'>{genre}</div>
           </a>
         </h2>
 

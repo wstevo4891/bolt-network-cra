@@ -9,7 +9,7 @@ import './styles/main.scss'
 
 // Components
 import NavCollapse from './components/NavCollapse'
-import SideMenu from './components/SideMenu/index'
+import SideMenu from './components/SideMenu'
 import Hamburger from './components/Hamburger'
 import { SearchInput } from './components/SearchBar/components/SearchInput'
 
@@ -19,7 +19,9 @@ export default class Navbar extends Component {
   }
 
   render() {
-    const display = this.state.displayMenu
+    const { displayMenu } = this.state
+
+    const genreLinks = Object.values(this.props.genresIndex)
 
     return (
       <div id="navbar">
@@ -36,7 +38,11 @@ export default class Navbar extends Component {
           <Route
             render={(routeProps) =>
               <>
-                <NavCollapse {...this.props} {...routeProps} />
+                <NavCollapse
+                  genreLinks={genreLinks}
+                  {...this.props}
+                  {...routeProps}
+                />
 
                 <div id="mobileSearchInput">
                   <div className="form-inline">
@@ -49,8 +55,8 @@ export default class Navbar extends Component {
                 </div>
 
                 <SideMenu
-                  genres={this.props.genres}
-                  display={display}
+                  genres={genreLinks}
+                  display={displayMenu}
                   {...routeProps}
                   toggleDisplay={this.toggleDisplay}
                 />

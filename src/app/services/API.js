@@ -24,5 +24,9 @@ export default {
 
       xhr.send()
     }
+  },
+
+  moviesIndex: {
+    get: () => axios.get(`${URI}/movies-index`)
   }
 }

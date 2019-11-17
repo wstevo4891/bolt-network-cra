@@ -8,7 +8,7 @@ import './styles/index.scss'
 
 import MoviePage from './components/MoviePage'
 
-export default class MovieDisplay extends Component {
+export default class Movie extends Component {
   state = {
     movie: null
   }
@@ -44,14 +44,13 @@ export default class MovieDisplay extends Component {
   fetchMovie = (movieID) => {
     API.movies.show(movieID)
       .then(response => {
-        // localStorage.setItem(`Movie_${movieId}`, JSON.stringify(response.data))
 
         this.setState({
           movie: response.data
         })
       })
       .catch(error => {
-        console.error('Error in MovieDisplay.fetchMovie()')
+        console.error('Error in Movie.fetchMovie()')
         console.error(error)
       })
   }

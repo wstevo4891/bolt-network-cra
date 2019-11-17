@@ -13,10 +13,7 @@ import Search from '../../scenes/Search'
 const Routes = (props) => (
   <Switch>
     <Route exact path="/">
-      <Home
-        slideLength={props.slideLength}
-        genres={props.genres}
-      />
+      <Home {...props} />
     </Route>
 
     <Route
@@ -24,7 +21,7 @@ const Routes = (props) => (
       render={(routeProps) =>
         <Genre
           {...props}
-          {...routeProps}
+          genreSlug={routeProps.match.params.slug}
           key={routeProps.match.params.slug}
         />
       }
@@ -36,7 +33,6 @@ const Routes = (props) => (
         <Movie
           {...props}
           {...routeProps}
-          key={routeProps.match.params.slug}
         />
       }
     />

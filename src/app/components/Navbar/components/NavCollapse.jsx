@@ -9,7 +9,7 @@ import SearchBar from './SearchBar'
 
 const NavCollapse = (props) => {
   const path = props.location.pathname
-  const { genres, history } = props
+  const { genreLinks, history } = props
 
   return(
     <div className="collapse navbar-collapse" id="navbarContent">
@@ -26,7 +26,7 @@ const NavCollapse = (props) => {
           dropdownId="genresDropdown"
           path={path}
           text="Genres"
-          links={genres}
+          links={genreLinks}
         />
 
         <NavItem
