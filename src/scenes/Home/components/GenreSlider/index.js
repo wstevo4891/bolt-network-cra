@@ -1,6 +1,4 @@
-// app/javascript/main/scenes/Home/GenreSliders/components/GenreSliderRow.jsx
-
-// import React, { Component } from 'react'
+// GenreSlider Functional Component
 
 import React from 'react'
 
