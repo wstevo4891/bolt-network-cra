@@ -4,6 +4,8 @@ const URI = 'http://localhost:3001/api/v1'
 
 export default {
   moviesIndex: {
+    fetch: fetch(`${URI}/movies-index`),
+
     get: async () => {
       const response = await fetch(`${URI}/movies-index`)
 

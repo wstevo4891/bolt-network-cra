@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 
-import API from './services/API'
+// import API from './services/API'
 import Results from '../../components/Results'
 
 export default class Recent extends Component {
@@ -41,21 +41,26 @@ export default class Recent extends Component {
     }
   }
 
-  fetchMovies = () => {
-    API.movies.recent()
-      .then(response => {
-        sessionStorage.setItem(
-          'RecentMovies',
-          JSON.stringify(response.data)
-        )
+  fetchMovies =  async () => {
+    try {
+      const URI = 'http://localhost:3001/api/v1/recent-movies'
 
-        this.setState({
-          movies: response.data
-        })
+      const response = await fetch(URI)
+
+      const data = await response.json()
+
+      sessionStorage.setItem(
+        'RecentMovies',
+        JSON.stringify(data)
+      )
+
+      this.setState({
+        movies: data
       })
-      .catch(error => {
-        console.error('Error in Recent.fetchMovies()')
-        console.error(error)
-      })
+
+    } catch(error) {
+      console.error('Somthing went wrong in Recent.fetchMovies()')
+      console.error(error)
+    }
   }
 }

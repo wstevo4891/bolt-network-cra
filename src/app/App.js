@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
+
+import { createStore, applyMiddleware } from 'redux'
+import { Provider, connect } from 'react-redux'
+import thunk from 'redux-thunk'
+
+import reducer from './reducers/rootReducer'
+
+import { fetchMoviesIndex } from './actions/moviesIndexActions'
 
 import API from './services/API'
 
 import './styles/App.scss'
 
-import MainContainer from './components/MainContainer'
-import Navbar from './components/Navbar'
-import Routes from './components/Routes'
-import Footer from './components/Footer'
+import Layout from './components/Layout'
+
+const store = createStore(
+  reducer,
+  applyMiddleware(thunk)
+)
+
+// const store = createStore(reducer)
+
+store.dispatch({ type: "INCREMENT" })
+store.dispatch({ type: "INCREMENT" })
+store.dispatch({ type: "DECREMENT" })
+store.dispatch({ type: "RESET" })
 
 class App extends Component {
   state = {
@@ -24,28 +40,15 @@ class App extends Component {
     if (genres === null) return null
 
     return (
-      <Router>
-        <MainContainer>
-          {slideLength => (
-            <>
-              <Navbar
-                genresIndex={genresIndex}
-                fetchResults={this.fetchSearchResults}
-              />
-
-              <Routes
-                genres={genres}
-                genresIndex={genresIndex}
-                moviesIndex={moviesIndex}
-                slideLength={slideLength}
-                searchResults={searchResults}
-              />
-            </>
-          )}
-        </MainContainer>
-
-        <Footer />
-      </Router>
+      <Provider store={store}>
+        <Layout
+          genres={genres}
+          genresIndex={genresIndex}
+          moviesIndex={moviesIndex}
+          searchResults={searchResults}
+          fetchResults={this.fetchResults}
+        />
+      </Provider>
     )
   }
 

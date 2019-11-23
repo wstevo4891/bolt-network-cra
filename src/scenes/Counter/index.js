@@ -1,37 +1,64 @@
 import React, { Component } from 'react'
 
+import { connect } from 'react-redux'
+
+import { increment, decrement, reset } from './actions/counter_actions'
+
+import './styles/index.scss'
+
 class Counter extends Component {
-  state = {
-    count: 0
-  }
-
   render() {
+    console.log(this.props)
+
     return(
-      <div>
-        <h2>Counter</h2>
+      <div className="display-container">
+        <div className="row justify-content-center">
+          <div className="counter">
+            <h2>Counter</h2>
 
-        <div>
-          <button onClick={this.decrement}>-</button>
+            <div>
+              <button onClick={this.decrement}>-</button>
 
-          <span>{this.state.count}</span>
+              <span className="count">{this.props.count}</span>
 
-          <button onClick={this.increment}>+</button>
+              <button onClick={this.increment}>+</button>
+
+              <button className="reset-btn" onClick={this.reset}>
+                RESET
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     )
   }
 
   increment = () => {
-    this.setState({
-      count: this.state.count + 1
-    })
+    this.props.increment()
   }
 
   decrement = () => {
-    this.setState({
-      count: this.state.count - 1
-    })
+    this.props.decrement()
+  }
+
+  reset = () => {
+    this.props.reset()
   }
 }
 
-export default Counter
+function mapStateToProps(state) {
+  return {
+    count: state.counter.count
+  }
+}
+
+// in this object, keys become prop names,
+// and values should be action creator functions.
+// They get bound to `dispatch`.
+const mapDispatchToProps = {
+  increment,
+  decrement,
+  reset
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter)
