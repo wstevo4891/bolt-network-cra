@@ -1,19 +1,19 @@
 // app/javascript/main/scenes/Recent/components/RecentlyAdded.jsx
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-// import API from './services/API'
+// Components
 import Results from '../../components/Results'
 
-export default class Recent extends Component {
-  state = {
-    movies: null
-  }
+// Actions
+import { fetchRecentMovies } from '../../store/actions/recentMoviesActions'
 
+class Recent extends Component {
   render() {
-    const movies = this.state.movies
+    const { movies, slideLength } = this.props
 
-    if (movies === null) return null
+    if (movies.length === 0) return null
 
     return(
       <div className="display-container">
@@ -23,44 +23,23 @@ export default class Recent extends Component {
           </div>
         </div>
 
-        <Results movies={movies} slideLength={this.props.slideLength} />
+        <Results movies={movies} slideLength={slideLength} />
       </div>
     )
   }
 
   componentDidMount() {
-    const movies = sessionStorage.getItem('RecentMovies')
+    if (this.props.movies.length > 0) return
 
-    if (movies === null) {
-      this.fetchMovies()
-
-    } else {
-      this.setState({
-        movies: JSON.parse(movies)
-      })
-    }
-  }
-
-  fetchMovies =  async () => {
-    try {
-      const URI = 'http://localhost:3001/api/v1/recent-movies'
-
-      const response = await fetch(URI)
-
-      const data = await response.json()
-
-      sessionStorage.setItem(
-        'RecentMovies',
-        JSON.stringify(data)
-      )
-
-      this.setState({
-        movies: data
-      })
-
-    } catch(error) {
-      console.error('Somthing went wrong in Recent.fetchMovies()')
-      console.error(error)
-    }
+    this.props.dispatch(fetchRecentMovies())
   }
 }
+
+function mapStateToProps(state) {
+  console.log(state)
+  return {
+    movies: state.recentMovies.movies
+  }
+}
+
+export default connect(mapStateToProps)(Recent)

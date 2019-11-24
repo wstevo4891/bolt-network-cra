@@ -2,8 +2,6 @@
 
 import React, { Component } from 'react'
 
-import API from './services/API'
-
 import './styles/index.scss'
 
 import MoviePage from './components/MoviePage'
@@ -14,7 +12,7 @@ export default class Movie extends Component {
   }
 
   render() {
-    const { movie } = this.state
+    const movie = this.state.movie
 
     if (movie === null) return null
 
@@ -32,21 +30,19 @@ export default class Movie extends Component {
   }
 
   componentDidMount() {
-    const movie = this.state.movie
-
-    if (movie !== null) return
-
-    const movieID = this.props.match.params.movieID
-
-    this.fetchMovie(movieID)
+    this.fetchMovie(this.props.match.params.movieID)
   }
 
   fetchMovie = async (movieID) => {
     try {
-      const movie = await API.movies.show(movieID)
+      const URI = 'http://localhost:3001/api/v1/movies'
+
+      const response = await fetch(`${URI}/${movieID}`)
+
+      const data = await response.json()
 
       this.setState({
-        movie: movie
+        movie: data
       })
 
     } catch(error) {
