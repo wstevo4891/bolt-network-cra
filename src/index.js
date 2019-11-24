@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './index.css'
 
 import Store from './store'
-import App from './app/App'
+import App from './App'
 import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(

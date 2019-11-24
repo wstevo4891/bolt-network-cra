@@ -3,11 +3,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import './styles/App.scss'
+import Layout from './scenes/Layout'
 
-import Layout from './components/Layout'
-
-import { fetchMoviesIndex } from './actions/moviesIndexActions'
+import { fetchMoviesIndex } from './store/actions/moviesIndexActions'
 
 class App extends Component {
   render() {

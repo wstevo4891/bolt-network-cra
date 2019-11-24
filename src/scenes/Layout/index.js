@@ -6,10 +6,13 @@ import {
   Route
 } from 'react-router-dom'
 
-import MainContainer from './MainContainer'
-import Navbar from './Navbar'
-import Routes from './Routes'
-import Footer from './Footer'
+import Routes from '../Routes'
+
+import MainContainer from './components/MainContainer'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+
+import './styles/index.scss'
 
 function Layout() {
   return(

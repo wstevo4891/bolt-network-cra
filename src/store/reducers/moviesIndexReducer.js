@@ -2,11 +2,11 @@
 
 // Constants
 // ==================================================================
-const FETCH_MOVIES_INDEX_BEGIN = 'FETCH_MOVIES_INDEX_BEGIN'
-
-const FETCH_MOVIES_INDEX_SUCCESS = 'FETCH_MOVIES_INDEX_SUCCESS'
-
-const FETCH_MOVIES_INDEX_FAILURE = 'FETCH_MOVIES_INDEX_FAILURE'
+import {
+  FETCH_MOVIES_INDEX_BEGIN,
+  FETCH_MOVIES_INDEX_SUCCESS,
+  FETCH_MOVIES_INDEX_FAILURE
+} from '../actions/moviesIndexActions'
 
 const initialState = {
   moviesIndex: {},
