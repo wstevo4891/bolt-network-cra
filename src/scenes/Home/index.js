@@ -1,6 +1,7 @@
 // Home Page Functional Component
 
 import React from 'react'
+import { connect } from 'react-redux'
 
 import './styles/HomePage.scss'
 
@@ -42,4 +43,11 @@ const Home = (props) => (
   </main>
 )
 
-export default Home
+function mapStateToProps(state) {
+  return {
+    genres: state.moviesIndex.genres,
+    moviesIndex: state.moviesIndex.moviesIndex
+  }
+}
+
+export default connect(mapStateToProps)(Home)

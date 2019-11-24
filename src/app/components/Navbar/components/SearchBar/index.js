@@ -1,6 +1,7 @@
-// app/javascript/main/components/Navbar/containers/SearchBar.jsx
+// SearchBar Main Component
 
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import './styles/index.scss'
 
@@ -10,17 +11,20 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 // Components
 import InputDisplay from './components/InputDisplay'
 
-export default class SearchBar extends Component {
+import { fetchSearchResults } from './actions/searchActions'
+
+class SearchBar extends Component {
   state = {
+    display: false,
     location: null,
-    display: false
+    queryExists: false
   }
 
   // When we click on the hour glass button, we'll hide it,
   // render the searchInput div, and animate its width to 270px.
   render() {
-    const { history, fetchResults } = this.props
-    const { display, location } = this.state
+    const { history } = this.props
+    const { display, location, queryExists } = this.state
 
     const boxClass = display ? 'searchBox d-none' : 'searchBox'
     const wrapperClass = display ? 'searchWrapper' : 'searchWrapper d-none'
@@ -40,8 +44,9 @@ export default class SearchBar extends Component {
             location={location}
             history={history}
             display={display}
+            queryExists={queryExists}
             hideDisplay={this.hideDisplay}
-            fetchResults={fetchResults}
+            handleKeyUp={this.handleKeyUp}
           />
         </div>
       </li>
@@ -60,4 +65,43 @@ export default class SearchBar extends Component {
       display: false
     })
   }
+
+  handleKeyUp = (event) => {
+    const query = event.target.value
+
+    this.updateLocation(query)
+
+    this.updateQueryState(query)
+
+    this.props.dispatch(fetchSearchResults(query))
+  }
+
+  updateLocation = (query) => {
+    const history = this.props.history
+    const location = this.state.location
+
+    if (query && query !== '') {
+      history.push(`/search?q=${encodeURIComponent(query)}`)
+    
+    } else if (location === '/search') {
+      history.push('/')
+    
+    } else {
+      history.push(location)
+    }
+  }
+
+  updateQueryState = (query) => {
+    if (query && query !== '') {
+      this.setState({
+        queryExists: true
+      })
+    } else {
+      this.setState({
+        queryExists: false
+      })
+    }
+  }
 }
+
+export default connect()(SearchBar)

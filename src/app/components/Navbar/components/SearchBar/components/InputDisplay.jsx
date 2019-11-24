@@ -7,14 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 // Components
-import { SearchInput } from './SearchInput'
-import { SearchClose } from './SearchClose'
+import SearchInput from './SearchInput'
+import SearchClose from './SearchClose'
 
 export default class InputDisplay extends Component {
   state = {
     start: 0,
-    end: 270,
-    queryExists: false
+    end: 270
   }
 
   searchClasses = [
@@ -29,7 +28,9 @@ export default class InputDisplay extends Component {
   render() {
     if (this.props.display === false) return null
 
-    const { start, end, queryExists } = this.state
+    const { queryExists, handleKeyUp } = this.props
+
+    const { start, end } = this.state
 
     return(
       <Motion defaultStyle={{ x: start }} style={{ x: spring(end) }}>
@@ -43,11 +44,8 @@ export default class InputDisplay extends Component {
 
             <div className="form-inline">
               <SearchInput
-                update={this.updateQuery}
-                location={this.props.location}
-                history={this.props.history}
                 placeholder="Titles, people, genres"
-                handleChange={this.props.fetchResults}
+                handleKeyUp={handleKeyUp}
               />
             </div>
 
@@ -59,18 +57,6 @@ export default class InputDisplay extends Component {
         )}
       </Motion>
     )
-  }
-
-  updateQuery = (query) => {
-    if (query && query !== '') {
-      this.setState({
-        queryExists: true
-      })
-    } else {
-      this.setState({
-        queryExists: false
-      })
-    }
   }
 
   componentDidMount() {

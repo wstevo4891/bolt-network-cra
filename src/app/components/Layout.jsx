@@ -1,31 +1,27 @@
 // Layout Component
 
 import React from 'react'
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 
-import { BrowserRouter as Router } from 'react-router-dom'
 import MainContainer from './MainContainer'
 import Navbar from './Navbar'
 import Routes from './Routes'
 import Footer from './Footer'
 
-function Layout(props) {
+function Layout() {
   return(
     <Router>
       <MainContainer>
         {slideLength => (
           <>
-            <Navbar
-              genresIndex={props.genresIndex}
-              fetchResults={props.fetchSearchResults}
-            />
+            <Route render={(routeProps) =>
+              <Navbar {...routeProps} />
+            } />
 
-            <Routes
-              genres={props.genres}
-              genresIndex={props.genresIndex}
-              moviesIndex={props.moviesIndex}
-              slideLength={slideLength}
-              searchResults={props.searchResults}
-            />
+            <Routes slideLength={slideLength} />
           </>
         )}
       </MainContainer>

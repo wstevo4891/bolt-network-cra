@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import Home from '../../scenes/Home'
 import Genre from '../../scenes/Genre'
@@ -64,4 +65,13 @@ const Routes = (props) => (
   </Switch>
 )
 
-export default Routes
+function mapStateToProps(state) {
+  return {
+    genres: state.moviesIndex.genres,
+    genresIndex: state.moviesIndex.genresIndex,
+    moviesIndex: state.moviesIndex.moviesIndex,
+    search: state.search
+  }
+}
+
+export default connect(mapStateToProps)(Routes)

@@ -1,8 +1,12 @@
-import {
-  FETCH_MOVIES_INDEX_BEGIN,
-  FETCH_MOVIES_INDEX_SUCCESS,
-  FETCH_MOVIES_INDEX_FAILURE
-} from '../actions/moviesIndexActions'
+// Movies Index Reducer
+
+// Constants
+// ==================================================================
+const FETCH_MOVIES_INDEX_BEGIN = 'FETCH_MOVIES_INDEX_BEGIN'
+
+const FETCH_MOVIES_INDEX_SUCCESS = 'FETCH_MOVIES_INDEX_SUCCESS'
+
+const FETCH_MOVIES_INDEX_FAILURE = 'FETCH_MOVIES_INDEX_FAILURE'
 
 const initialState = {
   moviesIndex: {},
@@ -59,7 +63,7 @@ export default function moviesIndexReducer(state = initialState, action) {
       // maybe you want to keep the items around!
       // Do whatever seems right for your use case.
       return {
-        state,
+        ...state,
         moviesIndex: {},
         genres: [],
         genresIndex: {},

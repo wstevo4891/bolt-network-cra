@@ -1,71 +1,63 @@
 // app/javascript/main/components/Navbar/containers/Navbar.jsx
 
 import React, { Component } from 'react'
-import { Link, Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 import logo from './images/bolt-network.svg'
 
 import './styles/main.scss'
 
 // Components
+import NavContainer from './components/NavContainer'
 import NavCollapse from './components/NavCollapse'
 import SideMenu from './components/SideMenu'
 import Hamburger from './components/Hamburger'
-import { SearchInput } from './components/SearchBar/components/SearchInput'
+import SearchInput from './components/SearchBar/components/SearchInput'
 
-export default class Navbar extends Component {
+import { fetchSearchResults } from './components/SearchBar/actions/searchActions'
+
+class Navbar extends Component {
   state = {
+    location: this.props.history.location,
     displayMenu: false
   }
 
   render() {
-    const { displayMenu } = this.state
-
     const genreLinks = Object.values(this.props.genresIndex)
 
     return (
-      <div id="navbar">
-        <nav className="navbar navbar-expand-md fixed-top">
-          <Hamburger
-            dataTarget="side-menu"
-            handleClick={this.toggleDisplay}
-          />
+      <NavContainer>
+        <Hamburger
+          dataTarget="side-menu"
+          handleClick={this.toggleDisplay}
+        />
 
-          <Link className="navbar-brand" to="/">
-            <img src={logo} alt="Bolt Network logo" className="logo" />
-          </Link>
+        <Link className="navbar-brand" to="/">
+          <img src={logo} alt="Bolt Network logo" className="logo" />
+        </Link>
 
-          <Route
-            render={(routeProps) =>
-              <>
-                <NavCollapse
-                  genreLinks={genreLinks}
-                  {...this.props}
-                  {...routeProps}
-                />
+        <NavCollapse
+          {...this.props}
+          genreLinks={genreLinks}
+        />
 
-                <div id="mobileSearchInput">
-                  <div className="form-inline">
-                    <SearchInput
-                      location={routeProps.location.pathname}
-                      history={routeProps.history}
-                      placeholder="Search"
-                      handleChange={this.props.fetchResults}
-                    />
-                  </div>
-                </div>
+        <div id="mobileSearchInput">
+          <div className="form-inline">
+            <SearchInput
+              placeholder="Search"
+              handleKeyUp={this.handleKeyUp}
+            />
+          </div>
+        </div>
 
-                <SideMenu
-                  genres={genreLinks}
-                  display={displayMenu}
-                  {...routeProps}
-                  toggleDisplay={this.toggleDisplay}
-                />
-              </>
-            }
-          />
-        </nav>
-      </div>
+        <SideMenu
+          {...this.props}
+          genres={genreLinks}
+          display={this.state.displayMenu}
+          toggleDisplay={this.toggleDisplay}
+        />
+      </NavContainer>
     )
   }
 
@@ -75,43 +67,48 @@ export default class Navbar extends Component {
     })
   }
 
-  componentDidMount() {
-    this.assignScrollListener()
+  handleKeyUp = (event) => {
+    const query = event.target.value
 
-    window.addEventListener('resize', this.assignScrollListener)
+    this.updateLocation(query)
+
+    this.props.dispatch(fetchSearchResults(query))
   }
 
-  assignScrollListener = () => {
-    if (window.innerWidth < 768) {
-      this.addShadow()
-      window.removeEventListener('scroll', this.handleScroll)
+  updateLocation = (query) => {
+    const history = this.props.history
+    const location = this.state.location
 
+    if (query && query !== '') {
+      history.push(`/search?q=${encodeURIComponent(query)}`)
+    
+    } else if (location === '/search') {
+      history.push('/')
+    
     } else {
-      this.removeShadow()
-      window.addEventListener('scroll', this.handleScroll)
+      history.push(location)
     }
   }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.assignScrollListener)
-    window.removeEventListener('scroll', this.handleScroll)
-  }
+  componentDidUpdate() {
+    const stateLocation = this.state.location
+    const propsLocation = this.props.history.location
 
-  handleScroll = () => {
-    const scrollLength = window.scrollY
+    if (
+      propsLocation === '/search' ||
+      propsLocation === stateLocation
+    ) return
 
-    if (scrollLength > 20) {
-      this.addShadow()
-    } else {
-      this.removeShadow()
-    }
-  }
-
-  removeShadow = () => {
-    document.querySelector('.navbar').classList.remove('nav-shadow')
-  }
-
-  addShadow = () => {
-    document.querySelector('.navbar').classList.add('nav-shadow')
+    this.setState({
+      location: propsLocation
+    })
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    genresIndex: state.moviesIndex.genresIndex
+  }
+}
+
+export default connect(mapStateToProps)(Navbar)

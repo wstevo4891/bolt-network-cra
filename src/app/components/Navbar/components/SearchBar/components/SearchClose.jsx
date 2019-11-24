@@ -5,7 +5,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
-export const SearchClose = (props) => (
+const SearchClose = (props) => (
   <FontAwesomeIcon
     icon={faTimes}
     id="closeIcon"
@@ -13,3 +13,5 @@ export const SearchClose = (props) => (
     onClick={() => props.handleClick()}
   />
 )
+
+export default SearchClose
