@@ -1,10 +1,9 @@
 // app/javascript/main/scenes/Home/Carousel/components/CarouselApp.jsx
 
 import React, { Component } from 'react'
-import { Carousel, CarouselItem } from 'reactstrap'
+import { connect } from 'react-redux'
 
-// Services
-import API from './services/API'
+import { Carousel, CarouselItem } from 'reactstrap'
 
 import './styles/App.scss'
 
@@ -12,32 +11,39 @@ import './styles/App.scss'
 import Slide from './components/Slide'
 import ControlButton from './components/ControlButton'
 
-export default class CarouselApp extends Component {
+import { fetchCarouselMovies } from './actions/carouselMoviesActions'
+
+class CarouselApp extends Component {
   state = {
     activeIndex: 0,
     titles: [
       'Pirates of the Caribbean: The Curse of the Black Pearl',
       'The Avengers',
       'Skyfall'
-    ],
-    movies: null
+    ]
   }
 
   render() {
-    const { activeIndex, movies } = this.state
+    const movies = this.props.movies
 
     if (movies === null) return null
 
-    const slides = this.buildSlides(movies)
-
     return(
       <Carousel
-        activeIndex={activeIndex}
+        activeIndex={this.state.activeIndex}
         next={this.next}
         previous={this.previous}
         interval={false}
       >
-        {slides}
+        {movies.map(movie =>
+          <CarouselItem
+            key={movie.id}
+            onExiting={this.onExiting}
+            onExited={this.onExited}
+          >
+            <Slide movie={movie} />
+          </CarouselItem>
+        )}
 
         <ControlButton
           direction="prev"
@@ -54,20 +60,6 @@ export default class CarouselApp extends Component {
     )
   }
 
-  buildSlides = (movies) => {
-    return movies.map((movie) => {
-      return(
-        <CarouselItem
-          key={movie.id}
-          onExiting={this.onExiting}
-          onExited={this.onExited}
-        >
-          <Slide movie={movie} />
-        </CarouselItem>
-      )
-    })
-  }
-
   onExiting = () => {
     this.animating = true
   }
@@ -79,8 +71,8 @@ export default class CarouselApp extends Component {
   next = () => {
     if (this.animating) return
 
-    const { activeIndex, movies } = this.state
-
+    const activeIndex = this.state.activeIndex
+    const movies = this.props.movies
     const nextIndex = activeIndex === movies.length - 1 ? 0 : activeIndex + 1
 
     this.setState({ activeIndex: nextIndex })
@@ -89,36 +81,24 @@ export default class CarouselApp extends Component {
   previous = () => {
     if (this.animating) return
 
-    const { activeIndex, movies } = this.state
-
+    const activeIndex = this.state.activeIndex
+    const movies = this.props.movies
     const nextIndex = activeIndex === 0 ? movies.length - 1 : activeIndex - 1
 
     this.setState({ activeIndex: nextIndex })
   }
 
   componentDidMount() {
-    const moviesData = sessionStorage.getItem('CarouselMovies')
+    const titles = this.state.titles
 
-    if (moviesData) {
-      this.setState({
-        movies: JSON.parse(moviesData)
-      })
-    } else {
-      this.fetchMovies()
-    }
-  }
-
-  fetchMovies = async () => {
-    try {
-      const data = await API.movies.search(this.state.titles)
-
-      sessionStorage.setItem('CarouselMovies', JSON.stringify(data))
-
-      this.setState({ movies: data })
-
-    } catch(error) {
-      console.error('Error in Carousel.fetchMovies')
-      console.error(error)
-    }
+    this.props.dispatch(fetchCarouselMovies(titles))
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    movies: state.carouselMovies.movies
+  }
+}
+
+export default connect(mapStateToProps)(CarouselApp)
