@@ -1,41 +1,42 @@
 // Movies Index Actions
 
-// Constants
+// Types
 // ==================================================================
-export const FETCH_MOVIES_INDEX_BEGIN = 'FETCH_MOVIES_INDEX_BEGIN'
-
-export const FETCH_MOVIES_INDEX_SUCCESS = 'FETCH_MOVIES_INDEX_SUCCESS'
-
-export const FETCH_MOVIES_INDEX_FAILURE = 'FETCH_MOVIES_INDEX_FAILURE'
-
-const URI = 'http://localhost:3001/api/v1'
+import {
+  FETCH_MOVIES_INDEX_BEGIN,
+  FETCH_MOVIES_INDEX_SUCCESS,
+  FETCH_MOVIES_INDEX_FAILURE
+} from '../types/moviesIndexTypes'
 
 
-// Dispatch Functions
+// Dispatch Actions
 // ==================================================================
-const fetchMoviesIndexBegin = () => ({
+export const fetchMoviesIndexBegin = () => ({
   type: FETCH_MOVIES_INDEX_BEGIN
 })
 
-const fetchMoviesIndexSuccess = moviesIndex => ({
+export const fetchMoviesIndexSuccess = moviesIndex => ({
   type: FETCH_MOVIES_INDEX_SUCCESS,
   payload: { moviesIndex }
 })
 
-const fetchMoviesIndexFailure = error => ({
+export const fetchMoviesIndexFailure = error => ({
   type: FETCH_MOVIES_INDEX_FAILURE,
   payload: { error }
 })
 
 
-// Export Function
+// API Action
 // ==================================================================
+
+const URI = 'http://localhost:3001/api/v1/movies-index'
+
 export function fetchMoviesIndex() {
   return async dispatch => {
     try {
       dispatch(fetchMoviesIndexBegin())
 
-      const response = await fetch(`${URI}/movies-index`)
+      const response = await fetch(URI)
 
       const data = await response.json()
 

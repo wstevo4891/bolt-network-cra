@@ -6,7 +6,7 @@ import {
   FETCH_MOVIES_INDEX_BEGIN,
   FETCH_MOVIES_INDEX_SUCCESS,
   FETCH_MOVIES_INDEX_FAILURE
-} from '../actions/moviesIndexActions'
+} from '../types/moviesIndexTypes'
 
 const initialState = {
   moviesIndex: {},
