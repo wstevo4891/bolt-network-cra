@@ -36,7 +36,6 @@ class Recent extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     movies: state.recentMovies.movies
   }

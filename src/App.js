@@ -9,9 +9,7 @@ import { fetchMoviesIndex } from './store/actions/moviesIndexActions'
 
 class App extends Component {
   render() {
-    const { genres } = this.props
-
-    if (genres.length === 0) return null
+    if (this.props.genres.length === 0) return null
 
     return <Layout />
   }

@@ -1,12 +1,8 @@
-// app/javascript/main/components/Navbar/containers/Navbar.jsx
+// Navbar Main Component
 
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-
-import logo from './images/bolt-network.svg'
-
-import './styles/main.scss'
 
 // Components
 import NavContainer from './components/NavContainer'
@@ -14,6 +10,10 @@ import NavCollapse from './components/NavCollapse'
 import SideMenu from './components/SideMenu'
 import Hamburger from './components/Hamburger'
 import SearchInput from './components/SearchBar/components/SearchInput'
+
+import logo from './images/bolt-network.svg'
+
+import './styles/main.scss'
 
 import { fetchSearchResults } from './components/SearchBar/actions/searchActions'
 

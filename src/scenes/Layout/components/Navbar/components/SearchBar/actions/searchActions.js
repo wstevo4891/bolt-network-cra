@@ -33,6 +33,8 @@ const fetchSearchResultsFailure = error => ({
 export function fetchSearchResults(query) {
   return async dispatch => {
     try {
+      if (query === '') return
+
       dispatch(fetchSearchResultsBegin())
 
       const response = await fetch(`${URI}/search/${query}`)

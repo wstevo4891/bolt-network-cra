@@ -89,6 +89,8 @@ class CarouselApp extends Component {
   }
 
   componentDidMount() {
+    if (this.props.movies.length > 0) return
+
     const titles = this.state.titles
 
     this.props.dispatch(fetchCarouselMovies(titles))
