@@ -1,10 +1,12 @@
 // Search Results Reducer
 
-const FETCH_SEARCH_RESULTS_BEGIN = 'FETCH_SEARCH_RESULTS_BEGIN'
-
-const FETCH_SEARCH_RESULTS_SUCCESS = 'FETCH_SEARCH_RESULTS_SUCCESS'
-
-const FETCH_SEARCH_RESULTS_FAILURE = 'FETCH_SEARCH_RESULTS_FAILURE'
+// Types
+// ==================================================================
+import {
+  FETCH_SEARCH_RESULTS_BEGIN,
+  FETCH_SEARCH_RESULTS_SUCCESS,
+  FETCH_SEARCH_RESULTS_FAILURE
+} from '../types/searchTypes'
 
 const initialState = {
   genres: [],
