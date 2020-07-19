@@ -8,6 +8,8 @@ import { faPlay } from '@fortawesome/free-solid-svg-icons'
 
 import MovieTitle from './MovieTitle'
 
+import './MovieInfo.styles.scss'
+
 const MovieInfo = ({ movie }) => (
   <div className="movie-info">
     <div>
