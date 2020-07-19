@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 // Components
-import { Icon } from '@components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
 import SearchInput from '../SearchInput'
 import SearchClose from './SearchClose'
 
@@ -32,7 +34,9 @@ class InputDisplay extends Component {
 
     return(
       <div id="searchInputDisplay" ref={this.mainRef} style={{ width: MIN_WIDTH }}>
-        <Icon icon="fa-search" id="searchIcon" ariaHidden="true" />
+        <span id="searchIcon" ariaHidden="true" >
+          <FontAwesomeIcon icon={faSearch} />
+        </span>
 
         <div className="form-inline">
           <SearchInput

@@ -3,7 +3,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import { IconButton } from '@components'
+import { faAngleDown  } from '@fortawesome/free-solid-svg-icons'
+
+import { IconButton } from 'components/IconButton'
 
 export default class Dropdown extends Component {
   state = {
@@ -22,7 +24,7 @@ export default class Dropdown extends Component {
             buttonClass: 'nav-link',
             id: dropdownId,
           }}
-          iconProps={{ icon: "fa-angle-down" }}
+          icon={faAngleDown}
           text={text}
           textPlacement="left"
         />

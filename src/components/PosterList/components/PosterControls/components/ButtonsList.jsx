@@ -3,8 +3,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import {
+  faCheck,
+  faPlus,
+  faThumbsDown as faThumbsDownSolid,
+  faThumbsUp as faThumbsUpSolid,
+  faVolumeOff,
+  faVolumeUp,
+} from '@fortawesome/free-solid-svg-icons'
+
+import {
+  faThumbsUp as faThumbsUpClear,
+  faThumbsDown as faThumbsDownClear,
+} from '@fortawesome/free-regular-svg-icons'
+
 import ListItem from './ListItem'
-import { ToggleIconButton, ToggleListButton } from '@components'
+import { ToggleIconButton, ToggleListButton } from 'components'
 
 const ButtonsList = (props) => (
   <ul className="poster-buttons">
@@ -13,7 +27,7 @@ const ButtonsList = (props) => (
       status={props.statusMap.volume}
     >
       <ToggleIconButton
-        clickableProps={{ options: ['fa-volume-up', 'fa-volume-off'] }}
+        clickableProps={{ options: [faVolumeUp, faVolumeOff] }}
       />
     </ListItem>
 
@@ -22,7 +36,7 @@ const ButtonsList = (props) => (
       status={props.statusMap.like}
     >
       <ToggleListButton
-        clickableProps={{ options: ['fa-thumbs-up', 'fa-thumbs-o-up'] }}
+        clickableProps={{ options: [faThumbsUpSolid, faThumbsUpClear] }}
         movie={props.movie}
         listName="LikedList"
         updateContainer={props.toggleLike}
@@ -34,7 +48,7 @@ const ButtonsList = (props) => (
       status={props.statusMap.unlike}
     >
       <ToggleListButton
-        clickableProps={{ options: ['fa-thumbs-down', 'fa-thumbs-o-down'] }}
+        clickableProps={{ options: [ faThumbsDownSolid, faThumbsDownClear] }}
         movie={props.movie}
         listName="UnlikedList"
         updateContainer={props.toggleUnlike}
@@ -43,7 +57,7 @@ const ButtonsList = (props) => (
 
     <li className="poster-btn poster-btn-my-list">
       <ToggleListButton
-        clickableProps={{ options: ['fa-check', 'fa-plus'] }}
+        clickableProps={{ options: [faCheck, faPlus] }}
         movie={props.movie}
         listName="MyList"
       />

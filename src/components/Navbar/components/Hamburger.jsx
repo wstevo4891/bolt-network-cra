@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { IconButton } from '@components'
+import { faBars  } from '@fortawesome/free-solid-svg-icons'
+
+import { IconButton } from 'components/IconButton'
 
 const Hamburger = (props) => (
   <IconButton
@@ -14,7 +16,7 @@ const Hamburger = (props) => (
       dataTarget: `#${props.dataTarget}`,
       handleClick: props.handleClick,
     }}
-    iconProps={{ icon: 'fa-bars' }}
+    icon={faBars}
   />
 )
 

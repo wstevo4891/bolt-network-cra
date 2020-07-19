@@ -3,7 +3,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Icon } from '@components'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay } from '@fortawesome/free-solid-svg-icons'
 
 import MovieTitle from './MovieTitle'
 
@@ -11,7 +12,7 @@ const MovieInfo = ({ movie }) => (
   <div className="movie-info">
     <div>
       <span className="play-icon">
-        <Icon icon="fa-play" />
+        <FontAwesomeIcon icon={faPlay} />
       </span>
     </div>
 

@@ -4,7 +4,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 // Components
-import { IconButton } from '@components'
+import { faSearch  } from '@fortawesome/free-solid-svg-icons'
+
+import { IconButton } from 'components/IconButton'
 import InputDisplay from './InputDisplay'
 
 class SearchBar extends Component {
@@ -27,13 +29,11 @@ class SearchBar extends Component {
       <li className="d-sm-inline-block nav-item">
         <IconButton
           buttonProps={{
+            ariaHidden: "true",
             buttonClass,
             handleClick: this.handleClick,
           }}
-          iconProps={{
-            icon: "fa-search",
-            ariaHidden: "true",
-          }}
+          icon={faSearch}
         />
 
         <div className={wrapperClass}>
