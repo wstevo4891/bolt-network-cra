@@ -9,6 +9,8 @@ import SessionList from '@services/SessionList'
 import MovieInfo from './components/MovieInfo'
 import ButtonsList from './components/ButtonsList'
 
+import './PosterControls.styles.scss'
+
 function StatusMap(volume, like, unlike) {
   this.volume = volume || 'static'
   this.like = like || 'static'

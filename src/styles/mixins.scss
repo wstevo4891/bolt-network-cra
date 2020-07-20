@@ -1,0 +1,9 @@
+// ========================================================
+// Application Mixins
+// ========================================================
+
+@mixin on_wide($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}

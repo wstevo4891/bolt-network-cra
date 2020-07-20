@@ -1,0 +1,69 @@
+@import "styles/core";
+
+#bob-open {
+  transform: scale(1.75) translate3d(-54px, 0px, 0px) !important;
+}
+
+.poster-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.poster-container {
+  display: inline-block;
+  position: relative;
+  width: 50%;
+  height: 25vw;
+  vertical-align: top;
+  white-space: normal;
+  z-index: 1;
+
+  @include on_wide($breakpoint_500) {
+    width: 33.333333%;
+    height: 16vw;
+  }
+
+  @include on_wide($breakpoint_800) {
+    width: 25%;
+    height: 13vw;
+  }
+
+  @include on_wide($breakpoint_1100) {
+    width: 20%;
+    height: 10vw;
+  }
+
+  @include on_wide($breakpoint_1400) {
+    width: 16.6666667%;
+    height: 8vw;
+  }
+
+  .poster {
+    margin: 0 2px;
+    height: 100%;
+  }
+
+  &.mouseOver {
+    z-index: 2;
+
+    .poster {
+      margin: 0;
+    }
+
+    .poster-overlay {
+      background: rgba(0, 0, 0, .1);
+    }
+
+    .poster-controls:hover {
+      .movie-info span.play-icon {
+        color: white;
+      }
+    }
+
+    .movie-info span.play-icon {
+      color: red;
+    }
+  }
+}
