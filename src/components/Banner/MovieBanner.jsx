@@ -13,8 +13,8 @@ import ToggleListButton from '../ToggleListButton'
 
 import './MovieBanner.styles.scss'
 
-function BannerImage(movie) {
-  this.backgroundImage = `url(${movie.banner.url})`
+function BannerImage(url) {
+  this.backgroundImage = `url(${url})`
   this.backgroundRepeat = 'no-repeat'
   this.backgroundPosition = 'center'
   this.backgroundSize = 'cover'
@@ -22,7 +22,7 @@ function BannerImage(movie) {
 }
 
 const MovieBanner = ({ movie }) => {
-  const bannerImage = new BannerImage(movie)
+  const bannerImage = new BannerImage(movie.banner.url)
 
   return(
     <div className="banner">
@@ -67,7 +67,19 @@ const MovieBanner = ({ movie }) => {
 }
 
 MovieBanner.propTypes = {
-  movie: PropTypes.object.isRequired
+  movie: PropTypes.shape({
+    banner: PropTypes.shape({
+      url: PropTypes.string,
+    }),
+    logo: PropTypes.shape({
+      url: PropTypes.string,
+    }),
+    plot: PropTypes.string,
+    rated: PropTypes.string,
+    run_time: PropTypes.string,
+    url: PropTypes.string,
+    year: PropTypes.number,
+  })
 }
 
 export default MovieBanner
