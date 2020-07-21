@@ -7,6 +7,8 @@ import Layout from './scenes/Layout'
 
 import { fetchMoviesIndex } from './store/actions/moviesIndexActions'
 
+import './styles/base'
+
 class App extends Component {
   render() {
     if (this.props.genres.length === 0) return null
