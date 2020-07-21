@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 // Components
+import Overlay from 'components/Overlay'
+
 import PosterControlsWrapper from './PosterControlsWrapper'
 
 import './Poster.styles.scss'
@@ -18,7 +20,7 @@ const Poster = (props) => (
   >
     <Link to={`/movies/${props.movie.id}`}>
       <div className="poster" style={props.posterImage}></div>
-      <div className="poster-overlay"></div>
+      <Overlay />
     </Link>
 
     <PosterControlsWrapper

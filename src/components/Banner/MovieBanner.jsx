@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faPlay, faPlus } from '@fortawesome/free-solid-svg-icons'
 
+import Overlay from '../Overlay'
 import ToggleListButton from '../ToggleListButton'
 
 import './MovieBanner.styles.scss'
@@ -59,7 +60,7 @@ const MovieBanner = ({ movie }) => {
             </div>
           </div>
         </div>
-        <div className="poster-overlay"></div>
+        <Overlay />
       </div>
     </div>
   )
