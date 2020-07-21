@@ -20,6 +20,8 @@ import {
 import ListItem from './ListItem'
 import { ToggleIconButton, ToggleListButton } from 'components'
 
+import './ButtonsList.styles.scss'
+
 const ButtonsList = (props) => (
   <ul className="poster-buttons">
     <ListItem

@@ -1,5 +1,7 @@
 // MovieInfo Styles
 
+$fade_to_black: rgba(0, 0, 0, 0.6);
+
 .movie-info {
   position: absolute;
   bottom: 0;
@@ -28,7 +30,7 @@
     font-size: .5rem;
     text-shadow: none;
     color: white;
-    background: rgba(0, 0, 0, 0.6);
+    background: $fade_to_black;
     border: solid 1px white;
     border-radius: 50%;
     padding-top: .17rem;
@@ -55,7 +57,7 @@
   span.rating {
     padding: 1px 2px;
     border: solid 1px hsla(247, 15%, 96%, 0.7);
-    background: rgba(0, 0, 0, 0.6);
+    background: $fade_to_black;
     line-height: 1;
   }
 

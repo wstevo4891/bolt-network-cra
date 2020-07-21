@@ -3,11 +3,11 @@
 import React, { Component } from 'react'
 
 // Services
-import SessionList from '@services/SessionList'
+import SessionList from 'services/SessionList'
 
 // Components
-import MovieInfo from './components/MovieInfo'
-import ButtonsList from './components/ButtonsList'
+import ButtonsList from './ButtonsList'
+import MovieInfo from './MovieInfo'
 
 import './PosterControls.styles.scss'
 

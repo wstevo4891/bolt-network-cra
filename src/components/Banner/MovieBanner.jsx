@@ -5,8 +5,12 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 // Components
-import Icon from '../Icon'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck, faPlay, faPlus } from '@fortawesome/free-solid-svg-icons'
+
 import ToggleListButton from '../ToggleListButton'
+
+import './MovieBanner.styles.scss'
 
 function BannerImage(movie) {
   this.backgroundImage = `url(${movie.banner.url})`
@@ -38,7 +42,7 @@ const MovieBanner = ({ movie }) => {
 
             <div className="slide-buttons">
               <Link to={movie.url} className="btn-blue" id="play">
-                <Icon icon="fa-play" />PLAY
+                <FontAwesomeIcon icon={faPlay} />PLAY
               </Link>
 
               <ToggleListButton
@@ -46,7 +50,7 @@ const MovieBanner = ({ movie }) => {
                   buttonProps: {
                     buttonClass: 'btn-clear',
                   },
-                  options: ['fa-check', 'fa-plus'],
+                  options: [faCheck, faPlus],
                   text: 'MY LIST',
                 }}
                 movie={movie}

@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import './DisplayContainer.styles.scss'
+
 const DisplayContainer = ({ children }) => {
   return (
     <div className="display-container">

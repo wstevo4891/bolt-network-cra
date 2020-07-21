@@ -1,0 +1,26 @@
+// Footer Styles
+
+@import "styles/core";
+
+footer {
+  position: relative;
+  flex-shrink: 0;
+  padding-bottom: 2em;
+  background-color: $dark-bg;
+
+  .container {
+    padding-top: 1rem;
+  }
+  
+  h3 {
+    color:white;
+    font-size:18px;
+    font-weight:300;  
+  }
+
+  ul {
+    color: $azure-radiance; 
+    list-style:none;
+    padding-left:0px;  
+  }
+}
