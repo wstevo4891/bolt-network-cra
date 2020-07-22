@@ -1,16 +1,17 @@
 // Home Page Functional Component
 
+import PropTypes from 'prop-types'
 import React from 'react'
 import { connect } from 'react-redux'
 
-import './styles/HomePage.scss'
+import './HomePage.styles.scss'
 
-import Carousel from './components/Carousel'
-import GenreSlider from './components/GenreSlider'
+import Banner from 'components/Banner'
+import GenreSlider from 'components/GenreSlider'
 
 const Home = (props) => (
   <main className="application">
-    <Carousel />
+    <Banner />
 
     <div className="container">
       <div className="row justify-content-center">
@@ -42,6 +43,12 @@ const Home = (props) => (
     </div>
   </main>
 )
+
+Home.propTypes = {
+  genres: PropTypes.array,
+  moviesIndex: PropTypes.object,
+  slideLength: PropTypes.number
+}
 
 function mapStateToProps(state) {
   return {
