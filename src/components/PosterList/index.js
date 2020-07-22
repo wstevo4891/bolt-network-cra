@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 // Services
-import PosterDataFactory from '@services/PosterDataFactory'
+import PosterDataFactory from 'services/PosterDataFactory'
 
 // Components
 import Poster from './Poster'
@@ -31,7 +31,7 @@ class PosterList extends Component {
 
       return(
         <Poster
-          key={`${name}_Poster_${movie.id}`}
+          key={`${this.props.name}_Poster_${movie.id}`}
           mouseLeave={this.handleMouseLeave}
           mouseOver={this.handleMouseOver}
           {...posterData}

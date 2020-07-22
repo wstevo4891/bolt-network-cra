@@ -6,13 +6,10 @@ import TranslateCalculator from './TranslateCalculator'
 
 // Components
 import PosterList from 'components/PosterList'
-
-import './SlidesContainer.styles.scss'
+import SliderContent from 'components/SliderContent'
 
 const SlidesContainer = (props) => {
   const { genre, slides, slideLength, start, next, prev } = props
-
-  const contentClass = `sliderContent${next || prev ? ' animating' : ''}`
 
   const transformStyle = new TranslateCalculator(
     slideLength, start, next, prev
@@ -20,8 +17,9 @@ const SlidesContainer = (props) => {
 
   return(
     <div className="slider-container">
-      <div
-        className={contentClass}
+      <SliderContent
+        next={next}
+        prev={prev}
         style={transformStyle}
       >
         <PosterList
@@ -31,7 +29,7 @@ const SlidesContainer = (props) => {
           start={start}
           type="slider"
         />
-      </div>
+      </SliderContent>
     </div>
   )
 }
