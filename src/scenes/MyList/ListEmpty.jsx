@@ -1,5 +1,3 @@
-// app/javascript/main/scenes/MyList/components/ListEmpty.jsx
-
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -17,7 +15,7 @@ const ListEmpty = () => (
       </p>
       
       <p>
-        You may also add the movies in the home page slider.
+        You may also add the movies in the home page banner.
         Click on the "+ My List" button.
       </p>
 

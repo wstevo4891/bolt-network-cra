@@ -1,9 +1,17 @@
 // app/javascript/main/scenes/Recent/components/MyList.jsx
 
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-import ListEmpty from './components/ListEmpty'
-import Results from '../../components/Results'
+import {
+  DisplayContainer,
+  Results,
+  TitleRow,
+} from 'components'
+
+import ListEmpty from '.ListEmpty'
+
+const MY_LIST = 'MyList'
 
 export default class MyList extends Component {
   state = {
@@ -11,40 +19,40 @@ export default class MyList extends Component {
   }
 
   render() {
-    const movies = this.state.movies
-
-    if (movies === null) return null
+    if (this.state.movies === null) return null
 
     return(
-      <div className="display-container">
-        <div className="row">
-          <div className="col-12 mb-4">
-            <h1 style={{ color: 'white' }}>My List</h1>
-          </div>
-        </div>
-
-        {this.renderList(movies, this.props.slideLength)}
-      </div>
+      <DisplayContainer>
+        <TitleRow title="My List" />
+        {this.renderList()}
+      </DisplayContainer>
     )
   }
 
-  renderList = (movies, slideLength) => {
+  renderList() {
+    const movies = this.state.movies
     if (movies.length === 0) return <ListEmpty />
     
-    return <Results movies={movies} slideLength={slideLength} />
+    return (
+      <Results
+        movies={movies}
+        name={MY_LIST}
+        slideLength={this.props.slideLength}
+      />
+    )
   }
 
   componentDidMount() {
-    if (this.state.movies !== null) return
-
     this.fetchMyList()
   }
 
   fetchMyList = () => {
-    const list = JSON.parse(sessionStorage.getItem('MyList'))
+    const list = JSON.parse(sessionStorage.getItem(MY_LIST))
+
+    const newMovies = list === null ? [] : Object.values(list)
 
     this.setState({
-      movies: list === null ? [] : Object.values(list)
+      movies: newMovies
     })
   }
 }
