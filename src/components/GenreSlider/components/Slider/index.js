@@ -1,6 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import {
+  faAngleLeft,
+  faAngleRight,
+} from '@fortawesome/free-solid-svg-icons'
+
 // Components
 import PaginationList from './PaginationList'
 import SliderArrow from './SliderArrow'
@@ -18,7 +23,7 @@ const Slider = (props) => (
     <SliderArrow
       start={props.start}
       direction='Prev'
-      icon='fa-angle-left'
+      icon={faAngleLeft}
       handleClick={props.handlePrevClick}
     />
 
@@ -33,7 +38,7 @@ const Slider = (props) => (
 
     <SliderArrow
       direction='Next'
-      icon='fa-angle-right'
+      icon={faAngleRight}
       handleClick={props.handleNextClick}
     />
   </div>
