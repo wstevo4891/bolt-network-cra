@@ -1,10 +1,12 @@
 // Movie Scene stateful component
 
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-import './styles/index.scss'
+import { DisplayContainer, TitleRow } from 'components'
+import MoviePage from './MoviePage'
 
-import MoviePage from './components/MoviePage'
+const API_ROUTE = 'http://localhost:3001/api/v1/movies'
 
 export default class Movie extends Component {
   state = {
@@ -17,27 +19,20 @@ export default class Movie extends Component {
     if (movie === null) return null
 
     return(
-      <div className="display-container">
-        <div className="row">
-          <div className="col-12 mb-4">
-            <h1 style={{ color: 'white' }}>{movie.title}</h1>
-          </div>
-        </div>
-
+      <DisplayContainer>
+        <TitleRow title={movie.title} />
         <MoviePage movie={movie} />
-      </div>
+      </DisplayContainer>
     )
   }
 
   componentDidMount() {
-    this.fetchMovie(this.props.match.params.movieID)
+    this.fetchMovie(this.props.movieID)
   }
 
   fetchMovie = async (movieID) => {
     try {
-      const URI = 'http://localhost:3001/api/v1/movies'
-
-      const response = await fetch(`${URI}/${movieID}`)
+      const response = await fetch(`${API_ROUTE}/${movieID}`)
 
       const data = await response.json()
 
@@ -50,4 +45,8 @@ export default class Movie extends Component {
       console.error(error)
     }
   }
+}
+
+Movie.propTypes = {
+  movieID: PropTypes.string.isRequired,
 }
