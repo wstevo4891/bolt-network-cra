@@ -1,0 +1,17 @@
+.slide {
+  width: 100%;
+  display: inline-block;
+}
+
+.sliderContent {
+  white-space: nowrap;
+  // transition: transform 0.8s cubic-bezier(.5, 0, .1, 1) 0s;
+}
+
+.sliderContent.animating {
+  transition: transform .75s ease 0s,
+              -webkit-transform .75s ease 0s,
+              -moz-transform .75s ease 0s,
+              -o-transform .75s ease 0s;
+  pointer-events: none;
+}
