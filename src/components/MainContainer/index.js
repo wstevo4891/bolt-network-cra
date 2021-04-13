@@ -27,7 +27,7 @@ export default class MainContainer extends Component {
   }
 
   render() {
-    const slideLength = this.state.slideLength
+    const { slideLength } = this.state
 
     if (slideLength === null) return null
 

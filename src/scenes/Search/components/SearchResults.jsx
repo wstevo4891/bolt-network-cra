@@ -6,29 +6,17 @@ import MobileView from './MobileView'
 import DesktopView from './DesktopView'
 
 const SearchResults = (props) => {
-  const { genres, movies, query, slideLength } = props
+  const { resultsProps, suggestionsProps } = props
+  const { genres, movies, query } = suggestionsProps.data
 
   if (genres.length === 0 && movies.length === 0) {
     return <NotFound query={query} />
 
   } else if (window.innerWidth < 768) {
-    return(
-      <MobileView
-        query={query}
-        genres={genres}
-        movies={movies}
-        slideLength={slideLength}
-      />
-    )
+    return <MobileView resultsProps={resultsProps} suggestionsProps={suggestionsProps} />
 
   } else {
-    return(
-      <DesktopView
-        genres={genres}
-        movies={movies}
-        slideLength={slideLength}
-      />
-    )
+    return <DesktopView {...props} />
   }
 }
 

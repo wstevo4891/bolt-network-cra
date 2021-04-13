@@ -8,44 +8,50 @@
   }
 }
 
+@mixin on_narrow($breakpoint) {
+	@media (max-width: $breakpoint) {
+		@content;
+	}
+}
+
 @mixin bp-xl {
-	@media only screen and (min-width: 1400px) {
+	@include on_wide($breakpoint_1400) {
 		@content;
 	}
 }
 
 @mixin bp-lg {
-	@media only screen and (min-width: 1100px) {
+	@include on_wide($breakpoint_1100) {
 		@content;
 	}
 }
 
 @mixin bp-md {
-	@media only screen and (min-width: 800px) {
+	@include on_wide($breakpoint_800) {
 		@content;
 	}
 }
 
 @mixin bp-sm {
-	@media only screen and (min-width: 500px) {
+	@include on_wide($breakpoint_500) {
 		@content;
 	}
 }
 
 @mixin bp-xs {
-	@media only screen and (max-width: 499px) {
+	@include on_narrow($breakpoint_499) {
 		@content;
 	}
 }
 
 @mixin bp-tablet {
-	@media only screen and (min-width: 768px) {
+	@include on_wide($breakpoint_768) {
 		@content;
 	}
 }
 
 @mixin bp-mobile {
-	@media only screen and (max-width: 800px) {
+	@include on_narrow($breakpoint_800) {
 		@content;
 	}
 }

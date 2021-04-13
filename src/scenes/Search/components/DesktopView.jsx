@@ -1,28 +1,25 @@
-// app/javascript/main/scenes/Search/components/ResultsDisplay.jsx
-
 import React from 'react'
 
 // Components
-import SuggestionsList from './SuggestionsList'
-import Results from '../../../components/Results'
+import {
+  DisplayContainer,
+  Results
+} from 'components'
 
-const DesktopView = (props) => (
+import Suggestions from './Suggestions'
+import SuggestionHeader from './SuggestionHeader'
+
+const DesktopView = ({ headerProps, resultsProps, suggestionsProps }) => (
   <div className="search-results">
-    <div className="display-container">
+    <DisplayContainer>
       <div className="row">
-        <div className="col-12">
-          <div className="suggestions">
-            <span className="suggestionsLabel">
-              Explore titles related to:&nbsp;
-            </span>
+        <Suggestions {...suggestionsProps} />
 
-            <SuggestionsList genres={props.genres} movies={props.movies} />
-          </div>
-        </div>
+        <SuggestionHeader {...headerProps} />
       </div>
 
-      <Results movies={props.movies} slideLength={props.slideLength} />
-    </div>
+      <Results {...resultsProps} />
+    </DisplayContainer>
   </div>
 )
 
