@@ -3,8 +3,6 @@ import { shallow, mount } from "enzyme";
 
 import MainContainer from "../MainContainer";
 
-global.innerWidth = 1450;
-
 describe("<MainContainer />", () => {
   let props, wrapper;
 
