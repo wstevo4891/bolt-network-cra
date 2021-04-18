@@ -4,7 +4,7 @@ export default class PosterData {
   constructor(movie, hoverItem) {
     this.movie = movie
     this.posterImage = {
-      backgroundImage: `url(${movie.photo.url})`,
+      backgroundImage: `url(${movie.photo})`,
       backgroundSize: '100% 100%'
     }
     this.hoverItem = hoverItem

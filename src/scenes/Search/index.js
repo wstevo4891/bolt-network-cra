@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import queryString from 'query-string'
 
 // Actions
-import { fetchSuggestions } from 'store/actions/suggestionsActions'
+import { fetchSuggestions } from 'store'
 
 // Components
 import SearchResults from './components/SearchResults'

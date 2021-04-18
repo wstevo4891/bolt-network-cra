@@ -1,27 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-import {
-  DisplayContainer,
-  Results,
-  TitleRow,
-} from 'components'
+import { mapDispatchToProps, mapStateToProps } from './mappings'
 
-const Genre = ({ genre, movies, slideLength }) => (
-  <DisplayContainer>
-    <TitleRow title={genre} />
-    <Results
-      movies={movies}
-      name={genre}
-      slideLength={slideLength}
-    />
-  </DisplayContainer>
-)
+import Genre from './Genre'
 
-Genre.propTypes = {
-  genre: PropTypes.string.isRequired,
-  movies: PropTypes.array.isRequired,
-  slideLength: PropTypes.number.isRequired,
-}
-
-export default Genre
+export default connect(mapDispatchToProps, mapStateToProps)(Genre)

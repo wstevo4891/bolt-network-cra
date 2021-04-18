@@ -4,7 +4,7 @@ import {
   FETCH_CAROUSEL_MOVIES_BEGIN,
   FETCH_CAROUSEL_MOVIES_SUCCESS,
   FETCH_CAROUSEL_MOVIES_FAILURE
-} from '../types/carouselMoviesTypes'
+} from '../types'
 
 const initialState = {
   movies: [],

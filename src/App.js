@@ -1,30 +1,51 @@
-// App Component
-
-import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
 
-import Layout from './scenes/Layout'
+import API from 'store/api'
 
-import { fetchMoviesIndex } from './store/actions/moviesIndexActions'
+import {
+  Footer,
+  MainContainer,
+  Navbar,
+  Routes
+} from './components'
 
 import './styles/base'
 
-class App extends Component {
-  render() {
-    if (this.props.genres.length === 0) return null
+const mapStateToProps = (state) => ({
+  genres: state.genres.list
+})
 
-    return <Layout />
-  }
+const mapDispatchToProps = (dispatch) => ({
+  fetchGenres: dispatch(API.genres.fetch())
+})
 
-  componentDidMount() {
-    this.props.dispatch(fetchMoviesIndex())
-  }
+const App = ({ fetchGenres, genres }) => {
+  useEffect(() => {
+    fetchGenres()
+  }, [fetchGenres, genres])
+
+  if (genres === null) return null
+
+  return(
+    <Router>
+      <Route component={Navbar} />
+      <MainContainer>
+        <Routes />
+      </MainContainer>
+      <Footer />
+    </Router>
+  )
 }
 
-function mapStateToProps(state) {
-  return {
-    genres: state.moviesIndex.genres
-  }
+App.propTypes = {
+  fetchGenres: PropTypes.func.isRequired,
+  genres: PropTypes.array.isRequired
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapDispatchToProps, mapStateToProps)(App)

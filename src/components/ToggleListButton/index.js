@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import SessionList from '@services/SessionList'
+import { SessionListAPI } from 'services'
 
 import { ToggleIconButton } from '../IconButton'
 
 class ToggleListButton extends Component {
   constructor(props) {
     super(props)
-    this.list = new SessionList(props.movie, props.listName)
 
     this.state = {
       inList: null
@@ -16,43 +15,65 @@ class ToggleListButton extends Component {
   }
 
   render() {
-    const inList = this.state.inList
+    const { inList } = this.state
+
     if (inList === null) return null
+
+    const { buttonProps, iconProps, options, text, textPlacement } = this.props
 
     return(
       <ToggleIconButton
         callback={this.toggleList}
-        clickableProps={this.props.clickableProps}
+        buttonProps={buttonProps}
+        iconProps={iconProps}
+        options={options}
         status={inList}
+        text={text}
+        textPlacement={textPlacement}
       />
     )
   }
 
   toggleList = () => {
-    this.state.inList ? this.list.remove() : this.list.add()
+    const { movie, listName, updateContainer } = this.props
+
+    if (this.state.inList) {
+      SessionListAPI.remove(movie, listName)
+    } else {
+      SessionListAPI.add(movie, listName)
+    }
 
     this.setState(
-      prevState => ({ inList: !prevState.inList }),
-      this.props.updateContainer()
+      (prevState) => ({ inList: !prevState.inList }),
+      updateContainer
     )
   }
 
   componentDidMount() {
-    const movieInList = this.list.findMovie()
+    const { movie, listName } = this.props
+
+    const movieInList = SessionListAPI.findMovie(movie, listName)
 
     this.setState({ inList: movieInList })
   }
 }
 
 ToggleListButton.propTypes = {
-  movie: PropTypes.object.isRequired,
   listName: PropTypes.string.isRequired,
-  clickableProps: PropTypes.object.isRequired,
+  movie: PropTypes.object.isRequired,
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  buttonProps: PropTypes.object,
+  iconProps: PropTypes.object,
   updateContainer: PropTypes.func,
+  text: PropTypes.string.isRequired,
+  textPlacement: PropTypes.string
 }
 
 ToggleListButton.defaultProps = {
+  buttonProps: {},
+  iconProps: {},
   updateContainer: () => void {},
+  textPlacement: 'left'
 }
 
 export default ToggleListButton

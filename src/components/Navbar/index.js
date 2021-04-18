@@ -8,9 +8,7 @@ import { connect } from 'react-redux'
 import NavbarUI from './NavbarUI'
 
 // Actions
-import { fetchSearchResults } from '@store/actions/searchActions'
-
-import { resetSuggestions } from '@store/actions/suggestionsActions'
+import { fetchSearchResults, resetSuggestions } from '@store'
 
 class Navbar extends Component {
   constructor(props) {
