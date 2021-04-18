@@ -1,26 +1,21 @@
-// Genres Reducer
-
-// Constants
-// ==================================================================
 import {
   SET_SLIDE_LENGTH_BEGIN,
   SET_SLIDE_LENGTH_SUCCESS,
   SET_SLIDE_LENGTH_FAILURE
 } from '../types'
 
+import { loadingState, errorState } from './utils'
+
 const initialState = {
-  value: null,
+  error: null,
   loading: false,
-  error: null
+  value: null,
 }
 
 export default function slideLengthReducer(state = initialState, action) {
   switch (action.type) {
     case SET_SLIDE_LENGTH_BEGIN:
-      return {
-        ...state,
-        loading: true
-      }
+      return loadingState(state)
 
     case SET_SLIDE_LENGTH_SUCCESS:
       return {
@@ -29,10 +24,7 @@ export default function slideLengthReducer(state = initialState, action) {
       }
 
     case SET_SLIDE_LENGTH_FAILURE:
-      return {
-        ...state,
-        error: action.payload.error
-      }
+      return errorState(state, action)
 
     default:
       return state

@@ -1,1 +1,5 @@
-export { default as slideLength } from './api'
+import { setSlideLengthValue } from './methods'
+
+export default {
+  set: setSlideLengthValue
+}

@@ -1,0 +1,30 @@
+import {
+  FETCH_GENRES_BEGIN,
+  FETCH_GENRES_SUCCESS,
+  FETCH_GENRES_FAILURE,
+  FETCH_GENRE_MOVIES_BEGIN,
+  FETCH_GENRE_MOVIES_SUCCESS,
+  FETCH_GENRE_MOVIES_FAILURE,
+  SET_GENRES_INDEX
+} from '../../types'
+
+export const INITIAL_STATE = {
+  error: null,
+  index: {},
+  list: [],
+  loading: false
+}
+
+export const TYPES = {
+  INDEX: {
+    FETCH_GENRE_MOVIES_BEGIN,
+    FETCH_GENRE_MOVIES_SUCCESS,
+    FETCH_GENRE_MOVIES_FAILURE,
+    SET_GENRES_INDEX,
+  },
+  LIST: {
+    FETCH_GENRES_BEGIN,
+    FETCH_GENRES_SUCCESS,
+    FETCH_GENRES_FAILURE,
+  },
+}

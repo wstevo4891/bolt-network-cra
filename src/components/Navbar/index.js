@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import NavbarUI from './NavbarUI'
 
 // Actions
-import { fetchSearchResults, resetSuggestions } from '@store'
+import { fetchSearchResults, resetSuggestions } from 'store'
 
 class Navbar extends Component {
   constructor(props) {
@@ -104,7 +104,7 @@ Navbar.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    genresIndex: state.moviesIndex.genresIndex
+    genresIndex: state.genres.index.value
   }
 }
 

@@ -2,7 +2,6 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import {
-  Counter,
   Genre,
   Home,
   Movie,
@@ -22,10 +21,6 @@ const Routes = () => (
     <Route path='/recent' component={Recent} />
 
     <Route path='/my-list' component={MyList} />
-
-    <Route path='/counter'>
-      <Counter />
-    </Route>
 
     <Route path='/search' component={Search} />
   </Switch>

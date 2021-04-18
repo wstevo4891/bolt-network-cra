@@ -3,12 +3,12 @@ import {
   setSlideLengthBegin,
   setSlideLengthSuccess,
   setSlideLengthFailure
-} from '../actions'
+} from '../../actions'
 
 import { currentSlideLength } from './utils'
 
-function setSlideLengthValue() {
-  return async dispatch => {
+export function setSlideLengthValue() {
+  return async (dispatch) => {
     try {
       dispatch(setSlideLengthBegin)
 
@@ -21,8 +21,4 @@ function setSlideLengthValue() {
       dispatch(setSlideLengthFailure(error))
     }
   }
-}
-
-export default {
-  set: setSlideLengthValue
 }
