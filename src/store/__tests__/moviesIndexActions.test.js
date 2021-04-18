@@ -5,8 +5,8 @@ import fetchMock from 'fetch-mock'
 import * as actions from '../actions/moviesIndexActions'
 import * as types from '../types/moviesIndexTypes'
 
-const middlewares = [thunk]
-const mockStore = configureMockStore(middlewares)
+const middleware = [thunk]
+const mockStore = configureMockStore(middleware)
 
 describe('moviesIndexActions', () => {
   const PAYLOAD = {

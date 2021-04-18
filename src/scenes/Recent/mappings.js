@@ -1,5 +1,9 @@
-import { recentMovies as API } from 'store/api'
+import API from 'store'
 
 export const mapDispatchToProps = (dispatch) => ({
-  fetchMovies: () => dispatch(API.fetch())
+  fetchMovies: () => dispatch(API.movies.fetchRecent())
+})
+
+export const mapStateToProps = (state) => ({
+  movies: state.movies.recent
 })

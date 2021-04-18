@@ -3,17 +3,30 @@
 @import "styles/core";
 
 .movie-display {
-  p {
-    color: white;
+  color: white;
 
-    span {
-      color: $azure-radiance;
-    }
+  .label {
+    color: $azure-radiance;
+  }
 
-    span.movie-plot {
-      position: absolute;
-      left: 3rem;
-      color: white;
-    }
+  .movie-plot {
+    position: absolute;
+    left: 3rem;
   }
 }
+
+// .movie-display {
+//   p {
+//     color: white;
+
+//     .label {
+//       color: $azure-radiance;
+//     }
+
+//     .movie-plot {
+//       position: absolute;
+//       left: 3rem;
+//       color: white;
+//     }
+//   }
+// }

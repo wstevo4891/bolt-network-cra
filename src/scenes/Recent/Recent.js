@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 
 // Components
 import {
@@ -8,14 +8,12 @@ import {
   TitleRow,
 } from 'components'
 
-export default function Recent({ fetchMovies }) {
-  const [movies, setMovies] = useState(null)
+export default function Recent({ fetchMovies, movies }) {
+  useEffect(() => {
+    fetchMovies()
+  }, [fetchMovies, movies])
 
-  if (movies === null) {
-    const results = fetchMovies()
-
-    setMovies(results)
-  }
+  if (movies.length === 0) return null
 
   return (
     <DisplayContainer>
@@ -27,4 +25,5 @@ export default function Recent({ fetchMovies }) {
 
 Recent.propTypes = {
   fetchMovies: PropTypes.func.isRequired,
+  movies: PropTypes.array.isRequired
 }

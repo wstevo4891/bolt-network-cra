@@ -9,7 +9,7 @@ import {
   Recent,
   MyList,
   Search
-} from '../../scenes'
+} from 'scenes'
 
 const Routes = () => (
   <Switch>

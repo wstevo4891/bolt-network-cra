@@ -25,9 +25,6 @@ class GenreSlider extends Component {
       next: false,
       prev: false
     }
-
-    this.handlePrevClick = this.handlePrevClick.bind(this)
-    this.handleNextClick = this.handleNextClick.bind(this)
   }
 
   get root() {
@@ -53,11 +50,11 @@ class GenreSlider extends Component {
     )
   }
 
-  handlePrevClick() {
+  handlePrevClick = () => {
     this.handleArrowClick('prev')
   }
 
-  handleNextClick() {
+  handleNextClick = () => {
     this.handleArrowClick('next')
   }
 

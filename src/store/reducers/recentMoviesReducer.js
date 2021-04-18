@@ -9,9 +9,9 @@ import {
 } from '../types'
 
 const initialState = {
-  movies: [],
-  loading: false,
-  error: null
+  error: null,
+  list: [],
+  loading: false
 }
 
 export default function recentMoviesReducer(state = initialState, action) {
@@ -19,22 +19,18 @@ export default function recentMoviesReducer(state = initialState, action) {
     case FETCH_RECENT_MOVIES_BEGIN:
       return {
         ...state,
-        loading: true,
-        error: null
+        loading: true
       }
 
     case FETCH_RECENT_MOVIES_SUCCESS:
       return {
         ...state,
-        movies: action.payload.movies,
-        loading: false
+        list: action.payload.movies
       }
 
     case FETCH_RECENT_MOVIES_FAILURE:
       return {
         ...state,
-        movies: [],
-        loading: false,
         error: action.payload.error
       }
 
