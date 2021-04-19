@@ -1,7 +1,8 @@
 import {
   fetchSuggestionsBegin,
   fetchSuggestionsFailure,
-  fetchSuggestionsSuccess
+  fetchSuggestionsSuccess,
+  resetSuggestions,
 } from '../actions'
 
 import { API_URL } from './constants'
@@ -22,6 +23,11 @@ function fetchSuggestions(suggestionId) {
   }
 }
 
+function reset() {
+  return async (dispatch) => dispatch(resetSuggestions())
+}
+
 export default {
+  reset,
   fetch: fetchSuggestions,
 }
