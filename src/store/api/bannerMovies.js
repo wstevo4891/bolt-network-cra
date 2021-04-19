@@ -2,7 +2,7 @@ import {
   fetchBannerMoviesBegin,
   fetchBannerMoviesSuccess,
   fetchBannerMoviesFailure
-} from './actions'
+} from '../actions'
 
 import { API_URL } from './constants'
 

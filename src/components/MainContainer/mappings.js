@@ -1,4 +1,4 @@
-import API from 'store'
+import { API } from 'store'
 
 export const mapStateToProps = (state) => ({
   slideLength: state.slideLength.value

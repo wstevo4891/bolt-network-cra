@@ -1,1 +1,1 @@
-export { default as genresReducer } from './genresReducer'
+export { default } from './genresReducer'

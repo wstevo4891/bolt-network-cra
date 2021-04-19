@@ -1,26 +1,34 @@
-// app/javascript/main/components/Navbar/components/SearchClose.jsx
-
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { Icon } from '@components'
+import { IconButton } from 'components'
+
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const SearchClose = ({ handleClick, query }) => {
-  const iconClass = query ? 'fa-times' : 'fa-time d-none'
+  if (!query) return null
+
+  const buttonProps = {
+    handleClick,
+    ariaHidden: 'true',
+    id: 'closeIcon',
+  }
 
   return (
-    <Icon
-      ariaHidden="true"
-      handleClick={handleClick}
-      icon={iconClass}
-      id="closeIcon"
+    <IconButton
+      buttonProps={buttonProps}
+      icon={faTimes}
     />
   )
 }
 
 SearchClose.propTypes = {
-  handleClick: PropTypes.func,
+  handleClick: PropTypes.func.isRequired,
   query: PropTypes.bool,
+}
+
+SearchClose.defaultProps = {
+  query: false,
 }
 
 export default SearchClose

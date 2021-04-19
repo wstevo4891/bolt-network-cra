@@ -6,12 +6,8 @@ import { SessionListAPI } from 'services'
 import { ToggleIconButton } from '../IconButton'
 
 class ToggleListButton extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      inList: null
-    }
+  state = {
+    inList: null
   }
 
   render() {
@@ -19,13 +15,13 @@ class ToggleListButton extends Component {
 
     if (inList === null) return null
 
-    const { buttonProps, iconProps, options, text, textPlacement } = this.props
+    const { buttonProps, icon, options, text, textPlacement } = this.props
 
     return(
       <ToggleIconButton
         callback={this.toggleList}
         buttonProps={buttonProps}
-        iconProps={iconProps}
+        icon={icon}
         options={options}
         status={inList}
         text={text}

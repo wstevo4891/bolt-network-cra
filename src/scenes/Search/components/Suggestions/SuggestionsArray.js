@@ -8,7 +8,7 @@ export default class SuggestionsArray {
   }
 
   create() {
-    const genreLinks = this.buildSuggestions(this.genres, 'alias')
+    const genreLinks = this.buildSuggestions(this.genres, 'category')
     const movieLinks = this.buildSuggestions(this.movies, 'title')
     const peopleLinks = this.buildSuggestions(this.people)
 

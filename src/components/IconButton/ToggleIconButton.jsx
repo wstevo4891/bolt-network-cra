@@ -32,7 +32,6 @@ ToggleIconButton.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   buttonProps: PropTypes.object,
   callback: PropTypes.func,
-  iconProps: PropTypes.object,
   status: PropTypes.bool,
   text: PropTypes.string,
   textPlacement: PropTypes.oneOf([LEFT, RIGHT]),
@@ -41,7 +40,6 @@ ToggleIconButton.propTypes = {
 ToggleIconButton.defaultProps = {
   buttonProps: {},
   callback: () => void {},
-  iconProps: {},
   status: true,
   text: null,
   textPlacement: RIGHT,

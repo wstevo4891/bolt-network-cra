@@ -1,1 +1,1 @@
-export { default as DisplayContainer } from './DisplayContainer'
+export { default } from './DisplayContainer'

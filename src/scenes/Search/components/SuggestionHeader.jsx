@@ -17,13 +17,13 @@ const SuggestionHeader = ({ suggestionId, suggestion }) => {
   if (suggestionId === undefined) return null
 
   const type = suggestionId.split('_')[1]
-  const header = headerText(type, suggestion)
+  const text = headerText(type, suggestion)
 
   return(
     <div className="col-12">
       <div className="suggestionHeader">
         <div className="title">
-          {header}
+          {text}
         </div>
       </div>
     </div>

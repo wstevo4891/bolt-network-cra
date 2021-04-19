@@ -1,1 +1,1 @@
-export { default as moviesReducer } from './moviesReducer'
+export { default } from './moviesReducer'

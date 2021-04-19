@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MobileView /> should match snapshot 1`] = `
+<div
+  className="search-results"
+>
+  <DisplayContainer>
+    <div
+      className="row"
+    >
+      <div
+        className="col-12 mb-2"
+      >
+        <span
+          className="suggestionsLabel"
+        >
+          Results for "
+          foo
+          "
+        </span>
+      </div>
+    </div>
+    <Connect(Results)
+      movies={
+        Array [
+          Object {
+            "title": "The Avengers",
+          },
+          Object {
+            "title": "Alien",
+          },
+          Object {
+            "title": "Avatar",
+          },
+        ]
+      }
+      name="Search_Results"
+      slideLength={6}
+    />
+    <div
+      className="row"
+    >
+      <Suggestions
+        data={
+          Object {
+            "genres": Array [
+              Object {
+                "title": "Action",
+              },
+              Object {
+                "title": "Sci-Fi",
+              },
+            ],
+            "movies": Array [
+              Object {
+                "title": "The Avengers",
+              },
+              Object {
+                "title": "Alien",
+              },
+              Object {
+                "title": "Avatar",
+              },
+            ],
+            "people": Array [
+              Object {
+                "name": "Ridley Scott",
+              },
+              Object {
+                "name": "James Cameron",
+              },
+              Object {
+                "name": "Joss Whedon",
+              },
+            ],
+            "query": "foo",
+          }
+        }
+        handleClick={[MockFunction]}
+      />
+    </div>
+  </DisplayContainer>
+</div>
+`;

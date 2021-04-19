@@ -1,4 +1,4 @@
-import API from 'store'
+import { API } from 'store'
 
 export const mapDispatchToProps = (dispatch) => ({
   fetchMovie: (movieId) => dispatch(API.movies.fetch(movieId))

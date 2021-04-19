@@ -1,4 +1,4 @@
-import API from 'store'
+import { API } from 'store'
 
 export const mapDispatchToProps = (dispatch) => ({
   fetchMovies: (titles) => dispatch(API.bannerMovies.fetch(titles))

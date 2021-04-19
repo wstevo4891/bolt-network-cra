@@ -4,7 +4,7 @@ import {
   FETCH_MOVIE_FAILURE
 } from '../../types'
 
-import { errorState, loadingState } from '../../utils'
+import { errorState, loadingState } from '../utils'
 
 import { INITIAL_STATE } from './constants'
 
