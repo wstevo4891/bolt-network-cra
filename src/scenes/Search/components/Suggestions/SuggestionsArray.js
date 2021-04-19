@@ -1,22 +1,18 @@
 export default class SuggestionsArray {
-  constructor(data) {
-    this.genres = data.genres
-    this.movies = data.movies
-    this.people = data.people
-    this.query = data.query
+  constructor(results, query) {
+    this.results = results
+    this.query = query
     return this.create()
   }
 
   create() {
-    const genreLinks = this.buildSuggestions(this.genres, 'category')
-    const movieLinks = this.buildSuggestions(this.movies, 'title')
-    const peopleLinks = this.buildSuggestions(this.people)
+    const { genres, movies, people } = this.results
 
-    return genreLinks.concat(peopleLinks).concat(movieLinks)
-  }
+    const genreLinks = this.buildSuggestions(genres, 'category')
+    const movieLinks = this.buildSuggestions(movies, 'title')
+    const peopleLinks = this.buildSuggestions(people)
 
-  suggestionLink(id) {
-    return `/search?q=${this.query}&suggestionId=${id}`
+    return [...genreLinks, ...peopleLinks, ...movieLinks]
   }
 
   buildSuggestions(list, nameKey = 'name') {
@@ -26,5 +22,9 @@ export default class SuggestionsArray {
       name: item[nameKey],
       link: this.suggestionLink(item.suggestionId)
     }))
+  }
+
+  suggestionLink(id) {
+    return `/search?q=${this.query}&suggestionId=${id}`
   }
 }

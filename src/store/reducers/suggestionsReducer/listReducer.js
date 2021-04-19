@@ -8,7 +8,7 @@ import { errorState, loadingState } from '../utils'
 
 import { INITIAL_STATE } from './constants'
 
-export default function fetchReducer(state = INITIAL_STATE, action) {
+export default function listReducer(state = INITIAL_STATE, action) {
   switch(action.type) {
     case FETCH_SUGGESTIONS_BEGIN:
       return loadingState(state)
@@ -17,7 +17,7 @@ export default function fetchReducer(state = INITIAL_STATE, action) {
     case FETCH_SUGGESTIONS_SUCCESS:
       return {
         ...state,
-        movies: action.payload.suggestions,
+        list: action.payload.suggestions,
       }
     default:
       return state

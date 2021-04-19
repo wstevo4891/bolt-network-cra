@@ -1,13 +1,9 @@
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import queryString from 'query-string'
 
-// Actions
-import { fetchSuggestions } from 'store'
+import SearchContainer from './components/SearchContainer'
 
-// Components
-import SearchResults from './components/SearchResults'
+import ViewSelect from './components/ViewSelect'
 
 class Search extends Component {
   state = {
@@ -15,51 +11,22 @@ class Search extends Component {
   }
 
   render() {
-    const { genres, movies, people } = this.props
-    
-    const params = this.parseParams()
+    const { suggestionId, query } = this.props
 
-    const results = this.setResults(movies, params)
+    const suggestionProps = {
+      suggestionId,
+      suggestion: this.state.suggestion,
+    }
 
-    return(
-      <SearchResults
-        headerProps={{
-          suggestion: this.state.suggestion,
-          suggestionId: params.suggestionId,
-        }}
-        resultsProps={{
-          name: 'Search_Results',
-          movies: results,
-          slideLength: this.props.slideLength,
-        }}
-        suggestionsProps={{
-          data: {
-            genres,
-            movies,
-            people,
-            query: params.query,
-          },
-          handleClick: this.handleClick,
-        }}
-      />
+    return (
+      <SearchContainer>
+        <ViewSelect
+          handleClick={this.handleClick}
+          suggestionProps={suggestionProps}
+          query={query}
+        />
+      </SearchContainer>
     )
-  }
-
-  parseParams = () => {
-    const parsedQuery = queryString.parse(this.props.query)
-
-    return {
-      query: decodeURIComponent(parsedQuery.q),
-      suggestionId: parsedQuery.suggestionId,
-    }
-  }
-
-  setResults = (movies, params) => {
-    if (params.suggestionId && this.state.suggestion) {
-      return this.props.suggestions.movies
-    } else {
-      return movies
-    }
   }
 
   handleClick = (event) => {
@@ -69,12 +36,12 @@ class Search extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.query === prevProps.query) return
+    const { query, fetchSuggestions, suggestionId } = this.props
 
-    const params = this.parseParams()
+    if (query === prevProps.data.query) return
 
-    if (params.suggestionId) {
-      this.props.dispatch(fetchSuggestions(params))
+    if (suggestionId) {
+      fetchSuggestions(suggestionId)
     } else {
       this.setState({ suggestion: null })
     }
@@ -82,13 +49,13 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  genres: PropTypes.array,
-  movies: PropTypes.array,
-  people: PropTypes.array,
-  slideLength: PropTypes.number,
-  suggestions: PropTypes.object,
+  fetchSuggestions: PropTypes.func.isRequired,
+  suggestionId: PropTypes.number,
   query: PropTypes.string,
 }
 
-export default connect()(Search)
+Search.defaultProps = {
+  suggestionId: null,
+}
+
+export default Search

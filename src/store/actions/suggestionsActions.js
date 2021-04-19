@@ -22,25 +22,3 @@ export const fetchSuggestionsFailure = (error) => ({
 export const resetSuggestions = () => ({
   type: RESET_SUGGESTIONS
 })
-
-
-// API Actions
-// ========================================================
-export function fetchSuggestions({ query, suggestionId }) {
-  return async dispatch => {
-    try {
-      dispatch(fetchSuggestionsBegin())
-
-      const response = await fetch(`/api/suggestions/${query}/${suggestionId}`)
-
-      const data = await response.json()
-
-      dispatch(fetchSuggestionsSuccess(data))
-
-      return data
-    
-    } catch(error) {
-      dispatch(fetchSuggestionsFailure(error))
-    }
-  }
-}

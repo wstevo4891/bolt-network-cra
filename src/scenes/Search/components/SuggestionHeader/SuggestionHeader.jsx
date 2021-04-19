@@ -1,23 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function headerText(type, suggestion) {
-  if (type === 'genre') {
-    return `Titles in: ${suggestion}`
+import { headerText } from './utils'
 
-  } else if (type === 'person') {
-    return `Results for ${suggestion} and more fan favorites`
-
-  } else if (type === 'movie') {
-    return `Titles related to ${suggestion}`
-  }
-}
+import './SuggestionHeader.styles.scss'
 
 const SuggestionHeader = ({ suggestionId, suggestion }) => {
   if (suggestionId === undefined) return null
 
-  const type = suggestionId.split('_')[1]
-  const text = headerText(type, suggestion)
+  const text = headerText(suggestionId, suggestion)
 
   return(
     <div className="col-12">

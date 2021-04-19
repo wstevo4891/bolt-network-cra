@@ -1,29 +1,28 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-// Components
-import { DisplayContainer, Results } from 'components'
+import SearchResults from '../SearchResults'
 
 import Suggestions from '../Suggestions'
 
-const MobileView = ({ resultsProps, suggestionsProps }) => (
-  <div className="search-results">
-    <DisplayContainer>
-      <div className="row">
-        <div className="col-12 mb-2">
-          <span className="suggestionsLabel">
-            Results for &quot;{suggestionsProps.data.query}&quot;
-          </span>
-        </div>
-      </div>
+import SuggestionsLabel from '../SuggestionsLabel'
 
-      <Results {...resultsProps} />
-
-      <div className="row">
-        <Suggestions {...suggestionsProps} />
+const MobileView = ({ handleClick, suggestionProps, query }) => (
+  <>
+    <div className="row">
+      <div className="col-12 mb-2">
+        <SuggestionsLabel>
+          Results for &quot;{query}&quot;
+        </SuggestionsLabel>
       </div>
-    </DisplayContainer>
-  </div>
+    </div>
+
+    <SearchResults {...suggestionProps} />
+
+    <div className="row">
+      <Suggestions handleClick={handleClick} query={query} />
+    </div>
+  </>
 )
 
 MobileView.propTypes = {

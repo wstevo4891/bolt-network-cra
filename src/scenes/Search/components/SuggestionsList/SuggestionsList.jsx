@@ -2,9 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
+import './SuggestionsList.styles.scss'
+
 const SuggestionsList = ({ suggestions, handleClick }) => (
-  <ul>
-    {suggestions.map((suggestion, index) =>
+  <ul className="suggestions_list">
+    {suggestions.map((suggestion, index) => (
       <li
         key={index.toString()}
         onClick={handleClick}
@@ -13,7 +15,7 @@ const SuggestionsList = ({ suggestions, handleClick }) => (
           {suggestion.name}
         </Link>
       </li>
-    )}
+    ))}
   </ul>
 )
 
