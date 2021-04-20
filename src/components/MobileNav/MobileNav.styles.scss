@@ -1,0 +1,7 @@
+@import "styles/core";
+
+.mobile_nav {
+  @include on_wide($breakpoint_768) {
+    display: none;
+  }
+}

@@ -1,22 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useLocation } from 'react-router-dom'
 
-// Components
-import NavItem from './NavItem'
+import { NavItem } from 'components'
 
-const SideMenu = (props) => {
-  const translateX = props.display ? '0px' : '-9rem'
-  const path = props.location.pathname
-  const handleClick = () => setTimeout(props.toggleDisplay(), 1000)
+const SideMenu = ({ display, genres, toggleDisplay }) => {
+  const path = useLocation().pathname
+
+  const handleClick = () => setTimeout(toggleDisplay(), 1000)
+  
+  const translateX = display ? '0px' : '-9rem'
+
+  const transform = `translate3d(${translateX}, 0px, 0px)`
 
   return(
-    <div
-      id="side-menu"
-      style={{ transform: `translate3d(${translateX}, 0px, 0px)` }}
-    >
+    <div className="side_menu" style={{ transform }}>
       <ul className="navbar-nav">
         <NavItem
-          id="home-link"
+          id="mobile-home-link"
           path={path}
           href="/"
           text="Home"
@@ -24,7 +25,7 @@ const SideMenu = (props) => {
         />
 
         <NavItem
-          id="my-list-link"
+          id="mobile-my-list-link"
           path={path}
           href="/my-list"
           text="My List"
@@ -32,17 +33,16 @@ const SideMenu = (props) => {
         />
 
         <NavItem
-          id="recent-link"
+          id="mobile-recent-link"
           path={path}
           href="/recent"
           text="Recently Added"
           handleClick={handleClick}
         />
 
-        {props.genres.map((genre, index) =>
+        {genres.map((genre, index) =>
           <NavItem
-            key={index.toString()}
-            id={`genre-link-${index}`}
+            key={index}
             path={path}
             href={genre.url}
             text={genre.text}
@@ -56,7 +56,6 @@ const SideMenu = (props) => {
 
 SideMenu.propTypes = {
   display: PropTypes.bool.isRequired,
-  location: PropTypes.object.isRequired,
   genres: PropTypes.array.isRequired,
   toggleDisplay: PropTypes.func.isRequired,
 }

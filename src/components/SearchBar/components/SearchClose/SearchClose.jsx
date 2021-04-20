@@ -5,30 +5,25 @@ import { IconButton } from 'components'
 
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
-const SearchClose = ({ handleClick, query }) => {
-  if (!query) return null
+import './SearchClose.styles.scss'
 
-  const buttonProps = {
-    handleClick,
-    ariaHidden: 'true',
-    id: 'closeIcon',
-  }
+const SearchClose = ({ handleClick, queryState }) => {
+  if (!queryState) return null
 
   return (
-    <IconButton
-      buttonProps={buttonProps}
-      icon={faTimes}
-    />
+    <div className="search_close">
+      <IconButton buttonProps={{ handleClick }} icon={faTimes} />
+    </div>
   )
 }
 
 SearchClose.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  query: PropTypes.bool,
+  queryState: PropTypes.bool,
 }
 
 SearchClose.defaultProps = {
-  query: false,
+  queryState: false,
 }
 
 export default SearchClose

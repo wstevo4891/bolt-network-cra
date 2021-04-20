@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import API from 'store/api'
 
@@ -34,7 +31,7 @@ const App = ({ fetchGenres, genres }) => {
 
   return(
     <Router>
-      <Route component={Navbar} />
+      <Navbar />
       <MainContainer>
         <Routes />
       </MainContainer>

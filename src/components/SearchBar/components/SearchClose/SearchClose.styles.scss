@@ -1,0 +1,14 @@
+@import "styles/core";
+
+.search_close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  font-size: 23px;
+  cursor: pointer;
+
+  @include on_narrow($breakpoint_768) {
+    display: none;
+  }
+}

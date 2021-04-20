@@ -47,12 +47,12 @@ class NavContainer extends Component {
     }
   }
 
-  removeShadow = () => {
-    this.navbarRef.current.classList.remove('nav-shadow')
+  addShadow() {
+    this.navbarRef.current.classList.add('nav-shadow')
   }
 
-  addShadow = () => {
-    this.navbarRef.current.classList.add('nav-shadow')
+  removeShadow() {
+    this.navbarRef.current.classList.remove('nav-shadow')
   }
 
   componentWillUnmount() {

@@ -1,8 +1,9 @@
 export { default as Dropdown } from './Dropdown'
-export { default as Hamburger } from './Hamburger'
+
+export { default as NavCollapse } from './NavCollapse'
+
 export { default as NavContainer } from './NavContainer'
-export { default as NavItem } from './NavItem'
-export { default as ScreenReaderText } from './ScreenReaderText'
-export { default as SearchBar } from './SearchBar'
-export { default as SearchInput } from './SearchInput'
-export { default as SideMenu } from './SideMenu'
+
+export { default as NavLogo } from './NavLogo'
+
+export { default as SearchBarToggle } from './SearchBarToggle'

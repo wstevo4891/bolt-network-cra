@@ -1,0 +1,7 @@
+@import "styles/core";
+
+.search_icon {
+  @include on_wide($breakpoint_768) {
+    display: none;
+  }
+}

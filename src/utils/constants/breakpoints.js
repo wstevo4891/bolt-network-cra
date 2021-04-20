@@ -4,4 +4,6 @@ export const BREAKPOINT_1100 = 1100
 
 export const BREAKPOINT_800 = 800
 
+export const BREAKPOINT_768 = 768
+
 export const BREAKPOINT_500 = 500
