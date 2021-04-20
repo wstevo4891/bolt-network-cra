@@ -13,6 +13,10 @@
   color: white;
   font-size: 14px;
   line-height: 1.42857;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .desktop_input {
