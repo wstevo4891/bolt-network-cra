@@ -1,0 +1,50 @@
+.genre-slider {
+  .handle.handleNext {
+    right: 0;
+  }
+
+  .handle.handlePrev {
+    left: 0;
+  }
+
+  .handle.active {
+    cursor: pointer;
+  }
+
+  &:hover {
+    .handle .indicator-icon {
+      display: block;
+    }
+  }
+
+  .handle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 20;
+    width: 4%;
+    text-align: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: flex;
+    color: white;
+    background: rgba(20,20,20,.5);
+  }
+
+  .handle .indicator-icon {
+    display: none;
+    height: auto;
+    position: relative;
+    font-size: 4vw;
+    align-self: center;
+    transform-origin: 45% 50%;
+
+    i {
+      transition: all .2s ease;
+    }
+  }
+
+  .handle:hover .indicator-icon i {
+    transform: scale(1.5);
+  }
+}

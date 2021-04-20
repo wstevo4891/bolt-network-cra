@@ -1,10 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-// Components
-import PaginationList from './PaginationList'
-import SliderArrow from './SliderArrow'
-import SlidesContainer from './SlidesContainer'
+import {
+  PaginationList,
+  SliderArrow,
+  SlidesContainer,
+} from './components'
+
+import { PREV, NEXT } from './constants'
 
 import './Slider.styles.scss'
 
@@ -17,7 +20,7 @@ const Slider = (props) => (
 
     <SliderArrow
       start={props.start}
-      direction='Prev'
+      direction={PREV}
       handleClick={props.handlePrevClick}
     />
 
@@ -31,7 +34,7 @@ const Slider = (props) => (
     />
 
     <SliderArrow
-      direction='Next'
+      direction={NEXT}
       handleClick={props.handleNextClick}
     />
   </div>
