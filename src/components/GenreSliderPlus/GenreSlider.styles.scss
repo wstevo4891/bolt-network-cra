@@ -1,0 +1,12 @@
+.genre-slider {
+  z-index: 1;
+  margin: 3vw 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  transition: transform .54s cubic-bezier(.5, 0, .1, 1) 0s;
+
+  &:hover {
+    z-index: 3;
+  }
+}

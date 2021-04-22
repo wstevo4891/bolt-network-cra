@@ -23,7 +23,7 @@ const MovieInfo = ({ movie }) => (
     </div>
 
     <div>
-      <span className="rating">{movie.rated}</span>
+      <span className="rating">{movie.rating}</span>
       <span>{movie.runtime}</span>
     </div>
     

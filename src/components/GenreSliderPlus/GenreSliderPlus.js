@@ -25,7 +25,7 @@ class GenreSliderPlus extends React.Component {
 
     const pageCount = PAGE_LIMITS[slideLength]
 
-    const rowID = `${genre.title}_row`
+    const rowID = `${genre.title}_Genre_Row`
 
     return (
       <div id={rowID} className="genre_slider">
