@@ -8,9 +8,9 @@ import {
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-// import { IconButton } from 'components'
+import { PREV, NEXT } from 'utils'
 
-import { PREV, NEXT } from '../../constants'
+// import { IconButton } from 'components'
 
 import './SliderArrow.styles.scss'
 

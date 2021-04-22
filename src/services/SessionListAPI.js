@@ -8,7 +8,11 @@
   getList(listName) {
     const list = JSON.parse(sessionStorage.getItem(listName))
 
-    return list === null ? {} : list
+    return (list === null) ? {} : list
+  },
+
+  setList(list, listName) {
+    sessionStorage.setItem(listName, JSON.stringify(list))
   },
 
   findMovie(movie, listName) {
@@ -22,7 +26,7 @@
 
     list[movie.id] = movie
 
-    sessionStorage.setItem(listName, JSON.stringify(list))
+    this.setList(list, listName)
 
     console.log(`Movie was added to ${listName}`)
   },
@@ -32,7 +36,7 @@
 
     delete list[movie.id]
 
-    sessionStorage.setItem(listName, JSON.stringify(list))
+    this.setList(list, listName)
 
     console.log(`Movie was removed from ${listName}`)
   },

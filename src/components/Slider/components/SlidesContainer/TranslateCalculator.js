@@ -47,7 +47,7 @@ export default class TranslateCalculator {
     }
   }
 
-  translate3D(x) {
-    return { transform: `translate3d(${x}%, 0px, 0px)` }
+  translate3D(translateX) {
+    return { transform: `translate3d(${translateX}%, 0px, 0px)` }
   }
 }

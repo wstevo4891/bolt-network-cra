@@ -1,56 +1,76 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  PaginationList,
-  SliderArrow,
-  SlidesContainer,
-} from './components'
+import { noop } from 'utils'
 
-import { PREV, NEXT } from './constants'
+import { SliderUI } from './components'
 
-import './Slider.styles.scss'
+class Slider extends Component {
+  state = {
+    position: 1,
+    start: true,
+    next: false,
+    prev: false
+  }
 
-const Slider = (props) => (
-  <div id={`${props.genre}_slider`} className='genre-slider'>
-    <PaginationList
-      active={props.position - 1}
-      listLength={props.listLength}
-    />
+  get nextPosition() {
+    const { next, prev, position } = this.state
 
-    <SliderArrow
-      start={props.start}
-      direction={PREV}
-      handleClick={props.handlePrevClick}
-    />
+    if (next) {
+      return position + 1
+    } else if (prev) {
+      return position - 1
+    } else return position
+  }
 
-    <SlidesContainer
-      genre={props.genre}
-      slides={props.slides}
-      slideLength={props.slideLength}
-      next={props.next}
-      prev={props.prev}
-      start={props.start}
-    />
+  set pointerEvents(value) {
+    document.getElementById('root').style['pointer-events'] = value
+  }
 
-    <SliderArrow
-      direction={NEXT}
-      handleClick={props.handleNextClick}
-    />
-  </div>
-)
+  render() {
+    const { name, slides } = this.props
+
+    return(
+      <SliderUI
+        {...this.state}
+        handleArrowClick={this.handleArrowClick}
+        name={name}
+        slides={slides}
+      />
+    )
+  }
+
+  handleArrowClick = (direction) => {
+    this.pointerEvents = 'none'
+
+    this.setState({ [direction]: true }, this.updateSlider(direction))
+  }
+
+  updateSlider(direction) {
+    this.props.fetchNextSlides(direction)
+      .then(() => setTimeout(this.handleTransitionEnd(), 1000))
+  }
+
+  handleTransitionEnd() {
+    const newState = {
+      position: this.nextPosition,
+      start: false,
+      next: false,
+      prev: false
+    }
+
+    this.setState(newState, () => { this.pointerEvents = 'auto' })
+  }
+}
 
 Slider.propTypes = {
-  genre: PropTypes.string,
-  slideLength: PropTypes.number,
-  slides: PropTypes.array,
-  listLength: PropTypes.number,
-  position: PropTypes.number,
-  start: PropTypes.bool,
-  next: PropTypes.bool,
-  prev: PropTypes.bool,
-  handlePrevClick: PropTypes.func,
-  handleNextClick: PropTypes.func,
+  fetchNextSlides: PropTypes.func,
+  name: PropTypes.string.isRequired,
+  slides: PropTypes.array.isRequired,
+}
+
+Slider.defaultProps = {
+  fetchNextSlides: noop,
 }
 
 export default Slider

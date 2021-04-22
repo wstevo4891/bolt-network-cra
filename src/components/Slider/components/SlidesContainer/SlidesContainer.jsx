@@ -1,45 +1,43 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { SLIDER } from 'utils'
+
 // Services
-import TranslateCalculator from './TranslateCalculator'
+import { translateFactory } from './utils'
 
 // Components
-import { PosterList, SliderContent } from 'components'
+import { PosterList } from 'components'
 
 const SlidesContainer = (props) => {
-  const { genre, slides, slideLength, start, next, prev } = props
+  const { name, next, prev, slideLength, slides, start } = props
 
-  const transformStyle = new TranslateCalculator(
-    slideLength, start, next, prev
-  ).call()
+  const contentClass = (next || prev) ? 'sliderContent animating' : 'sliderContent'
+
+  const transformStyle = translateFactory({ slideLength, start, next, prev })
 
   return(
     <div className="slider-container">
-      <SliderContent
-        next={next}
-        prev={prev}
-        style={transformStyle}
-      >
+      <div className={contentClass} style={transformStyle}>
         <PosterList
           movies={slides}
-          name={genre}
+          name={name}
           slideLength={slideLength}
           start={start}
-          type="slider"
+          type={SLIDER}
         />
-      </SliderContent>
+      </div>
     </div>
   )
 }
 
 SlidesContainer.propTypes = {
-  genre: PropTypes.string,
-  slides: PropTypes.array,
-  slideLength: PropTypes.number,
-  start: PropTypes.bool,
+  name: PropTypes.string,
   next: PropTypes.bool,
-  prev: PropTypes.bool
+  prev: PropTypes.bool,
+  slideLength: PropTypes.number,
+  slides: PropTypes.array,
+  start: PropTypes.bool,
 }
 
 export default SlidesContainer
