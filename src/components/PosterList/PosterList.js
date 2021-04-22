@@ -27,7 +27,7 @@ class PosterList extends Component {
           key={`${this.props.name}_Poster_${movie.id}`}
           mouseLeave={this.handleMouseLeave}
           mouseOver={this.handleMouseOver}
-          {...posterData}
+          posterData={posterData}
         />
       )
     })

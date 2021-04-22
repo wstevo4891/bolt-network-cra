@@ -1,5 +1,3 @@
-// src/components/Poster/index.jsx
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -11,40 +9,51 @@ import { PosterControls, PosterControlsWrapper } from './components'
 
 import './Poster.styles.scss'
 
-const Poster = (props) => (
-  <div
-    className={props.containerClass}
-    style={props.containerStyle}
-    onMouseOver={props.mouseOver}
-    onMouseLeave={props.mouseLeave}
-  >
-    <Link to={`/movies/${props.movie.id}`}>
-      <div className="poster" style={props.posterImage}></div>
-      <Overlay />
-    </Link>
+const Poster = ({ mouseOver, mouseLeave, posterData }) => {
+  const { container, hoverItem, movie, posterImage, slideItem } = posterData
 
-    <PosterControlsWrapper
-      hoverItem={props.hoverItem}
-      slideItem={props.slideItem}
+  return (
+    <div
+      className={container.className}
+      style={container.style}
+      onMouseOver={mouseOver}
+      onMouseLeave={mouseLeave}
     >
-      <PosterControls
-        hoverItem={props.hoverItem}
-        movie={props.movie}
-        slideItem={props.slideItem}
-      />
-    </PosterControlsWrapper>
-  </div>
-)
+      <Link to={`/movies/${movie.id}`}>
+        <div className="poster" style={posterImage}></div>
+        <Overlay />
+      </Link>
+  
+      <PosterControlsWrapper
+        hoverItem={hoverItem}
+        slideItem={slideItem}
+      >
+        <PosterControls
+          hoverItem={hoverItem}
+          movie={movie}
+          slideItem={slideItem}
+        />
+      </PosterControlsWrapper>
+    </div>
+  )
+}
 
 Poster.propTypes = {
-  containerClass: PropTypes.string,
-  containerStyle: PropTypes.object,
-  hoverItem: PropTypes.number,
-  mouseOver: PropTypes.func,
-  mouseLeave: PropTypes.func,
-  movie: PropTypes.object,
-  posterImage: PropTypes.object,
-  slideItem: PropTypes.number
+  mouseOver: PropTypes.func.isRequired,
+  mouseLeave: PropTypes.func.isRequired,
+  posterData: PropTypes.shape({
+    container: PropTypes.shape({
+      className: PropTypes.string,
+      style: PropTypes.string,
+    }),
+    hoverItem: PropTypes.number,
+    movie: PropTypes.object,
+    posterImage: PropTypes.shape({
+      backgroundImage: PropTypes.string,
+      backgroundSize: PropTypes.string,
+    }),
+    slideItem: PropTypes.number,
+  }).isRequired,
 }
 
 export default Poster
