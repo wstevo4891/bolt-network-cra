@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { GenreSlider } from 'components'
+import { GenreSliderPlus } from 'components'
 
 const GenreSlidersSection = ({ genres }) => (
   <section className='genre-sliders-container'>
     {genres.map((genre, index) => (
-      <GenreSlider key={index} genre={genre} />
+      <GenreSliderPlus key={index} genre={genre} />
     ))}
   </section>
 )
