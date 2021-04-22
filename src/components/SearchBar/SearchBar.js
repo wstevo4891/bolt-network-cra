@@ -1,5 +1,5 @@
+import PropTypes from 'prop-types'
 import React, { Component } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
 
 import { noop } from 'utils'
 
@@ -9,7 +9,7 @@ import './SearchBar.styles.scss'
 
 class SearchBar extends Component {
   state = {
-    firstLocation: useLocation().pathname,
+    firstLocation: this.props.location,
     queryState: false,
   }
 
@@ -76,7 +76,7 @@ class SearchBar extends Component {
   updateLocation(query = null) {
     const { firstLocation } = this.state
 
-    const history = useHistory()
+    const { history } = this.props
 
     if (query && query !== '') {
       history.push(`/search?q=${encodeURIComponent(query)}`)
@@ -96,6 +96,11 @@ class SearchBar extends Component {
 
     this.setState({ queryState: currentState }, callback)
   }
+}
+
+SearchBar.propTypes = {
+  history: PropTypes.object.isRequired,
+  location: PropTypes.string.isRequired,
 }
 
 export default SearchBar

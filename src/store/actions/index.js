@@ -1,6 +1,7 @@
 export * from './bannerMoviesActions'
 export * from './genresListActions'
 export * from './genresIndexActions'
+export * from './movieActions'
 export * from './moviesIndexActions'
 export * from './recentMoviesActions'
 export * from './searchActions'

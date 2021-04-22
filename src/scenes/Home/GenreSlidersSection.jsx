@@ -3,13 +3,17 @@ import React from 'react'
 
 import { GenreSliderPlus } from 'components'
 
-const GenreSlidersSection = ({ genres }) => (
-  <section className='genre-sliders-container'>
-    {genres.map((genre, index) => (
-      <GenreSliderPlus key={index} genre={genre} />
-    ))}
-  </section>
-)
+const GenreSlidersSection = ({ genres }) => {
+  console.log('genres', genres)
+
+  return (
+    <section className='genre-sliders-container'>
+      {genres.map((genre, index) => (
+        <GenreSliderPlus key={index} genre={genre} />
+      ))}
+    </section>
+  )
+}
 
 GenreSlidersSection.propTypes = {
   genres: PropTypes.array.isRequired

@@ -30,3 +30,5 @@ Movie.propTypes = {
 Movie.defaultProps = {
   movie: undefined
 }
+
+export default Movie

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { SearchBar } from 'components'
 
@@ -15,6 +16,9 @@ const SearchBarToggle = () => {
   const toggleRef = useRef()
   const setWidth = (width) => { toggleRef.current.style.width = width }
 
+  const history = useHistory()
+  const { pathname } = useLocation()
+
   const width = display ? MAX_WIDTH : MIN_WIDTH
 
   useEventListeners(setDisplay, setWidth)
@@ -24,7 +28,7 @@ const SearchBarToggle = () => {
       <ToggleButton display={display} handleClick={toggleDisplay} />
 
       <div className="toggle_wrapper" ref={toggleRef} style={{ width }}>
-        <SearchBar />
+        <SearchBar history={history} location={pathname} />
       </div>
     </div>
   )

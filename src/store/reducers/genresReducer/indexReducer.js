@@ -2,7 +2,7 @@ import { SET_GENRES_INDEX } from '../../types'
 
 import { INITIAL_STATE } from './constants'
 
-import { indexMoviesReducer } from './indexMoviesReducer'
+import indexMoviesReducer from './indexMoviesReducer'
 
 export function buildGenresIndex(genres) {
   const index = {}

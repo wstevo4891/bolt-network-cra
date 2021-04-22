@@ -3,7 +3,7 @@ import React from 'react'
 
 import { API_URL } from 'store'
 
-import { Slider } from '../Slider'
+import Slider from '../Slider'
 
 import { Header, PaginationList } from './components'
 
@@ -78,3 +78,5 @@ GenreSliderPlus.propTypes = {
   genres: PropTypes.object.isRequired,
   slideLength: PropTypes.number.isRequired,
 }
+
+export default GenreSliderPlus

@@ -10,7 +10,7 @@ import {
   SearchBarToggle,
 } from './components'
 
-import { buildGenreLinks } from './utis'
+import { buildGenreLinks } from './utils'
 
 const Navbar = ({ genres }) => {
   const genreLinks = buildGenreLinks(genres)

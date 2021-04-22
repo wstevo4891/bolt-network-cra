@@ -1,3 +1,7 @@
-export const mapStateToProps = (state) => ({
-    genres: state.genres.list.value
-})
+export const mapStateToProps = (state) => {
+  const { genres } = state
+
+  if (genres === undefined) return { genres: null }
+
+  return { genres: genres.list }
+}

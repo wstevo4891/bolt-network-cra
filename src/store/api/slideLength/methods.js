@@ -8,11 +8,11 @@ import {
 import { currentSlideLength } from './utils'
 
 export function setSlideLengthValue() {
-  return async (dispatch) => {
+  return (dispatch) => {
     try {
       dispatch(setSlideLengthBegin)
 
-      const slideLength = await currentSlideLength()
+      const slideLength = currentSlideLength()
 
       dispatch(setSlideLengthSuccess(slideLength))
 

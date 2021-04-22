@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { DisplayContainer, TitleRow } from 'components'
-import MoviesList from '.MoviesList'
+import MoviesList from './MoviesList'
 
 import { fetchMyListMovies } from './utils'
 

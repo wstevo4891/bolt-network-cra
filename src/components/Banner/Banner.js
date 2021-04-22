@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+
+import { API } from 'store'
 
 import { randomIndex } from './utils'
 
@@ -14,10 +16,14 @@ const MOVIE_TITLES = [
   'Skyfall'
 ]
 
-const Banner = ({ fetchMovies, movies }) => {
+const Banner = ({ dispatch, movies }) => {
   useEffect(() => {
+    const fetchMovies = (titles) => {
+      dispatch(API.bannerMovies.fetch(titles))
+    }
+
     fetchMovies(MOVIE_TITLES)
-  }, [fetchMovies, movies])
+  }, [movies])
 
   if (movies === null) return null
 

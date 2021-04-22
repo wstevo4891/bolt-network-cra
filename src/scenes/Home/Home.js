@@ -11,14 +11,18 @@ import WelcomeSection from './WelcomeSection'
 
 import './Home.styles.scss'
 
-const Home = ({ genres }) => (
-  <main className="application">
-    <Banner />
-    <WelcomeSection />
-    <GenreSlidersSection genres={genres} />
-    <FeatureSection />
-  </main>
-)
+const Home = ({ genres }) => {
+  if (genres === null) return null
+
+  return (
+    <main className="application">
+      <Banner />
+      <WelcomeSection />
+      <GenreSlidersSection genres={genres} />
+      <FeatureSection />
+    </main>
+  )
+}
 
 Home.propTypes = {
   genres: PropTypes.array.isRequired,

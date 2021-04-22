@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import { mapDispatchToProps, mapStateToProps } from './mappings'
+import { mapStateToProps } from './mappings'
 
 import Banner from './Banner'
 
-export default connect(mapDispatchToProps, mapStateToProps)(Banner)
+export default connect(mapStateToProps)(Banner)

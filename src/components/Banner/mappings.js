@@ -1,9 +1,15 @@
-import { API } from 'store'
+// import { API } from 'store'
 
-export const mapDispatchToProps = (dispatch) => ({
-  fetchMovies: (titles) => dispatch(API.bannerMovies.fetch(titles))
-})
+// export const mapDispatchToProps = (dispatch) => ({
+//   fetchMovies: (titles) => dispatch(API.bannerMovies.fetch(titles))
+// })
 
-export const mapStateToProps = (state) => ({
-  movies: state.bannerMovies.value
-})
+export const mapStateToProps = (state) => {
+  const { bannerMovies } = state
+
+  if (bannerMovies === undefined) return { movies: null }
+
+  return {
+    movies: bannerMovies.value
+  }
+}
