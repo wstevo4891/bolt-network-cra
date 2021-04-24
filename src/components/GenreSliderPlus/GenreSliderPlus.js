@@ -3,6 +3,8 @@ import React from 'react'
 
 import { API_URL } from 'store'
 
+import { noop } from 'utils'
+
 import Slider from '../Slider'
 
 import { Header, PaginationList } from './components'
@@ -21,7 +23,7 @@ class GenreSliderPlus extends React.Component {
     const { page, movies } = this.state
     const { genre, slideLength } = this.props
 
-    if (movies === null) return null
+    if (!Array.isArray(movies)) return null
 
     const pageCount = PAGE_LIMITS[slideLength]
 
@@ -43,9 +45,9 @@ class GenreSliderPlus extends React.Component {
   }
 
   componentDidMount() {
-    const movies = this.fetchGenreMovies(this.state.page)
-
-    this.setState({ page: 1, movies })
+    this.fetchGenreMovies(this.state.page).then((movies) => {
+      this.setState({ page: 1, movies })
+    })
   }
 
   async fetchGenreMovies(page) {
@@ -54,23 +56,27 @@ class GenreSliderPlus extends React.Component {
 
       const response = await fetch(`${URI}/${genre.id}/${slideLength}/${page}`)
 
-      const data = await response.json()
+      const movies = await response.json()
 
-      return data
+      return movies
     } catch(error) {
       console.error(error.message)
     }
   }
 
-  fetchNextMovies = (direction) => {
-    const currentPage = this.state.page
-    const { slideLength } = this.props
+  fetchNextMovies = (direction, callback = noop) => {
+    try {
+      const currentPage = this.state.page
+      const { slideLength } = this.props
 
-    const page = findNextPage(currentPage, direction, slideLength)
+      const page = findNextPage(currentPage, direction, slideLength)
 
-    const movies = this.fetchGenreMovies(page)
-
-    this.setState({ page, movies })
+      this.fetchGenreMovies(page).then((movies) => {
+        this.setState({ page, movies }, callback)
+      })
+    } catch(error) {
+      console.error(error)
+    }
   }
 }
 

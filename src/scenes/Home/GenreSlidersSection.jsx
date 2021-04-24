@@ -4,8 +4,6 @@ import React from 'react'
 import { GenreSliderPlus } from 'components'
 
 const GenreSlidersSection = ({ genres }) => {
-  console.log('genres', genres)
-
   return (
     <section className='genre-sliders-container'>
       {genres.map((genre, index) => (

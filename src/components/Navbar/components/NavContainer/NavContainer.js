@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import './NavContainer.styles.scss'
+
 class NavContainer extends Component {
   constructor(props) {
     super(props)
@@ -9,14 +11,9 @@ class NavContainer extends Component {
 
   render() {
     return(
-      <div id="navbar">
-        <nav
-          className="navbar navbar-expand-md fixed-top"
-          ref={this.navbarRef}
-        >
-          {this.props.children}
-        </nav>
-      </div>
+      <nav className="navbar navbar-expand-md fixed-top" ref={this.navbarRef}>
+        {this.props.children}
+      </nav>
     )
   }
 

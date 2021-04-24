@@ -6,6 +6,10 @@ import { NavItem } from 'components'
 
 import Dropdown from '../Dropdown'
 
+import './NavCollapse.styles.scss'
+
+const GENRES_PATH_REGEX = /\/genres/
+
 const NavCollapse = ({ dropdownLinks }) => {
   const { pathname } = useLocation()
 
@@ -24,7 +28,7 @@ const NavCollapse = ({ dropdownLinks }) => {
           dropdownId="genresDropdown"
           links={dropdownLinks}
           path={pathname}
-          pathRegex={/\/genres/}
+          pathRegex={GENRES_PATH_REGEX}
           text="Genres"
         />
 

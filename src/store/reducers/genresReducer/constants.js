@@ -12,7 +12,7 @@ export const INITIAL_STATE = {
   error: null,
   index: {},
   list: [],
-  loading: false
+  loading: false,
 }
 
 export const TYPES = {

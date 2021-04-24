@@ -17,11 +17,11 @@ function fetchGenres() {
 
       const response = await fetch(`${API_URL}/genres`)
 
-      const data = await response.json()
+      const genres = await response.json()
 
-      dispatch(fetchGenresSuccess(data))
+      dispatch(fetchGenresSuccess(genres))
 
-      dispatch(setGenresIndex(data))
+      dispatch(setGenresIndex(genres))
 
     } catch(error) {
       dispatch(fetchGenresFailure(error))

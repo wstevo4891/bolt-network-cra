@@ -1,0 +1,21 @@
+.dropdown {
+  .dropdown-menu {
+    display: block;
+    width: 400px;
+    max-height: 175px;
+    background: rgba(0,0,0,.75);
+    border-radius: 0;
+    border: 1px solid rgba(255,255,255,.35);
+  }
+
+  .dropdown-item {
+    display: inline-block;
+    width: 125px;
+  
+    &:hover {
+      color: white;
+      background: transparent;
+      text-decoration: underline;
+    }
+  }
+}

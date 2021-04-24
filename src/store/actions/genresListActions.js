@@ -10,15 +10,15 @@ import {
 // Dispatch Functions
 // ==================================================================
 export const fetchGenresBegin = () => ({
-  type: FETCH_GENRES_BEGIN
+  type: FETCH_GENRES_BEGIN,
 })
 
 export const fetchGenresSuccess = (genres) => ({
   type: FETCH_GENRES_SUCCESS,
-  payload: { genres }
+  payload: { genres },
 })
 
 export const fetchGenresFailure = (error) => ({
   type: FETCH_GENRES_FAILURE,
-  payload: { error }
+  payload: { error },
 })

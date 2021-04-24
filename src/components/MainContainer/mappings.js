@@ -1,17 +1,9 @@
-// import { API } from 'store'
-
 export const mapStateToProps = (state) => {
   const { slideLength } = state
 
   if (slideLength === undefined) {
-    return { slideLength: null }
+    return { slideLength: 0 }
   } else {
-    return { slideLength }
+    return { slideLength: slideLength.value }
   }
 }
-
-// export const mapDispatchToProps = (dispatch) => {
-//   return {
-//     setSlideLength: (dispatch) => dispatch(API.slideLength.set()),
-//   }
-// }

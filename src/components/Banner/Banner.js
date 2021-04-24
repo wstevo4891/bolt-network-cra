@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { API } from 'store'
 
 import { randomIndex } from './utils'
 
 // Components
-import MovieBanner from './MovieBanner'
+import Overlay from '../Overlay'
+
+import { BackgroundImage, MovieContent } from './components'
 
 import './Banner.styles.scss'
 
@@ -16,16 +19,14 @@ const MOVIE_TITLES = [
   'Skyfall'
 ]
 
-const Banner = ({ dispatch, movies }) => {
+const Banner = ({ movies }) => {
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    const fetchMovies = (titles) => {
-      dispatch(API.bannerMovies.fetch(titles))
-    }
+    dispatch(API.bannerMovies.fetch(MOVIE_TITLES))
+  }, [dispatch])
 
-    fetchMovies(MOVIE_TITLES)
-  }, [movies])
-
-  if (movies === null) return null
+  if (movies.length === 0) return null
 
   const index = randomIndex(MOVIE_TITLES.length)
 
@@ -33,18 +34,16 @@ const Banner = ({ dispatch, movies }) => {
 
   return (
     <section className="banner">
-      <MovieBanner movie={movie} />
+      <BackgroundImage url={movie.banner}>
+        <MovieContent movie={movie} />
+        <Overlay />
+      </BackgroundImage>
     </section>
   )
 }
 
 Banner.propTypes = {
-  fetchMovies: PropTypes.func.isRequired,
-  movies: PropTypes.array
-}
-
-Banner.defaultProps = {
-  movies: null
+  movies: PropTypes.array.isRequired,
 }
 
 export default Banner

@@ -6,7 +6,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import './SearchIcon.styles.scss'
 
 const SearchIcon = () => (
-  <span className="search_icon" ariaHidden="true" >
+  <span className="search_icon" aria-hidden="true" >
     <FontAwesomeIcon icon={faSearch} />
   </span>
 )

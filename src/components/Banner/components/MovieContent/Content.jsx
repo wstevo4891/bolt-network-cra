@@ -3,7 +3,7 @@ import React from 'react'
 
 import SlideButtons from './SlideButtons'
 
-const MovieContent = ({ movie }) => (
+const Content = ({ movie }) => (
   <div className="movie-content">
     <span className="movie-year">{movie.year}</span>
 
@@ -17,7 +17,7 @@ const MovieContent = ({ movie }) => (
   </div>
 )
 
-MovieContent.propTypes = {
+Content.propTypes = {
   movie: PropTypes.shape({
     plot: PropTypes.string,
     rated: PropTypes.string,
@@ -27,4 +27,4 @@ MovieContent.propTypes = {
   }).isRequired
 }
 
-export default MovieContent
+export default Content

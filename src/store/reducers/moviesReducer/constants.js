@@ -24,5 +24,5 @@ export const INITIAL_STATE = {
   error: null,
   index: {},
   loading: false,
-  recent: []
+  recent: [],
 }

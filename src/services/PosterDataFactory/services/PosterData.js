@@ -8,7 +8,7 @@
  */
 export default class PosterData {
   constructor(container, hoverItem, movie) {
-    this.slideItem = parseInt(container.class.slice(-1), 10)
+    this.slideItem = parseInt(container.className.slice(-1), 10)
 
     this.hoverItem = hoverItem
 
@@ -24,7 +24,7 @@ export default class PosterData {
 
   setContainer(container) {
     if (this.slideItem === this.hoverItem) {
-      container.class += ' mouseOver'
+      container.className += ' mouseOver'
     }
 
     return container

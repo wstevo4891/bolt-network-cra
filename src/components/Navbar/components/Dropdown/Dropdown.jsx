@@ -1,76 +1,67 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { faAngleDown  } from '@fortawesome/free-solid-svg-icons'
 
-import { IconButton } from 'components/IconButton'
+import { IconButton } from 'components'
 
 import Menu from './Menu'
 
-class Dropdown extends Component {
-  state = {
-    show: false
-  }
+import './Dropdown.styles.scss'
 
-  // this.props.path.match(/\/genres/)
+const Dropdown = (props) => {
+  let navItemClass
 
-  get navItemClass() {
-    const { path, pathRegex } = this.props
+  const { id, dropdownId, links, path, pathRegex, text } = props
 
-    if (path.match(pathRegex)) {
-      return "nav-item dropdown active"
-    } else {
-      return "nav-item dropdown"
-    }
-  }
+  const [showMenu, setShowMenu] = useState(false)
+  const toggleShow = () => setShowMenu(!showMenu)
 
-  render() {
-    const { id, dropdownId, links, text } = this.props
-
-    const buttonProps = {
-      ariaExpanded: 'false',
-      ariaHasPopup: 'true',
-      buttonClass: 'nav-link',
-      id: dropdownId,
+  useEffect(() => {
+    const handleMouseUp = (event) => {
+      if (event.target.id === dropdownId) {
+        toggleShow()
+      } else {
+        setShowMenu(false)
+      }
     }
 
-    return(
-      <li id={id} className={this.navItemClass}>
-        <IconButton
-          buttonProps={buttonProps}
-          icon={faAngleDown}
-          text={text}
-          textPlacement="left"
-        />
+    document.addEventListener('mouseup', handleMouseUp)
 
-        <Menu
-          dropdownId={dropdownId}
-          links={links}
-          showMenu={this.state.show}
-        />
-      </li>
-    )
-  }
-
-  componentDidMount() {
-    document.addEventListener('mouseup', this.handleMouseUp)
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('mouseup', this.handleMouseUp)
-  }
-
-  handleMouseUp = (event) => {
-    if (event.target.id === this.props.dropdownId) {
-      this.toggleShow()
-    } else {
-      this.setState({ show: false })
+    return () => {
+      document.removeEventListener('mouseup', handleMouseUp)
     }
+  })
+
+  if (path.match(pathRegex)) {
+    navItemClass = "nav-item dropdown active"
+  } else {
+    navItemClass = "nav-item dropdown"
   }
 
-  toggleShow = () => {
-    this.setState(prevState => ({ show: !prevState.show }))
+  const buttonProps = {
+    ariaExpanded: 'false',
+    ariaHasPopup: 'true',
+    buttonClass: 'nav-link',
+    id: dropdownId,
   }
+
+  return(
+    <li id={id} className={navItemClass}>
+      <IconButton
+        buttonProps={buttonProps}
+        icon={faAngleDown}
+        text={text}
+        textPlacement="left"
+      />
+
+      <Menu
+        dropdownId={dropdownId}
+        links={links}
+        showMenu={showMenu}
+      />
+    </li>
+  )
 }
 
 Dropdown.propTypes = {

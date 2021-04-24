@@ -1,76 +1,40 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 import { API } from 'store'
 
-class MainContainer extends Component {
-  state = {
-    slideLength: null,
-  }
+const MainContainer = ({ children, slideLength }) => {
+  const dispatch = useDispatch()
 
-  render() {
-    const { slideLength } = this.state
+  useEffect(() => {
+    const setSlideLength = () => {
+      dispatch(API.slideLength.set())
+    }
 
-    if (slideLength === null) return null
+    setSlideLength()
 
-    return (
-      <div id="main-container">
-        {this.props.children}
-      </div>
-    )
-  }
+    window.addEventListener('resize', setSlideLength)
 
-  componentDidMount() {
-    this.updateSlideLength()
+    return () => window.removeEventListener('resize', setSlideLength)
+  }, [dispatch])
 
-    window.addEventListener("resize", this.updateSlideLength)
-  }
+  if (slideLength === 0) return null
 
-  // TODO: deBounce this function
-  updateSlideLength = () => {
-    const newLength = this.props.dispatch(API.slideLength.set())
-
-    this.setState((prevState) => {
-      if (newLength === prevState.slideLength) return prevState
-
-      return { slideLength: newLength }
-    })
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.updateSlideLength)
-  }
+  return (
+    <div id="main-container">
+      {children}
+    </div>
+  )
 }
 
-// const MainContainer = ({ children, setSlideLength, slideLength }) => {
-//   useEffect(() => {
-//     window.addEventListener('resize', setSlideLength)
-
-//     return () => window.removeEventListener('resize', setSlideLength)
-//   })
-
-//   if (slideLength === null) {
-//     setSlideLength()
-//     return null
-//   }
-
-//   return (
-//     <div id="main-container">
-//       {children}
-//     </div>
-//   )
-// }
-
 MainContainer.propTypes = {
-  children: PropTypes.array,
-  dispatch: PropTypes.func,
-  // setSlideLength: PropTypes.func.isRequired,
-  // slideLength: PropTypes.number,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  slideLength: PropTypes.number.isRequired,
 }
 
 MainContainer.defaultProps = {
   children: null,
-  // slideLength: null
 }
 
 export default MainContainer

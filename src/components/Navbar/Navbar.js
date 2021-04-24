@@ -12,14 +12,16 @@ import {
 
 import { buildGenreLinks } from './utils'
 
-const Navbar = ({ genres }) => {
+const Navbar = ({ genres }) => {  
+  if (genres.length === 0) return null
+
   const genreLinks = buildGenreLinks(genres)
 
   return (
     <NavContainer>
       <MobileNav genres={genreLinks} />
       <NavLogo />
-      <NavCollapse dropdownlinks={genreLinks} />
+      <NavCollapse dropdownLinks={genreLinks} />
       <SearchBarToggle />
     </NavContainer>
   )

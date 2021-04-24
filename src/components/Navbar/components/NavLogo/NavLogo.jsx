@@ -2,7 +2,9 @@ import React from 'react'
 
 import { Link } from 'react-router-dom'
 
-import logoSVG from './logo.svg'
+import logoSVG from './bolt-network.svg'
+
+import './NavLogo.styles.scss'
 
 const NavLogo = () => (
   <Link className="navbar-brand" to="/">

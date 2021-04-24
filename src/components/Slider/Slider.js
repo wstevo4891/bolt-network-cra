@@ -47,8 +47,9 @@ class Slider extends Component {
   }
 
   updateSlider(direction) {
-    this.props.fetchNextSlides(direction)
-      .then(() => setTimeout(this.handleTransitionEnd(), 1000))
+    this.props.fetchNextSlides(direction, () => {
+      setTimeout(this.handleTransitionEnd(), 1000)
+    })
   }
 
   handleTransitionEnd() {

@@ -17,9 +17,13 @@ class PosterList extends Component {
   _mounted = false
 
   render() {
+    const { movies } = this.props
+
+    if (movies === null) return null
+
     const factory = new PosterDataFactory({...this.state, ...this.props })
 
-    return this.props.movies.map((movie, index) => {
+    return movies.map((movie, index) => {
       const posterData = factory.build(movie, index)
 
       return(

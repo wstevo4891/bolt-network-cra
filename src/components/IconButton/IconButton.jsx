@@ -17,7 +17,7 @@ const IconButton = (props) => (
 
 IconButton.propTypes = {
   buttonProps: PropTypes.shape(Button.propTypes).isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.object.isRequired,
   text: PropTypes.string,
   textPlacement: PropTypes.oneOf([LEFT, RIGHT]),
 }

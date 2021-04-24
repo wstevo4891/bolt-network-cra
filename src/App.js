@@ -71,7 +71,7 @@ class App extends React.Component {
 App.propTypes = {
   dispatch: PropTypes.func,
   // fetchGenres: PropTypes.func.isRequired,
-  genres: PropTypes.oneOf([PropTypes.array, PropTypes.object]),
+  genres: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 }
 
 export default connect(mapStateToProps)(App)

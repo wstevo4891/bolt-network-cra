@@ -11,7 +11,7 @@ const NavItem = (props) => {
     <li className={itemClass} onClick={props.handleClick}>
       <Link
         id={props.id}
-        className="nav-linnk"
+        className="nav-link"
         to={props.href}
       >
         {props.text}&nbsp;

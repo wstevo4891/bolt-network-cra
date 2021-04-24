@@ -7,7 +7,7 @@ import {
 const initialState = {
   error: null,
   loading: false,
-  value: null
+  value: [],
 }
 
 export default function bannerMoviesReducer(state = initialState, action) {

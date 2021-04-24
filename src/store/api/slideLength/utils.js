@@ -22,7 +22,7 @@ export const SLIDE_LENGTH_MAP = {
 }
 
 export function currentSlideLength() {
-  if (window === undefined) return null
+  if (window === undefined) return 0
 
   const width = window.innerWidth
 

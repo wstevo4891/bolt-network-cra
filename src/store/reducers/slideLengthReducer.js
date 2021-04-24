@@ -9,7 +9,7 @@ import { loadingState, errorState } from './utils'
 const initialState = {
   error: null,
   loading: false,
-  value: null,
+  value: 0,
 }
 
 export default function slideLengthReducer(state = initialState, action) {

@@ -1,0 +1,13 @@
+@import "styles/core";
+
+.navbar {
+  transition: background .4s;
+
+  @include bp-mobile {
+    width: 100%;
+  }
+
+  .nav-shadow {
+    background: rgb(20, 20, 20);
+  }
+}
