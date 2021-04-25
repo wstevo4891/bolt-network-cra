@@ -11,6 +11,8 @@ import { Header, PaginationList } from './components'
 
 import { findNextPage, PAGE_LIMITS } from './utils'
 
+import './GenreSlider.styles.scss'
+
 const URI = `${API_URL}/movies/paginated-list`
 
 class GenreSliderPlus extends React.Component {
@@ -22,6 +24,8 @@ class GenreSliderPlus extends React.Component {
   render() {
     const { page, movies } = this.state
     const { genre, slideLength } = this.props
+
+    console.log('GenreSlider.page', page)
 
     if (!Array.isArray(movies)) return null
 
@@ -68,7 +72,6 @@ class GenreSliderPlus extends React.Component {
     try {
       const currentPage = this.state.page
       const { slideLength } = this.props
-
       const page = findNextPage(currentPage, direction, slideLength)
 
       this.fetchGenreMovies(page).then((movies) => {

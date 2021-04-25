@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import ScreenReaderText from './ScreenReaderText'
 
+import './NavItem.styles.scss'
+
 const NavItem = (props) => {
   const itemClass = (props.path === props.href) ? 'nav-item active' : 'nav-item'
 

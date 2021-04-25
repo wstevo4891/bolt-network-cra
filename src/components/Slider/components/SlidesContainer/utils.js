@@ -18,11 +18,11 @@ export function translateFactory(params) {
   return transformStyle(params)
 }
 
-function translate3D(x = 0) {
+export function translate3D(x = 0) {
   return { transform: `translate3d(${x}%, 0px, 0px)` }
 }
 
-function transformStyle(params) {
+export function transformStyle(params) {
   const translateX = TRANSFORMATIONS[params.slideLength]
 
   if (params.next) {

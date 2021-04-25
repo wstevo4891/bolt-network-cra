@@ -26,12 +26,11 @@ const SliderArrow = ({ direction, handleClick, start }) => {
 
   return (
     <span
-      className={`handle handle${direction} active`}
+      className={`handle ${direction}`}
       onClick={handleClick}
+      role="button"
     >
-      <b className='indicator-icon icon-rightCaret'>
-        <FontAwesomeIcon icon={icon} />
-      </b>
+      <FontAwesomeIcon className="slider_arrow" icon={icon} />
     </span>
   )
 }

@@ -1,4 +1,4 @@
-.genre-slider {
+.genre_slider {
   z-index: 1;
   margin: 3vw 0;
   padding: 0;
@@ -8,5 +8,9 @@
 
   &:hover {
     z-index: 3;
+
+    .pagination_indicator {
+      display: block;
+    }
   }
 }

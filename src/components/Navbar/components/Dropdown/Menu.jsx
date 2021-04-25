@@ -13,7 +13,7 @@ const Menu = ({ dropdownId, links, showMenu }) => {
     >
       {links.map((link, index) => (
         <Link
-          key={index}
+          key={`dropdown_link_${index}`}
           className="dropdown-item"
           to={link.url}
         >

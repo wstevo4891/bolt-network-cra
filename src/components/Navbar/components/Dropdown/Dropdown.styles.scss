@@ -11,9 +11,10 @@
   .dropdown-item {
     display: inline-block;
     width: 125px;
+    color: white;
   
     &:hover {
-      color: white;
+      color: #b3b3b3;
       background: transparent;
       text-decoration: underline;
     }

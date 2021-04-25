@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import { SLIDER } from 'utils'
 
-// Services
-import { translateFactory } from './utils'
-
 // Components
 import { PosterList } from 'components'
+
+// Local Services
+import { translateFactory } from './utils'
 
 const SlidesContainer = (props) => {
   const { name, next, prev, slideLength, slides, start } = props
@@ -22,7 +22,6 @@ const SlidesContainer = (props) => {
         <PosterList
           movies={slides}
           name={name}
-          slideLength={slideLength}
           start={start}
           type={SLIDER}
         />

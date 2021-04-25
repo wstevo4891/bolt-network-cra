@@ -12,10 +12,14 @@ import {
 
 import { buildGenreLinks } from './utils'
 
-const Navbar = ({ genres }) => {  
+const Navbar = ({ genres }) => {
+  console.log('Navbar.genres', genres)
+
   if (genres.length === 0) return null
 
   const genreLinks = buildGenreLinks(genres)
+
+  console.log('Navbar.genreLinks', genreLinks)
 
   return (
     <NavContainer>

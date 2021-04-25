@@ -3,24 +3,21 @@ import PropTypes from 'prop-types'
 
 import { noop } from 'utils'
 
-import { SliderUI } from './components'
+import { PREV, NEXT } from 'utils'
+
+import { SliderArrow, SlidesContainer } from './components'
+
+export const CLEAR_STATE = {
+  start: false,
+  next: false,
+  prev: false,
+}
 
 class Slider extends Component {
   state = {
-    position: 1,
     start: true,
     next: false,
     prev: false
-  }
-
-  get nextPosition() {
-    const { next, prev, position } = this.state
-
-    if (next) {
-      return position + 1
-    } else if (prev) {
-      return position - 1
-    } else return position
   }
 
   set pointerEvents(value) {
@@ -28,39 +25,43 @@ class Slider extends Component {
   }
 
   render() {
+    const { next, prev, start } = this.state
     const { name, slides } = this.props
 
     return(
-      <SliderUI
-        {...this.state}
-        handleArrowClick={this.handleArrowClick}
-        name={name}
-        slides={slides}
-      />
+      <div className='slider'>
+        <SliderArrow
+          direction={PREV}
+          handleClick={() => this.handleArrowClick(PREV)}
+          start={start}
+        />
+        <SlidesContainer
+          name={name}
+          next={next}
+          prev={prev}
+          slides={slides}
+          start={start}
+        />
+        <SliderArrow
+          direction={NEXT}
+          handleClick={() => this.handleArrowClick(NEXT)}
+        />
+      </div>
     )
   }
 
   handleArrowClick = (direction) => {
     this.pointerEvents = 'none'
 
-    this.setState({ [direction]: true }, this.updateSlider(direction))
-  }
-
-  updateSlider(direction) {
-    this.props.fetchNextSlides(direction, () => {
-      setTimeout(this.handleTransitionEnd(), 1000)
+    this.setState({ [direction]: true }, () => {
+      setTimeout(() => {
+        this.props.fetchNextSlides(direction, () => this.handleTransitionEnd())
+      }, 1000)
     })
   }
 
   handleTransitionEnd() {
-    const newState = {
-      position: this.nextPosition,
-      start: false,
-      next: false,
-      prev: false
-    }
-
-    this.setState(newState, () => { this.pointerEvents = 'auto' })
+    this.setState(CLEAR_STATE, () => { this.pointerEvents = 'auto' })
   }
 }
 

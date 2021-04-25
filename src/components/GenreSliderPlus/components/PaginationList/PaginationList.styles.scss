@@ -1,17 +1,8 @@
-// PaginationList Styles
-
-.genre_slider:hover {
-  .pagination-indicator {
-    display: block;
-  }
-}
-
 .pagination_indicator {
   position: absolute;
   top: 0;
   right: 4%;
   display: none;
-  margin: -24px 0 12px 0;
   padding: 0;
   list-style-type: none;
 

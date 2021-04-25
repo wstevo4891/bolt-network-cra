@@ -6,8 +6,6 @@ import { NavItem } from 'components'
 
 import Dropdown from '../Dropdown'
 
-import './NavCollapse.styles.scss'
-
 const GENRES_PATH_REGEX = /\/genres/
 
 const NavCollapse = ({ dropdownLinks }) => {

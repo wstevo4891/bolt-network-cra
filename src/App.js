@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux'
+import { connect, useDispatch } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import API from 'store/api'
@@ -14,64 +14,38 @@ import {
 
 import './App.styles.scss'
 
-const mapStateToProps = (state) => {
+export const mapStateToProps = (state) => {
   const { genres } = state
 
   if (genres === undefined) {
-    return { genres: null }
+    return { genres: [] }
   } else {
-    return { genres }
+    return { genres: genres.list }
   }
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   fetchGenres: () => dispatch(API.genres.fetch()),
-// })
+const App = ({ genres }) => {
+  const dispatch = useDispatch()
 
-class App extends React.Component {
-  render() {
-    const { genres } = this.props
+  useEffect(() => {
+    dispatch(API.genres.fetch())
+  }, [dispatch])
 
-    if (genres === null) return null
+  if (genres.length === 0) return null
 
-    return(
-      <Router>
-        <Navbar />
-        <MainContainer>
-          <Routes />
-        </MainContainer>
-        <Footer />
-      </Router>
-    )
-  }
-
-  componentDidMount() {
-    this.props.dispatch(API.genres.fetch())
-  }
+  return(
+    <Router>
+      <Navbar />
+      <MainContainer>
+        <Routes />
+      </MainContainer>
+      <Footer />
+    </Router>
+  )
 }
-
-// const App = ({ dispatch, genres }) => {
-//   useEffect(() => {
-//     fetchGenres()
-//   })
-
-//   if (genres === null) return null
-
-//   return(
-//     <Router>
-//       <Navbar />
-//       <MainContainer>
-//         <Routes />
-//       </MainContainer>
-//       <Footer />
-//     </Router>
-//   )
-// }
 
 App.propTypes = {
-  dispatch: PropTypes.func,
-  // fetchGenres: PropTypes.func.isRequired,
-  genres: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  genres: PropTypes.array.isRequired,
 }
 
 export default connect(mapStateToProps)(App)
