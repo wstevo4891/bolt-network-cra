@@ -1,13 +1,11 @@
-// MoviePage View Component
-
 import PropTypes from 'prop-types'
 import React from 'react'
 
 import Poster from './Poster'
 
-import './MoviePage.styles.scss'
-
 import { displayList } from './utils'
+
+import './MoviePage.styles.scss'
 
 const MoviePage = ({ movie }) => (
   <div className="row">
@@ -18,7 +16,7 @@ const MoviePage = ({ movie }) => (
     <div className="col-8 movie-display">
       <p><span className="label">Year: </span>{movie.year}</p>
 
-      <p><span className="label">Rated: </span>{movie.rated}</p>
+      <p><span className="label">Rated: </span>{movie.rating}</p>
 
       <p><span className="label">Runtime: </span>{movie.runtime}</p>
 

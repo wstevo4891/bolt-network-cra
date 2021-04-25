@@ -69,7 +69,7 @@ Dropdown.propTypes = {
   dropdownId: PropTypes.string,
   links: PropTypes.array.isRequired,
   path: PropTypes.string.isRequired,
-  pathRegex: PropTypes.string.isRequired,
+  pathRegex: PropTypes.object.isRequired,
   text: PropTypes.string.isRequired,
 }
 

@@ -1,17 +1,20 @@
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+
+import { API } from 'store'
 
 import { DisplayContainer, TitleRow } from 'components'
 import MoviePage from './MoviePage'
 
-const Movie = ({ fetchMovie, movie, movieId }) => {
-  useEffect(() => {
-    if (movie === undefined) {
-      fetchMovie(movieId)
-    }
-  })
+const Movie = ({ movie, movieId }) => {
+  const dispatch = useDispatch()
 
-  if (movie === undefined) return null
+  useEffect(() => {
+    dispatch(API.movies.fetch(movieId))
+  }, [dispatch, movieId])
+
+  if (movie === null) return null
 
   return(
     <DisplayContainer>
@@ -28,7 +31,7 @@ Movie.propTypes = {
 }
 
 Movie.defaultProps = {
-  movie: undefined
+  movie: null,
 }
 
 export default Movie

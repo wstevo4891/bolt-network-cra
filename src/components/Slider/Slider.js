@@ -7,6 +7,8 @@ import { PREV, NEXT } from 'utils'
 
 import { SliderArrow, SlidesContainer } from './components'
 
+import './Slider.styles.scss'
+
 export const CLEAR_STATE = {
   start: false,
   next: false,

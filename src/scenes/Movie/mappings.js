@@ -1,12 +1,12 @@
-import { API } from 'store'
-
-export const mapDispatchToProps = (dispatch) => ({
-  fetchMovie: (movieId) => dispatch(API.movies.fetch(movieId))
-})
-
 export const mapStateToProps = (state, ownProps) => {
-  const movieId = ownProps.match.params.id
-  const movie = state.movies.index[movieId]
+  const movieId = Number(ownProps.match.params.id)
+  const { movies } = state
+
+  if (movies === undefined) return { movie: null, movieId }
+
+  const movie = movies.index[movieId]
+
+  if (movie === undefined) return { movie: null, movieId }
 
   return { movie, movieId }
 }

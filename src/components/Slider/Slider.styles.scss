@@ -1,8 +1,14 @@
-.genre-slider {
+.slider {
   position: relative;
   margin: 0;
   padding: 0 4%;
   z-index: 2;
   white-space: nowrap;
   overflow-x: visible;
+
+  &:hover {
+    .slider_arrow {
+      display: block;
+    }
+  }
 }
