@@ -8,6 +8,8 @@ import { fetchMyListMovies } from './utils'
 export default function MyList() {
   const movies = fetchMyListMovies()
 
+  console.log('MyList.movies', movies)
+
   return(
     <DisplayContainer>
       <TitleRow title="My List" />

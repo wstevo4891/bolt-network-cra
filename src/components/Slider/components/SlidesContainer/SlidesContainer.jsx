@@ -17,15 +17,13 @@ const SlidesContainer = (props) => {
   const transformStyle = translateFactory({ slideLength, start, next, prev })
 
   return(
-    <div className="slider-container">
-      <div className={contentClass} style={transformStyle}>
-        <PosterList
-          movies={slides}
-          name={name}
-          start={start}
-          type={SLIDER}
-        />
-      </div>
+    <div className={contentClass} style={transformStyle}>
+      <PosterList
+        movies={slides}
+        name={name}
+        start={start}
+        type={SLIDER}
+      />
     </div>
   )
 }

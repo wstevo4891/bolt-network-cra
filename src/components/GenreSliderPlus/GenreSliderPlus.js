@@ -25,8 +25,6 @@ class GenreSliderPlus extends React.Component {
     const { page, movies } = this.state
     const { genre, slideLength } = this.props
 
-    console.log('GenreSlider.page', page)
-
     if (!Array.isArray(movies)) return null
 
     const pageCount = PAGE_LIMITS[slideLength]
