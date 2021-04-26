@@ -5,6 +5,8 @@ import { faBars  } from '@fortawesome/free-solid-svg-icons'
 
 import { IconButton } from 'components'
 
+import './HamburgerButton.styles.scss'
+
 const HamburgerButton = ({ dataTarget, handleClick }) => {
   const buttonProps = {
     handleClick,

@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React from 'react'
+import { Col, Row } from 'reactstrap'
 
 import Poster from './Poster'
 
@@ -8,32 +9,34 @@ import { displayList } from './utils'
 import './MoviePage.styles.scss'
 
 const MoviePage = ({ movie }) => (
-  <div className="row">
-    <div className="col-4">
+  <Row>
+    <Col sm="4">
       <Poster source={movie.poster} title={movie.title} />
-    </div>
+    </Col>
 
-    <div className="col-8 movie-display">
-      <p><span className="label">Year: </span>{movie.year}</p>
+    <Col sm="8">
+      <div className="movie-display">
+        <p><span className="label">Year: </span>{movie.year}</p>
 
-      <p><span className="label">Rated: </span>{movie.rating}</p>
+        <p><span className="label">Rated: </span>{movie.rating}</p>
 
-      <p><span className="label">Runtime: </span>{movie.runtime}</p>
+        <p><span className="label">Runtime: </span>{movie.runtime}</p>
 
-      <p><span className="label">Release Date: </span>{movie.release_date}</p>
+        <p><span className="label">Release Date: </span>{movie.release_date}</p>
 
-      <p><span className="label">Genres: </span>{displayList(movie.genres)}</p>
+        <p><span className="label">Genres: </span>{displayList(movie.genres)}</p>
 
-      <p><span className="label">Director: </span>{displayList(movie.directors)}</p>
+        <p><span className="label">Director: </span>{displayList(movie.directors)}</p>
 
-      <p><span className="label">Actors: </span>{displayList(movie.actors)}</p>
+        <p><span className="label">Actors: </span>{displayList(movie.actors)}</p>
 
-      <p>
-        <span className="label">Plot: </span>
-        <span className="movie-plot">{movie.plot}</span>
-      </p>
-    </div>
-  </div>
+        <p>
+          <span className="label">Plot: </span>
+          <span className="movie-plot">{movie.plot}</span>
+        </p>
+      </div>
+    </Col>
+  </Row>
 )
 
 MoviePage.propTypes = {

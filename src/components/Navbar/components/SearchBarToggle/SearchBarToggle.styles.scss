@@ -1,9 +1,20 @@
-.toggle_wrapper {
-  display: flex;
-  transition: width 0.4s;
-}
+@import "styles/core";
 
 .search_button {
-  margin-right: 0.5em;
+  display: inline-block;
+  border: none;
+  background: 0 0;
   color: white;
+
+  @include on_narrow($breakpoint_768) {
+    display: none;
+  }
+}
+
+.toggle_wrapper {
+  transition: width 0.4s;
+
+  @include on_narrow($breakpoint_768) {
+    display: flex !important;
+  }
 }

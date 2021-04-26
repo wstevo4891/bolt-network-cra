@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
+import './BackgroundImage.styles.scss'
+
 const BackgroundImage = ({ children, url }) => {
-  const style = {
+  const imageStyle = {
     backgroundImage: `url(${url})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    backgroundSize: 'cover',
-    height: '100%'
   }
 
-  return <div style={style}>{children}</div>
+  return (
+    <div className="background_image" style={imageStyle}>
+      {children}
+    </div>
+  )
 }
 
 BackgroundImage.propTypes = {

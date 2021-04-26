@@ -1,0 +1,15 @@
+@import "styles/colors";
+
+@import "../../styles/banner_button";
+
+.play-link {
+  @extend %banner-button;
+  color: $azure-radiance;
+  border: solid 1px $azure-radiance;
+
+  &:hover {
+    background-color: $azure-radiance;
+    color: #d6d6d6;
+    text-decoration: none;
+  }
+}

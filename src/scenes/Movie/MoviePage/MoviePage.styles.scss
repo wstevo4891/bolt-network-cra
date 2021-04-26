@@ -1,8 +1,7 @@
-// MoviePage Styles
-
 @import "styles/core";
 
 .movie-display {
+  margin-top: 2rem;
   color: white;
 
   .label {
@@ -14,19 +13,3 @@
     left: 3rem;
   }
 }
-
-// .movie-display {
-//   p {
-//     color: white;
-
-//     .label {
-//       color: $azure-radiance;
-//     }
-
-//     .movie-plot {
-//       position: absolute;
-//       left: 3rem;
-//       color: white;
-//     }
-//   }
-// }

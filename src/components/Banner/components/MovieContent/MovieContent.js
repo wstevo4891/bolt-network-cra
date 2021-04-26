@@ -1,18 +1,40 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import Content from './Content'
-import Logo from './Logo'
+import { ContentRow, MyListButton, PlayLink } from '..'
+
+import './MovieContent.styles.scss'
 
 const MovieContent = ({ movie }) => (
-  <div className="slide-info d-none d-sm-block">
-    <Logo source={movie.logo} title={movie.title} />
-    <Content movie={movie} />
+  <div className="movie-content">
+    <img
+      src={movie.logo}
+      className="img-fluid"
+      alt={`${movie.title} logo`}
+    />
+    <ContentRow>
+      <span className="blue-span">{movie.year}</span>
+      <span className="blue-span">{movie.rating}</span>
+      <span className="blue-span">{movie.runtime}</span>
+      <p className="blurb">{movie.plot}</p>
+    </ContentRow>
+    <ContentRow>
+      <PlayLink url={movie.url} />
+      <MyListButton movie={movie} />
+    </ContentRow>
   </div>
 )
 
 MovieContent.propTypes = {
-  movie: PropTypes.object.isRequired,
+  movie: PropTypes.shape({
+    logo: PropTypes.string,
+    plot: PropTypes.string,
+    rating: PropTypes.string,
+    runtime: PropTypes.string,
+    title: PropTypes.string,
+    url: PropTypes.string,
+    year: PropTypes.string,
+  }).isRequired,
 }
 
 export default MovieContent

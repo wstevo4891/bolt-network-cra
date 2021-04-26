@@ -4,7 +4,8 @@ export const MAX_WIDTH = '270px'
 
 export const SEARCH_CLASSES = [
   'search_bar',
-  'fa fa-search',
+  'search_button',
+  'fa-search',
+  'form-control',
   'form-inline',
-  'form-control'
 ]

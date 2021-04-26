@@ -1,3 +1,11 @@
+@import "styles/core";
+
 .logo {
+  position: relative;
+  left: 3rem;
   width: 150px;
+
+  @include on_wide($breakpoint_768) {
+    left: 0;
+  } 
 }

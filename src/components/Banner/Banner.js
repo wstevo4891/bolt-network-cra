@@ -6,7 +6,6 @@ import { API } from 'store'
 
 import { randomIndex } from './utils'
 
-// Components
 import Overlay from '../Overlay'
 
 import { BackgroundImage, MovieContent } from './components'

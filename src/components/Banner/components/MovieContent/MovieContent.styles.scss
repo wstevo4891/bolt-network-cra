@@ -1,0 +1,34 @@
+@import "styles/core";
+
+$lightShadow: 2px 2px 4px #333; 
+
+.movie-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 40%;
+  height: auto;
+  color: white;
+  text-align: left;
+  font-weight: 400;
+  font-size: 1.5vw;
+  z-index: 1;
+
+  .blue-span {
+    margin-right: 0.5em;
+    color: $azure-radiance;
+    text-shadow: $lightShadow;
+  }
+
+  .blurb {
+    padding-right: 1rem;
+    margin: 0.5em 0;
+    font-size: 14px;
+    text-shadow: $lightShadow;
+  }
+
+  @include on_wide($breakpoint_768) {
+    display: block;
+  }
+}

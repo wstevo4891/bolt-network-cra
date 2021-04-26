@@ -1,19 +1,30 @@
 import { useEffect } from 'react'
 
-import { MIN_WIDTH, SEARCH_CLASSES } from './constants'
-
 import { BREAKPOINT_768 } from 'utils'
 
-export function targetIsSearchBar(event) {
-  return SEARCH_CLASSES.includes(event.target.className)
+export const MIN_WIDTH = 0
+
+export const MAX_WIDTH = '270px'
+
+export const toggleWrapperStyle = (display) => ({
+  display: display ? 'flex' : 'none',
+  width: display ? MAX_WIDTH : MIN_WIDTH,
+})
+
+export function targetIsSearchBar(target) {
+  const container = target.closest('.search_bar_toggle')
+
+  if (container === null) return false
+
+  return true
 }
 
 export function useEventListeners(setDisplay, setWidth) {
   const handleMouseUp = (event) => {
-    if (targetIsSearchBar(event)) return
+    if (targetIsSearchBar(event.target)) return
   
     setWidth(MIN_WIDTH)
-    setTimeout(setDisplay(false), 400)
+    setTimeout(() => setDisplay(false), 400)
   }
 
   const handleResize = () => {

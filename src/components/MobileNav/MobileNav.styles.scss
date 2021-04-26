@@ -1,6 +1,8 @@
 @import "styles/core";
 
 .mobile_nav {
+  position: absolute;
+
   @include on_wide($breakpoint_768) {
     display: none;
   }
