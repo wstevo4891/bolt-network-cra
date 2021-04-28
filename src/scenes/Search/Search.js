@@ -38,7 +38,7 @@ class Search extends Component {
   componentDidUpdate(prevProps) {
     const { query, fetchSuggestions, suggestionId } = this.props
 
-    if (query === prevProps.data.query) return
+    if (query === prevProps.query) return
 
     if (suggestionId) {
       fetchSuggestions(suggestionId)

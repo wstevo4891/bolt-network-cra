@@ -10,11 +10,12 @@ import './SearchClose.styles.scss'
 const SearchClose = ({ handleClick, queryState }) => {
   if (!queryState) return null
 
-  return (
-    <div className="search_close">
-      <IconButton buttonProps={{ handleClick }} icon={faTimes} />
-    </div>
-  )
+  const buttonProps = {
+    handleClick,
+    buttonClass: 'search_close',
+  }
+
+  return <IconButton buttonProps={buttonProps} icon={faTimes} />
 }
 
 SearchClose.propTypes = {

@@ -68,8 +68,8 @@ class SearchBar extends Component {
 
     this.updateQueryState(query, () => {
       this.updateLocation(query)
-      this.props.resetSuggestions()
       this.props.fetchSearchResults(query)
+      this.props.resetSuggestions()
     })
   }
 

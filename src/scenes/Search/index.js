@@ -4,4 +4,4 @@ import { mapDispatchToProps, mapStateToProps } from './mappings'
 
 import Search from './Search'
 
-export default connect(mapDispatchToProps, mapStateToProps)(Search)
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

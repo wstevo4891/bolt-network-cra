@@ -3,7 +3,6 @@
 .search_input {
   position: absolute;
   top: 0;
-  width: 100% !important;
   height: 34px;
   margin: 0;
   box-shadow: 0px 0px 0px;
@@ -17,16 +16,23 @@
 
   &:focus {
     outline: none;
+    background: transparent;
+    color: white;
   }
 }
 
 .desktop_input {
+  width: 90% !important;
+  left: 10%;
+
   @include on_narrow($breakpoint_768) {
     display: none !important;
   }
 }
 
 .mobile_input {
+  width: 100% !important;
+
   @include on_wide($breakpoint_768) {
     display: none !important;
   }

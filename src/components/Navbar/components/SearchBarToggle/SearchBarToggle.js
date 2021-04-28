@@ -5,13 +5,12 @@ import { SearchBar } from 'components'
 
 import ToggleButton from './ToggleButton'
 
-import { MAX_WIDTH, MIN_WIDTH, toggleWrapperStyle, useEventListeners } from './utils'
+import { MAX_WIDTH, MIN_WIDTH, useEventListeners } from './utils'
 
 import './SearchBarToggle.styles.scss'
 
 const SearchBarToggle = () => {
   const [display, setDisplay] = useState(false)
-  // const toggleDisplay = () => setDisplay(!display)
   
   const toggleRef = useRef()
   const setWidth = (width) => { toggleRef.current.style.width = width }
@@ -20,8 +19,6 @@ const SearchBarToggle = () => {
 
   const history = useHistory()
   const { pathname } = useLocation()
-
-  // const wrapperStyle = toggleWrapperStyle(display)
 
   const toggleDisplay = () => {
     if (display) {

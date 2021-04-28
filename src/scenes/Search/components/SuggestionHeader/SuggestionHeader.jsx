@@ -6,7 +6,7 @@ import { headerText } from './utils'
 import './SuggestionHeader.styles.scss'
 
 const SuggestionHeader = ({ suggestionId, suggestion }) => {
-  if (suggestionId === undefined) return null
+  if (!suggestionId) return null
 
   const text = headerText(suggestionId, suggestion)
 
