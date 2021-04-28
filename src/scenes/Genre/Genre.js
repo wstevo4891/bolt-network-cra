@@ -9,12 +9,12 @@ import {
 
 const Genre = ({ fetchGenreMovies, genre }) => {
   useEffect(() => {
-    if (genre.movies !== null) return
-
-    fetchGenreMovies(genre.id)
+    if (genre.movies === undefined) {
+      fetchGenreMovies(genre.id)
+    }
   }, [fetchGenreMovies, genre])
 
-  if (genre.movies === null) return null
+  if (genre === null) return null
 
   return (
     <DisplayContainer>

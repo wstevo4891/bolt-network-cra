@@ -38,6 +38,10 @@ function fetchMovies(genreId) {
 
       const { genre, movies } = await response.json()
 
+      console.log('genre', genre)
+
+      console.log('movies', movies)
+
       dispatch(fetchGenreMoviesSuccess(genre, movies))
     } catch(error) {
       dispatch(fetchGenreMoviesFailure(error))

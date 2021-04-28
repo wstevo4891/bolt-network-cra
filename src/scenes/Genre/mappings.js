@@ -1,8 +1,12 @@
 import { API } from 'store'
 
 export const mapStateToProps = (state, ownProps) => {
+  const { genres: { index } } = state
   const { slug } = ownProps.match.params
-  const genre = state.genres.index[slug]
+
+  if (index[slug] === undefined) return { genre: null }
+
+  const genre = index[slug]
 
   return { genre }
 }

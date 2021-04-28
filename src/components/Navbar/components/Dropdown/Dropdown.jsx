@@ -10,8 +10,6 @@ import Menu from './Menu'
 import './Dropdown.styles.scss'
 
 const Dropdown = (props) => {
-  let navItemClass
-
   const { id, dropdownId, links, path, pathRegex, text } = props
 
   const [showMenu, setShowMenu] = useState(false)
@@ -32,6 +30,8 @@ const Dropdown = (props) => {
       document.removeEventListener('mouseup', handleMouseUp)
     }
   })
+
+  let navItemClass
 
   if (path.match(pathRegex)) {
     navItemClass = "nav-item dropdown active"
