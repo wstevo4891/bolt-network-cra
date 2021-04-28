@@ -20,7 +20,9 @@ const Dropdown = (props) => {
       if (event.target.id === dropdownId) {
         toggleShow()
       } else {
-        setShowMenu(false)
+        setTimeout(() => {
+          setShowMenu(false)
+        }, 50)
       }
     }
 

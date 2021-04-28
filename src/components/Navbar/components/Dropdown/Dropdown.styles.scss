@@ -18,5 +18,9 @@
       background: transparent;
       text-decoration: underline;
     }
+
+    &:focus {
+      background: transparent;
+    }
   }
 }
