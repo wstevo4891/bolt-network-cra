@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom'
 
 import { NavItem } from 'components'
 
+import './SideMenu.styles.scss'
+
 const SideMenu = ({ display, genres, toggleDisplay }) => {
   const path = useLocation().pathname
 

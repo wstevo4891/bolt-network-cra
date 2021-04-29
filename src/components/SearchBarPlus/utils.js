@@ -2,15 +2,12 @@ import { useEffect } from 'react'
 
 import { BREAKPOINT_768 } from 'utils'
 
-export const MIN_WIDTH = 0
-
-export const MAX_WIDTH = '270px'
+import { MIN_WIDTH } from './constants'
 
 export function targetIsSearchBar(target) {
   const container = target.closest('.search_bar_toggle')
-  const mobileContainer = target.closest('.mobile_nav')
 
-  if (container === null && mobileContainer === null) return false
+  if (container === null) return false
 
   return true
 }

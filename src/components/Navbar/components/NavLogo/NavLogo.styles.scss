@@ -2,7 +2,7 @@
 
 .logo {
   position: relative;
-  left: 3rem;
+  left: 3.5rem;
   width: 150px;
 
   @include on_wide($breakpoint_768) {
