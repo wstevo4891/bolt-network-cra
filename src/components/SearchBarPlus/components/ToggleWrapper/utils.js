@@ -6,8 +6,14 @@ import { MIN_WIDTH } from './constants'
 
 export function targetIsSearchBar(target) {
   const container = target.closest('.search_bar_toggle')
+  const mobileContainer = target.closest('.mobile_nav')
+  const suggestionsList = target.closest('.suggestions_list')
 
-  if (container === null) return false
+  if (
+    container === null &&
+    mobileContainer === null &&
+    suggestionsList === null
+  ) return false
 
   return true
 }

@@ -26,19 +26,16 @@ export function clickHandler(resetFunc, updateFunc) {
   }
 }
 
-export function keyUpHandler(fetchFunc, resetFunc, setQuery, updateFunc) {
+export function keyUpHandler(fetchFunc, resetFunc, updateFunc) {
   return (event) => {
     const query = event.target.value
-
-    setQuery(query, () => {
-      updateFunc(query)
-      fetchFunc(query)
-      resetFunc()
-    })
+    updateFunc(query)
+    fetchFunc(query)
+    resetFunc()
   }
 }
 
-export function useEventHandlers(setQuery, updateLocation) {
+export function useEventHandlers(updateLocation) {
   const dispatch = useDispatch()
 
   const fetchSearchResults = (query) => dispatch(API.search.fetchResults(query))
@@ -47,7 +44,7 @@ export function useEventHandlers(setQuery, updateLocation) {
 
   const handleClick = clickHandler(resetSuggestions, updateLocation)
 
-  const handleKeyUp = keyUpHandler(fetchSearchResults, resetSuggestions, setQuery, updateLocation)
+  const handleKeyUp = keyUpHandler(fetchSearchResults, resetSuggestions, updateLocation)
 
   return {
     handleClick,

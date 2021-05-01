@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState, useRef } from 'react'
 
-import { ToggleButton } from './components'
+import { ToggleButton } from '..'
 
 import { MAX_WIDTH, MIN_WIDTH } from './constants'
 

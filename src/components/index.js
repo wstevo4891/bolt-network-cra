@@ -32,6 +32,8 @@ export { default as Routes } from './Routes'
 
 export { default as SearchBar } from './SearchBar'
 
+export { default as SearchBarPlus } from './SearchBarPlus'
+
 export { default as Slider } from './Slider'
 
 export { default as SliderContent } from './SliderContent'

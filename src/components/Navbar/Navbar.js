@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { MobileNav } from '..'
+import { MobileNav, SearchBarPlus } from '..'
 
 import {
   NavContainer,
   NavCollapse,
   NavLogo,
-  SearchBarToggle,
+  // SearchBarToggle,
 } from './components'
 
 import { buildGenreLinks } from './utils'
@@ -22,7 +22,7 @@ const Navbar = ({ genres }) => {
       <MobileNav genres={genreLinks} />
       <NavLogo />
       <NavCollapse dropdownLinks={genreLinks} />
-      <SearchBarToggle />
+      <SearchBarPlus />
     </NavContainer>
   )
 }

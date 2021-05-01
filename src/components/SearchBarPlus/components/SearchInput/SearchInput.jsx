@@ -12,6 +12,7 @@ const SearchInput = ((props) => {
       className={inputClass}
       maxLength="80"
       name="query"
+      onChange={props.handleChange}
       onClick={props.handleClick}
       onKeyUp={props.handleKeyUp}
       placeholder={props.placeholder}
@@ -23,6 +24,7 @@ const SearchInput = ((props) => {
 
 SearchInput.propTypes = {
   extraClass: PropTypes.string,
+  handleChange: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
   handleKeyUp: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,

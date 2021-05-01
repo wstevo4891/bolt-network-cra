@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useLocation } from 'react-router-dom'
 
 import { useEventHandlers, useLocationUpdate } from './utils'
@@ -9,22 +9,18 @@ import './SearchBarPlus.styles.scss'
 
 const SearchBarPlus = () => {
   const { pathname } = useLocation()
+
   const updateLocation = useLocationUpdate(pathname)
 
-  const [query, setQuery] = useState('')
-  const clearSearch = () => setQuery('', () => updateLocation())
-
-  const { handleClick, handleKeyUp } = useEventHandlers(setQuery, updateLocation)
+  const { handleClick, handleKeyUp } = useEventHandlers(updateLocation)
 
   return (
     <ToggleWrapper>
       <div className="search_bar">
         <SearchIcon />
         <SearchForm
-          clearSearch={clearSearch}
           handleClick={handleClick}
           handleKeyUp={handleKeyUp}
-          query={query}
         />
       </div>
     </ToggleWrapper>

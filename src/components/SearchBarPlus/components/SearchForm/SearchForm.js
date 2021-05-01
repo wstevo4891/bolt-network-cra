@@ -1,42 +1,46 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useState } from 'react'
 
 import { SearchClose, SearchInput } from '..'
 
-const SearchForm = ({ clearSearch, handleClick, handleKeyUp, query }) => (
-  <div className="form-inline">
-    <SearchInput
-      extraClass="desktop_input"
-      handleClick={handleClick}
-      handleKeyUp={handleKeyUp}
-      placeholder="Titles, people, genres"
-      query={query}
-    />
+const SearchForm = ({ handleClick, handleKeyUp }) => {
+  const [query, setQuery] = useState('')
 
-    <SearchInput
-      extraClass="mobile_input"
-      handleClick={handleClick}
-      handleKeyUp={handleKeyUp}
-      placeholder="Search"
-      query={query}
-    />
+  const handleChange = (event) => setQuery(event.target.value)
 
-    <SearchClose
-      handleClick={clearSearch}
-      query={query}
-    />
-  </div>
-)
+  const clearSearch = () => setQuery('')
 
-SearchForm.propTypes = {
-  clearSearch: PropTypes.func.isRequired,
-  handleClick: PropTypes.func.isRequired,
-  handleKeyUp: PropTypes.func.isRequired,
-  query: PropTypes.string,
+  return (
+    <div className="form-inline">
+      <SearchInput
+        extraClass="desktop_input"
+        handleChange={handleChange}
+        handleClick={handleClick}
+        handleKeyUp={handleKeyUp}
+        placeholder="Titles, people, genres"
+        query={query}
+      />
+  
+      <SearchInput
+        extraClass="mobile_input"
+        handleChange={handleChange}
+        handleClick={handleClick}
+        handleKeyUp={handleKeyUp}
+        placeholder="Search"
+        query={query}
+      />
+  
+      <SearchClose
+        handleClick={clearSearch}
+        query={query}
+      />
+    </div>
+  )
 }
 
-SearchForm.defaultProps = {
-  query: '',
+SearchForm.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  handleKeyUp: PropTypes.func.isRequired,
 }
 
 export default SearchForm
