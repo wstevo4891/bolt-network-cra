@@ -8,13 +8,13 @@ const PosterControlsWrapper = ({ children, hoverItem, slideItem }) => {
 }
 
 PosterControlsWrapper.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element),
+  children: PropTypes.element,
   hoverItem: PropTypes.number,
   slideItem: PropTypes.number.isRequired,
 }
 
 PosterControlsWrapper.defaultProps = {
-  children: [],
+  children: null,
   hoverItem: null,
 }
 

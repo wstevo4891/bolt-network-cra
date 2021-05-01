@@ -5,6 +5,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 import { IconButton } from 'components'
 
+import './ToggleButton.styles.scss'
+
 const ToggleButton = ({ display, handleClick }) => {
   const buttonProps = {
     buttonClass: display ? 'search_button d-none' : 'search_button',

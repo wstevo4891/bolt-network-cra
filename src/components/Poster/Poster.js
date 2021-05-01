@@ -44,7 +44,7 @@ Poster.propTypes = {
   posterData: PropTypes.shape({
     container: PropTypes.shape({
       className: PropTypes.string,
-      style: PropTypes.string,
+      style: PropTypes.object,
     }),
     hoverItem: PropTypes.number,
     movie: PropTypes.object,

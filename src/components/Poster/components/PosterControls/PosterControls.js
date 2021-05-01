@@ -47,7 +47,6 @@ class PosterControls extends Component {
   toggleLike = () => {
     this.setState(prevState => {
       const likeState = prevState.likeState ? null : true
-
       return { likeState }
     })
   }
@@ -55,21 +54,17 @@ class PosterControls extends Component {
   toggleUnlike = () => {
     this.setState(prevState => {
       const likeState = (prevState.likeState === false) ? null : false
-
       return { likeState }
     })
   }
 
   componentDidMount() {
-    const currentLikeState = this.getLikeState()
-
-    this.setState({
-      likeState: currentLikeState
-    })
+    const likeState = this.getLikeState()
+    this.setState({ likeState })
   }
 
   getLikeState() {
-    const movie = this.props.movie
+    const { movie } = this.props
 
     if (SessionListAPI.findMovie(movie, LIKED_LIST)) return true
 
@@ -80,8 +75,12 @@ class PosterControls extends Component {
 }
 
 PosterControls.propTypes = {
-  hoverItem: PropTypes.number.isRequired,
+  hoverItem: PropTypes.number,
   movie: PropTypes.object.isRequired,
+}
+
+PosterControls.defaultProps = {
+  hoverItem: null,
 }
 
 export default PosterControls

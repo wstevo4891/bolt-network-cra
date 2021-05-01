@@ -42,15 +42,16 @@ const SideMenu = ({ display, genres, toggleDisplay }) => {
           handleClick={handleClick}
         />
 
-        {genres.map((genre, index) =>
+        {genres.map((genre, index) => (
           <NavItem
+            id={`mobile-genre-link-${genre.text.toLowerCase()}`}
             key={index}
             path={path}
             href={genre.url}
             text={genre.text}
             handleClick={handleClick}
           />
-        )}
+        ))}
       </ul>
     </div>
   )

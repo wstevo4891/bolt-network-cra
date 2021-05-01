@@ -1,0 +1,17 @@
+@import "styles/core";
+
+.search_button {
+  display: inline-block;
+  border: none;
+  background: 0 0;
+  color: white;
+  font-size: 1.3em;
+
+  &:focus {
+    border: none;
+  }
+
+  @include on_narrow($breakpoint_768) {
+    display: none;
+  }
+}

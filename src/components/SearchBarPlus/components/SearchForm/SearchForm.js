@@ -1,49 +1,42 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
-
-import { useEventHandlers, useLocationUpdate } from './utils'
+import React from 'react'
 
 import { SearchClose, SearchInput } from '..'
 
-const SearchForm = (props) => {
-  const { pathname } = useLocation()
-  const updateLocation = useLocationUpdate(pathname)
+const SearchForm = ({ clearSearch, handleClick, handleKeyUp, query }) => (
+  <div className="form-inline">
+    <SearchInput
+      extraClass="desktop_input"
+      handleClick={handleClick}
+      handleKeyUp={handleKeyUp}
+      placeholder="Titles, people, genres"
+      query={query}
+    />
 
-  const [query, setQuery] = useState('')
-  const clearSearch = () => setQuery('', () => updateLocation())
+    <SearchInput
+      extraClass="mobile_input"
+      handleClick={handleClick}
+      handleKeyUp={handleKeyUp}
+      placeholder="Search"
+      query={query}
+    />
 
-  const { handleClick, handleKeyUp } = useEventHandlers(props, setQuery, updateLocation)
-
-  return (
-    <div className="form-inline">
-      <SearchInput
-        extraClass="desktop_input"
-        handleClick={handleClick}
-        handleKeyUp={handleKeyUp}
-        placeholder="Titles, people, genres"
-        query={query}
-      />
-
-      <SearchInput
-        extraClass="mobile_input"
-        handleClick={handleClick}
-        handleKeyUp={handleKeyUp}
-        placeholder="Search"
-        query={query}
-      />
-
-      <SearchClose
-        handleClick={clearSearch}
-        query={query}
-      />
-    </div>
-  )
-}
+    <SearchClose
+      handleClick={clearSearch}
+      query={query}
+    />
+  </div>
+)
 
 SearchForm.propTypes = {
-  fetchSearchResults: PropTypes.func.isRequired,
-  resetSuggestions: PropTypes.func.isRequired,
+  clearSearch: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  handleKeyUp: PropTypes.func.isRequired,
+  query: PropTypes.string,
+}
+
+SearchForm.defaultProps = {
+  query: '',
 }
 
 export default SearchForm

@@ -1,44 +1,33 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
-import { SearchForm, SearchIcon, ToggleButton } from './components'
+import { useEventHandlers, useLocationUpdate } from './utils'
 
-import { MAX_WIDTH, MIN_WIDTH } from './constants'
-
-import { useEventListeners } from './utils'
+import { SearchForm, SearchIcon, ToggleWrapper } from './components'
 
 import './SearchBarPlus.styles.scss'
 
 const SearchBarPlus = () => {
-  const [display, setDisplay] = useState(false)
-  
-  const toggleRef = useRef()
-  const setWidth = (width) => { toggleRef.current.style.width = width }
+  const { pathname } = useLocation()
+  const updateLocation = useLocationUpdate(pathname)
 
-  useEventListeners(setDisplay, setWidth)
+  const [query, setQuery] = useState('')
+  const clearSearch = () => setQuery('', () => updateLocation())
 
-  const toggleDisplay = () => {
-    if (display) {
-      setWidth(MIN_WIDTH)
-      setTimeout(() => setDisplay(false), 400)
-    } else {
-      setDisplay(true)
-      setTimeout(() => setWidth(MAX_WIDTH), 100)
-    }
-  }
-
-  const wrapperStyle = { display: display ? 'flex' : 'none', }
+  const { handleClick, handleKeyUp } = useEventHandlers(setQuery, updateLocation)
 
   return (
-    <div className="search_bar_toggle">
-      <ToggleButton display={display} handleClick={toggleDisplay} />
-
-      <div className="toggle_wrapper" ref={toggleRef} style={wrapperStyle}>
-        <div className="search_bar">
-          <SearchIcon />
-          <SearchForm />
-        </div>
+    <ToggleWrapper>
+      <div className="search_bar">
+        <SearchIcon />
+        <SearchForm
+          clearSearch={clearSearch}
+          handleClick={handleClick}
+          handleKeyUp={handleKeyUp}
+          query={query}
+        />
       </div>
-    </div>
+    </ToggleWrapper>
   )
 }
 
