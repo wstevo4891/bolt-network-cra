@@ -1,3 +1,3 @@
-export { default as GenreSliderRow } from './GenreSliderRow'
-export { default as RowHeader } from './RowHeader'
-export { default as Slider } from './Slider'
+export { default as Header } from './Header'
+
+export { default as PaginationList } from './PaginationList'

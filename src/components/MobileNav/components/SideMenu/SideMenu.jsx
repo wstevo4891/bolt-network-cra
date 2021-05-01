@@ -7,7 +7,7 @@ import { NavItem } from 'components'
 import './SideMenu.styles.scss'
 
 const SideMenu = ({ display, genres, toggleDisplay }) => {
-  const path = useLocation().pathname
+  const { pathname } = useLocation()
 
   const handleClick = () => setTimeout(toggleDisplay(), 1000)
   
@@ -20,7 +20,7 @@ const SideMenu = ({ display, genres, toggleDisplay }) => {
       <ul className="navbar-nav">
         <NavItem
           id="mobile-home-link"
-          path={path}
+          path={pathname}
           href="/"
           text="Home"
           handleClick={handleClick}
@@ -28,7 +28,7 @@ const SideMenu = ({ display, genres, toggleDisplay }) => {
 
         <NavItem
           id="mobile-my-list-link"
-          path={path}
+          path={pathname}
           href="/my-list"
           text="My List"
           handleClick={handleClick}
@@ -36,19 +36,19 @@ const SideMenu = ({ display, genres, toggleDisplay }) => {
 
         <NavItem
           id="mobile-recent-link"
-          path={path}
+          path={pathname}
           href="/recent"
           text="Recently Added"
           handleClick={handleClick}
         />
 
-        {genres.map((genre, index) => (
+        {genres.map(({ text, url }, index) => (
           <NavItem
-            id={`mobile-genre-link-${genre.text.toLowerCase()}`}
+            id={`mobile-genre-link-${text.toLowerCase()}`}
             key={index}
-            path={path}
-            href={genre.url}
-            text={genre.text}
+            path={pathname}
+            href={url}
+            text={text}
             handleClick={handleClick}
           />
         ))}

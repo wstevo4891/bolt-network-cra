@@ -30,10 +30,7 @@ const SearchForm = ({ handleClick, handleKeyUp }) => {
         query={query}
       />
   
-      <SearchClose
-        handleClick={clearSearch}
-        query={query}
-      />
+      <SearchClose handleClick={clearSearch} query={query} />
     </div>
   )
 }

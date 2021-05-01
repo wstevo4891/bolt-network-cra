@@ -8,8 +8,6 @@ export { default as Footer } from './Footer'
 
 export { default as GenreSlider } from './GenreSlider'
 
-export { default as GenreSliderPlus } from './GenreSliderPlus'
-
 export * from './IconButton'
 
 export { default as MainContainer } from './MainContainer'
@@ -31,8 +29,6 @@ export { default as Results } from './Results'
 export { default as Routes } from './Routes'
 
 export { default as SearchBar } from './SearchBar'
-
-export { default as SearchBarPlus } from './SearchBarPlus'
 
 export { default as Slider } from './Slider'
 

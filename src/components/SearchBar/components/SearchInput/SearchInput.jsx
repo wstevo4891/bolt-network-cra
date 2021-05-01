@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import './SearchInput.styles.scss'
 
-const SearchInput = React.forwardRef((props, ref) => {
+const SearchInput = ((props) => {
   const inputClass = `form-control search_input ${props.extraClass}`
 
   return (
@@ -12,20 +12,23 @@ const SearchInput = React.forwardRef((props, ref) => {
       className={inputClass}
       maxLength="80"
       name="query"
+      onChange={props.handleChange}
       onClick={props.handleClick}
       onKeyUp={props.handleKeyUp}
       placeholder={props.placeholder}
-      ref={ref}
       type="text"
+      value={props.query}
     />
   )
 })
 
 SearchInput.propTypes = {
   extraClass: PropTypes.string,
+  handleChange: PropTypes.func.isRequired,
   handleClick: PropTypes.func.isRequired,
   handleKeyUp: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
+  query: PropTypes.string,
 }
 
 SearchInput.defaultProps = {

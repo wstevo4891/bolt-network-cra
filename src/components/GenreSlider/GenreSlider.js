@@ -15,7 +15,7 @@ import './GenreSlider.styles.scss'
 
 const URI = `${API_URL}/movies/paginated-list`
 
-class GenreSliderPlus extends React.Component {
+class GenreSlider extends React.Component {
   state = {
     page: 0,
     movies: null
@@ -25,15 +25,11 @@ class GenreSliderPlus extends React.Component {
     const { page, movies } = this.state
     const { genre, slideLength } = this.props
 
-    if (!Array.isArray(movies)) return null
-
-    const pageCount = PAGE_LIMITS[slideLength]
-
-    const rowID = `${genre.title}_Genre_Row`
+    if (movies === null) return null
 
     return (
-      <div id={rowID} className="genre_slider">
-        <PaginationList page={page} pageCount={pageCount} />
+      <div id={`${genre.title}_Genre_Row`} className="genre_slider">
+        <PaginationList page={page} pageCount={PAGE_LIMITS[slideLength]} />
 
         <Header title={genre.title} url={genre.url} />
 
@@ -81,9 +77,9 @@ class GenreSliderPlus extends React.Component {
   }
 }
 
-GenreSliderPlus.propTypes = {
+GenreSlider.propTypes = {
   genres: PropTypes.object.isRequired,
   slideLength: PropTypes.number.isRequired,
 }
 
-export default GenreSliderPlus
+export default GenreSlider

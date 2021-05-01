@@ -1,19 +1,20 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
 
-import { MobileNav, SearchBarPlus } from '..'
+import { MobileNav, SearchBar } from '..'
 
 import {
   NavContainer,
   NavCollapse,
   NavLogo,
-  // SearchBarToggle,
 } from './components'
 
-import { buildGenreLinks } from './utils'
+import { buildGenreLinks, selectGenresList } from './utils'
 
-const Navbar = ({ genres }) => {
-  if (genres.length === 0) return null
+const Navbar = () => {
+  const genres = useSelector(selectGenresList)
+
+  if (genres === null) return null
 
   const genreLinks = buildGenreLinks(genres)
 
@@ -22,13 +23,9 @@ const Navbar = ({ genres }) => {
       <MobileNav genres={genreLinks} />
       <NavLogo />
       <NavCollapse dropdownLinks={genreLinks} />
-      <SearchBarPlus />
+      <SearchBar />
     </NavContainer>
   )
-}
-
-Navbar.propTypes = {
-  genres: PropTypes.array.isRequired,
 }
 
 export default Navbar
