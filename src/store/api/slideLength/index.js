@@ -1,5 +1,6 @@
-import { setSlideLengthValue } from './methods'
+import { getSlideLength, setSlideLength } from './methods'
 
 export default {
-  set: setSlideLengthValue
+  get: getSlideLength,
+  set: setSlideLength,
 }

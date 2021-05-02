@@ -1,5 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+import { Col, Row } from 'reactstrap'
+
+import { API } from 'store'
 
 import PosterList from '../PosterList'
 
@@ -7,16 +11,19 @@ import { buildMovieRows } from './utils'
 
 import './Results.styles.scss'
 
-const Results = ({ movies, name, slideLength }) => {
+const Results = ({ movies, name }) => {
+  const slideLength = useSelector(API.slideLength.get)
+
+  if (slideLength === null || movies === null) return null
+
   const rows = buildMovieRows(movies, slideLength)
 
   return (
-    <div className="row">
+    <Row>
       {rows.map((row, index) => (
-        <div
+        <Col
           key={`static_slide_${index}`}
-          className="col-12"
-          style={{ marginBottom: '5.5vw' }}
+          className="static_column"
         >
           <div className="sliderContent">
             <PosterList
@@ -26,16 +33,15 @@ const Results = ({ movies, name, slideLength }) => {
               type="static"
             />
           </div>
-        </div>
+        </Col>
       ))}
-    </div>
+    </Row>
   )
 }
 
 Results.propTypes = {
   name: PropTypes.string.isRequired,
   movies: PropTypes.array,
-  slideLength: PropTypes.number.isRequired,
 }
 
 Results.defaultProps = {

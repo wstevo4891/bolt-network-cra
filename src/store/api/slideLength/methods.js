@@ -7,7 +7,7 @@ import {
 
 import { currentSlideLength } from './utils'
 
-export function setSlideLengthValue() {
+export function setSlideLength() {
   return (dispatch) => {
     try {
       dispatch(setSlideLengthBegin)
@@ -21,4 +21,12 @@ export function setSlideLengthValue() {
       dispatch(setSlideLengthFailure(error))
     }
   }
+}
+
+export function getSlideLength(state) {
+  const { slideLength } = state
+
+  if (slideLength === undefined) return null
+
+  return slideLength.value
 }
