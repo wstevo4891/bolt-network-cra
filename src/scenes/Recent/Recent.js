@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { API } from 'store'
 
@@ -10,14 +9,17 @@ import {
   TitleRow,
 } from 'components'
 
-export default function Recent({ movies }) {
+export default function Recent() {
+  const movies = useSelector(API.movies.selectRecentMovies)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(API.movies.fetchRecent())
-  }, [dispatch])
+    if (movies === null) {
+      dispatch(API.movies.fetchRecent())
+    }
+  }, [dispatch, movies])
 
-  if (movies === []) return null
+  if (movies === null) return null
 
   return (
     <DisplayContainer>
@@ -25,8 +27,4 @@ export default function Recent({ movies }) {
       <Results name="Recent" movies={movies} />
     </DisplayContainer>
   )
-}
-
-Recent.propTypes = {
-  movies: PropTypes.array.isRequired,
 }

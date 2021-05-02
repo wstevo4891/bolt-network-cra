@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import React from 'react'
 
-import { MY_LIST } from './constants'
-
 import { Results } from 'components'
 
-import ListEmpty from './ListEmpty'
+import { ListEmpty } from '..'
+
+export const MY_LIST = 'MyList'
 
 const MoviesList = ({ movies }) => {
   if (movies.length === 0) return <ListEmpty />

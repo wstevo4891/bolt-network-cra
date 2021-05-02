@@ -58,8 +58,17 @@ function selectMovie(movieId) {
   }
 }
 
+function selectRecentMovies(state) {
+  const { movies } = state
+
+  if (movies === undefined) return null
+
+  return movies.recent
+}
+
 export default {
-  fetchRecent: fetchRecentMovies,
   selectMovie,
+  selectRecentMovies,
   fetch: fetchMovie,
+  fetchRecent: fetchRecentMovies,
 }
