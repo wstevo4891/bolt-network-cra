@@ -45,7 +45,16 @@ function fetchMovies(genreId) {
   }
 }
 
+function selectList(state) {
+  const { genres } = state
+
+  if (genres === undefined) return null
+
+  return genres.list
+}
+
 export default {
+  fetchMovies,
+  selectList,
   fetch: fetchGenres,
-  fetchMovies
 }

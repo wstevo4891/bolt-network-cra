@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
+import { API } from 'store'
+
 import { MobileNav, SearchBar } from '..'
 
 import {
@@ -9,14 +11,12 @@ import {
   NavLogo,
 } from './components'
 
-import { buildGenreLinks, selectGenresList } from './utils'
-
 const Navbar = () => {
-  const genres = useSelector(selectGenresList)
+  const genres = useSelector(API.genres.selectList)
 
   if (genres === null) return null
 
-  const genreLinks = buildGenreLinks(genres)
+  const genreLinks = genres.map(({ title, url }) => ({ url, text: title }))
 
   return (
     <NavContainer>

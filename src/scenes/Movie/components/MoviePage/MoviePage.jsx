@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { Col, Row } from 'reactstrap'
 
-import Poster from './Poster'
+import { LabelledLine } from '..'
 
 import { displayList } from './utils'
 
@@ -11,29 +11,21 @@ import './MoviePage.styles.scss'
 const MoviePage = ({ movie }) => (
   <Row>
     <Col sm="4">
-      <Poster source={movie.poster} title={movie.title} />
+      <img src={movie.poster} className="img-fluid" alt={`${movie.title} poster`} />
     </Col>
 
     <Col sm="8">
       <div className="movie-display">
-        <p><span className="label">Year: </span>{movie.year}</p>
-
-        <p><span className="label">Rated: </span>{movie.rating}</p>
-
-        <p><span className="label">Runtime: </span>{movie.runtime}</p>
-
-        <p><span className="label">Release Date: </span>{movie.release_date}</p>
-
-        <p><span className="label">Genres: </span>{displayList(movie.genres)}</p>
-
-        <p><span className="label">Director: </span>{displayList(movie.directors)}</p>
-
-        <p><span className="label">Actors: </span>{displayList(movie.actors)}</p>
-
-        <p>
-          <span className="label">Plot: </span>
+        <LabelledLine label="Year">{movie.year}</LabelledLine>
+        <LabelledLine label="Rated">{movie.rating}</LabelledLine>
+        <LabelledLine label="Runtime">{movie.runtime}</LabelledLine>
+        <LabelledLine label="Release Date">{movie.release_date}</LabelledLine>
+        <LabelledLine label="Genres">{displayList(movie.genres)}</LabelledLine>
+        <LabelledLine label="Director">{displayList(movie.directors)}</LabelledLine>
+        <LabelledLine label="Actors">{displayList(movie.actors)}</LabelledLine>
+        <LabelledLine label="Plot">
           <span className="movie-plot">{movie.plot}</span>
-        </p>
+        </LabelledLine>
       </div>
     </Col>
   </Row>

@@ -1,13 +1,16 @@
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { API } from 'store'
 
 import { DisplayContainer, TitleRow } from 'components'
-import MoviePage from './MoviePage'
 
-const Movie = ({ movie, movieId }) => {
+import { MoviePage } from './components'
+
+const Movie = ({ match }) => {
+  const movieId = Number(match.params.id)
+  const movie = useSelector(API.movies.selectMovie(movieId))
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -25,13 +28,7 @@ const Movie = ({ movie, movieId }) => {
 }
 
 Movie.propTypes = {
-  fetchMovie: PropTypes.func.isRequired,
-  movie: PropTypes.object,
-  movieId: PropTypes.number.isRequired,
-}
-
-Movie.defaultProps = {
-  movie: null,
+  match: PropTypes.object.isRequired,
 }
 
 export default Movie

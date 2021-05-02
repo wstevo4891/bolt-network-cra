@@ -1,17 +1,21 @@
-// Home Page Functional Component
-
-import PropTypes from 'prop-types'
 import React from 'react'
+import { useSelector } from 'react-redux'
+
+import { API } from 'store'
 
 import { Banner } from 'components'
 
-import FeatureSection from './FeatureSection'
-import GenreSlidersSection from './GenreSlidersSection'
-import WelcomeSection from './WelcomeSection'
+import {
+  FeatureSection,
+  GenreSlidersSection,
+  WelcomeSection,
+} from './components'
 
 import './Home.styles.scss'
 
-const Home = ({ genres }) => {
+const Home = () => {
+  const genres = useSelector(API.genres.selectList)
+
   if (genres === null) return null
 
   return (
@@ -22,10 +26,6 @@ const Home = ({ genres }) => {
       <FeatureSection />
     </main>
   )
-}
-
-Home.propTypes = {
-  genres: PropTypes.array.isRequired,
 }
 
 export default Home

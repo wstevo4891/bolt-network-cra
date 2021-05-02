@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
+
+import { API } from 'store'
 
 import {
   DisplayContainer,
@@ -7,12 +10,18 @@ import {
   TitleRow,
 } from 'components'
 
-const Genre = ({ fetchGenreMovies, genre }) => {
+import { selectGenreFromIndex } from './utils'
+
+const Genre = ({ match }) => {
+  const genre = useSelector(selectGenreFromIndex(match.params.slug))
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    if (genre.movies === undefined) {
-      fetchGenreMovies(genre.id)
+    const fetchMovies = (genreId) => dispatch(API.genres.fetchMovies(genreId))
+    if (genre && genre.movies === undefined) {
+      fetchMovies(genre.id)
     }
-  }, [fetchGenreMovies, genre])
+  }, [dispatch, genre])
 
   if (genre === null) return null
 
@@ -25,8 +34,7 @@ const Genre = ({ fetchGenreMovies, genre }) => {
 }
 
 Genre.propTypes = {
-  fetchGenreMovies: PropTypes.func.isRequired,
-  genre: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
 }
 
 export default Genre
