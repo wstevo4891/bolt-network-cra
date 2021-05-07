@@ -15,60 +15,58 @@ import {
   faThumbsDown as faThumbsDownClear,
 } from '@fortawesome/free-regular-svg-icons'
 
-import { ToggleIconButton, ToggleListButton } from 'components'
+import { CircleIconButton } from '..'
 
-import ListItem from './ListItem'
+import { STATUS_MAP } from './constants'
 
 import './ButtonsList.styles.scss'
 
-const ButtonsList = ({ movie, statusMap, toggleLike, toggleUnlike }) => (
-  <ul className="poster-buttons">
-    <ListItem
-      type="poster-btn-volume"
-      status={statusMap.volume}
-    >
-      <ToggleIconButton
-        options={[faVolumeUp, faVolumeOff]}
-      />
-    </ListItem>
+const ButtonsList = ({ movie, likeState, toggleLike, toggleUnlike }) => {
+  const currentStatus = STATUS_MAP[likeState]
 
-    <ListItem
-      type="poster-btn-like"
-      status={statusMap.like}
-    >
-      <ToggleListButton
-        listName="LikedList"
-        movie={movie}
-        options={[faThumbsUpSolid, faThumbsUpClear]}
-        updateContainer={toggleLike}
-      />
-    </ListItem>
-
-    <ListItem
-      type="poster-btn-unlike"
-      status={statusMap.unlike}
-    >
-      <ToggleListButton
-        listName="UnlikedList"
-        movie={movie}
-        options={[faThumbsDownSolid, faThumbsDownClear]}
-        updateContainer={toggleUnlike}
-      />
-    </ListItem>
-
-    <li className="poster-btn poster-btn-my-list">
-      <ToggleListButton
-        listName="MyList"
-        movie={movie}
-        options={[faCheck, faPlus]}
-      />
-    </li>
-  </ul>
-)
+  return (
+    <ul className="poster-buttons">
+      <li>
+        <CircleIconButton
+          options={[faVolumeUp, faVolumeOff]}
+          status={currentStatus.volume}
+          type="toggle-volume"
+        />
+      </li>
+      <li>
+        <CircleIconButton
+          callback={toggleLike}
+          listName="LikedList"
+          movie={movie}
+          options={[faThumbsUpSolid, faThumbsUpClear]}
+          status={currentStatus.like}
+          type="toggle-list"
+        />
+      </li>
+      <li>
+        <CircleIconButton
+          callback={toggleUnlike}
+          listName="UnlikedList"
+          movie={movie}
+          options={[faThumbsDownSolid, faThumbsDownClear]}
+          status={currentStatus.unlike}
+          type="toggle-list"
+        />
+      </li>
+      <li>
+        <CircleIconButton
+          listName="MyList"
+          movie={movie}
+          options={[faCheck, faPlus]}
+        />
+      </li>
+    </ul>
+  )
+}
 
 ButtonsList.propTypes = {
   movie: PropTypes.object.isRequired,
-  statusMap: PropTypes.object.isRequired,
+  likeState: PropTypes.oneOf([null, PropTypes.bool]).isRequired,
   toggleLike: PropTypes.func.isRequired,
   toggleUnlike: PropTypes.func.isRequired
 }

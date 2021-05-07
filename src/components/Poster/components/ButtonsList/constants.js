@@ -4,7 +4,7 @@ const MOVE_DOWN = 'move-down'
 
 const HIDDEN = 'hidden'
 
-const STATUS_MAP = {
+export const STATUS_MAP = {
   [null]: {
     volume: STATIC,
     like: STATIC,
@@ -12,7 +12,7 @@ const STATUS_MAP = {
   },
   [true]: {
     volume: MOVE_DOWN,
-    like: 'move-down-selected',
+    like: MOVE_DOWN,
     unlike: HIDDEN,
   },
   [false]: {
@@ -20,14 +20,4 @@ const STATUS_MAP = {
     like: HIDDEN,
     unlike: 'selected',
   },
-}
-
-const LIKED_LIST = 'LikedList'
-
-const UNLIKED_LIST = 'UnlikedList'
-
-export {
-  LIKED_LIST,
-  STATUS_MAP,
-  UNLIKED_LIST,
 }

@@ -1,5 +1,7 @@
 export { default as ButtonsList } from './ButtonsList'
 
+export { default as CircleIconButton } from './CircleIconButton'
+
 export { default as MovieInfo } from './MovieInfo'
 
 export { default as PosterControls } from './PosterControls'

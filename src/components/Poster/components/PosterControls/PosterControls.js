@@ -8,11 +8,9 @@ import { SessionListAPI } from 'services'
 import { ButtonsList, MovieInfo } from '..'
 
 // Constants
-import {
-  LIKED_LIST,
-  STATUS_MAP,
-  UNLIKED_LIST,
-} from './constants'
+const LIKED_LIST = 'LikedList'
+
+const UNLIKED_LIST = 'UnlikedList'
 
 class PosterControls extends Component {
   state = {
@@ -21,26 +19,21 @@ class PosterControls extends Component {
 
   render() {
     const { likeState } = this.state
-
-    if (likeState === undefined) return null
-    
     const { hoverItem, movie } = this.props
 
-    const statusMap = STATUS_MAP[likeState]
+    if (likeState === undefined) return null
 
     return(
-      <span>
-        <div className="poster-controls">
-          <MovieInfo movie={movie} hoverItem={hoverItem} />
+      <div className="poster-controls">
+        <MovieInfo movie={movie} hoverItem={hoverItem} />
 
-          <ButtonsList
-            movie={movie}
-            statusMap={statusMap}
-            toggleLike={this.toggleLike}
-            toggleUnlike={this.toggleUnlike}
-          />
-        </div>
-      </span>
+        <ButtonsList
+          movie={movie}
+          likeState={likeState}
+          toggleLike={this.toggleLike}
+          toggleUnlike={this.toggleUnlike}
+        />
+      </div>
     )
   }
 

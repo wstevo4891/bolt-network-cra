@@ -1,5 +1,3 @@
-// Static Poster Translate Calculator
-
 const POSTER_WIDTH_MULTIPLIER = 0.38
 
 export default class StaticTranslateCalculator {
@@ -65,11 +63,11 @@ export default class StaticTranslateCalculator {
     }
   }
 
-  translate3D(x, scale = false) {
+  translate3D(translateXValue, scale = false) {
     if (scale) {
-      return `scale(1.75) translate3d(${x}px, 0px, 0px)`
+      return `scale(1.75) translate3d(${translateXValue}px, 0px, 0px)`
     } else {
-      return `translate3d(${x}px, 0px, 0px)`
+      return `translate3d(${translateXValue}px, 0px, 0px)`
     }
   }
 }

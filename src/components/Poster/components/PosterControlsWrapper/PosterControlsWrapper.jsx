@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const PosterControlsWrapper = ({ children, hoverItem, slideItem }) => {
   if (hoverItem !== slideItem) return <span></span>
 
-  return children
+  return <span>{children}</span>
 }
 
 PosterControlsWrapper.propTypes = {
