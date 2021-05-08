@@ -1,1 +1,1 @@
-export { default } from './ContainerFactory'
+export { default } from './ContainerFactoryPlus'

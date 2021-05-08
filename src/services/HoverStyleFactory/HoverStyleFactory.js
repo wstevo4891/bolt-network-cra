@@ -19,16 +19,13 @@ export default class HoverStyleFactory {
   }
 
   setCalculator(params) {
-    switch(params.type) {
-      case SLIDER:
-        return new SliderTranslateCalculator(params)
+    if (params.type === SLIDER) {
+      return new SliderTranslateCalculator(params)
 
-      case STATIC:
-        return new StaticTranslateCalculator(params)
+    } else if (params.type === STATIC) {
+      return new StaticTranslateCalculator(params)
 
-      default:
-        return null
-    }
+    } else return null
   }
 
   build(index) {

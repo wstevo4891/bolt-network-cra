@@ -46,9 +46,9 @@ class PosterList extends Component {
     setTimeout(() => {
       if (mouseOut) return
 
-      const slideIndex = parseInt(target.classList[1].slice(-1), 10)
+      const hoverItem = Number(target.dataset.index)
 
-      this._mounted && this.setState({ hoverItem: slideIndex })
+      this._mounted && this.setState({ hoverItem })
     }, 500)
   }
 

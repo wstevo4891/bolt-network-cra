@@ -18,7 +18,7 @@ const URI = `${API_URL}/movies/paginated-list`
 class GenreSlider extends React.Component {
   state = {
     page: 0,
-    movies: null
+    movies: null,
   }
 
   render() {
@@ -78,7 +78,7 @@ class GenreSlider extends React.Component {
 }
 
 GenreSlider.propTypes = {
-  genres: PropTypes.object.isRequired,
+  genre: PropTypes.object.isRequired,
   slideLength: PropTypes.number.isRequired,
 }
 

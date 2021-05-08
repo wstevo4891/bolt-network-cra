@@ -66,9 +66,13 @@ const ButtonsList = ({ movie, likeState, toggleLike, toggleUnlike }) => {
 
 ButtonsList.propTypes = {
   movie: PropTypes.object.isRequired,
-  likeState: PropTypes.oneOf([null, PropTypes.bool]).isRequired,
+  likeState: PropTypes.bool,
   toggleLike: PropTypes.func.isRequired,
   toggleUnlike: PropTypes.func.isRequired
+}
+
+ButtonsList.defaultProps = {
+  likeState: null,
 }
 
 export default ButtonsList

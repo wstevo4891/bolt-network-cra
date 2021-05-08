@@ -29,7 +29,7 @@ const ToggleIconButton = (props) => {
 }
 
 ToggleIconButton.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
   buttonProps: PropTypes.object,
   callback: PropTypes.func,
   status: PropTypes.bool,

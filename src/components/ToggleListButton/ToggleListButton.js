@@ -15,13 +15,12 @@ class ToggleListButton extends Component {
 
     if (inList === null) return null
 
-    const { buttonProps, icon, options, text, textPlacement } = this.props
+    const { buttonProps, options, text, textPlacement } = this.props
 
     return(
       <ToggleIconButton
         callback={this.toggleList}
         buttonProps={buttonProps}
-        icon={icon}
         options={options}
         status={inList}
         text={text}
@@ -57,18 +56,17 @@ class ToggleListButton extends Component {
 ToggleListButton.propTypes = {
   listName: PropTypes.string.isRequired,
   movie: PropTypes.object.isRequired,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
   buttonProps: PropTypes.object,
-  iconProps: PropTypes.object,
   updateContainer: PropTypes.func,
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   textPlacement: PropTypes.string
 }
 
 ToggleListButton.defaultProps = {
   buttonProps: {},
-  iconProps: {},
   updateContainer: () => void {},
+  text: null,
   textPlacement: 'left'
 }
 

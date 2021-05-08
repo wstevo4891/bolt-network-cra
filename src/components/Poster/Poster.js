@@ -10,14 +10,16 @@ import { PosterControls, PosterControlsWrapper } from './components'
 import './Poster.styles.scss'
 
 const Poster = ({ mouseOver, mouseLeave, posterData }) => {
-  const { container, hoverItem, movie, posterImage, slideItem } = posterData
+  // const { container, hoverItem, movie, posterImage, slideItem } = posterData
+  const { container, movie, posterImage } = posterData
 
   return (
     <div
-      className={container.className}
-      style={container.style}
+      className={`poster-container ${container.className}`}
+      data-index={container.slideIndex}
       onMouseOver={mouseOver}
       onMouseLeave={mouseLeave}
+      style={container.style}
     >
       <Link to={`/movies/${movie.id}`}>
         <div className="poster" style={posterImage}></div>
@@ -25,13 +27,13 @@ const Poster = ({ mouseOver, mouseLeave, posterData }) => {
       </Link>
   
       <PosterControlsWrapper
-        hoverItem={hoverItem}
-        slideItem={slideItem}
+        hoverItem={container.hoverItem}
+        slideItem={container.slideIndex}
       >
         <PosterControls
-          hoverItem={hoverItem}
+          hoverItem={container.hoverItem}
           movie={movie}
-          slideItem={slideItem}
+          slideItem={container.slideIndex}
         />
       </PosterControlsWrapper>
     </div>
@@ -44,15 +46,15 @@ Poster.propTypes = {
   posterData: PropTypes.shape({
     container: PropTypes.shape({
       className: PropTypes.string,
+      hoverItem: PropTypes.number,
+      slideIndex: PropTypes.number,
       style: PropTypes.object,
     }),
-    hoverItem: PropTypes.number,
     movie: PropTypes.object,
     posterImage: PropTypes.shape({
       backgroundImage: PropTypes.string,
       backgroundSize: PropTypes.string,
     }),
-    slideItem: PropTypes.number,
   }).isRequired,
 }
 

@@ -5,16 +5,16 @@ export default class PosterParams {
     this.type = props.type
     this.slideLength = props.slideLength
     this.hoverItem = props.hoverItem
-    this.setTypeAttributes(props.slideLength, props.start)
+    this.setTypeAttributes(props.start)
   }
 
-  setTypeAttributes(slideLength, start) {
+  setTypeAttributes(start) {
     if (this.type === STATIC) {
-      this.end = slideLength - 1
+      this.end = this.slideLength - 1
 
     } else if (this.type === SLIDER) {
       this.start = start
-      this.limit = (slideLength * 2) + 1
+      this.limit = (this.slideLength * 2) + 1
     }
   }
 }

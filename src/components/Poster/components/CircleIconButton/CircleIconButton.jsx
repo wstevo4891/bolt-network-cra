@@ -34,8 +34,8 @@ CircleIconButton.propTypes = {
   listName: PropTypes.string,
   movie: PropTypes.object,
   options: PropTypes.array.isRequired,
-  status: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
+  status: PropTypes.string,
+  type: PropTypes.string,
 }
 
 CircleIconButton.defaultProps = {

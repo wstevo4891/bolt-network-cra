@@ -30,10 +30,10 @@ MovieContent.propTypes = {
     logo: PropTypes.string,
     plot: PropTypes.string,
     rating: PropTypes.string,
-    runtime: PropTypes.string,
+    runtime: PropTypes.number,
     title: PropTypes.string,
     url: PropTypes.string,
-    year: PropTypes.string,
+    year: PropTypes.number,
   }).isRequired,
 }
 
