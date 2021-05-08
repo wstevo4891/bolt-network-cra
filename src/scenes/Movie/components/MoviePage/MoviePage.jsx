@@ -17,12 +17,19 @@ const MoviePage = ({ movie }) => (
     <Col sm="8">
       <div className="movie-display">
         <LabelledLine label="Year">{movie.year}</LabelledLine>
+
         <LabelledLine label="Rated">{movie.rating}</LabelledLine>
+
         <LabelledLine label="Runtime">{movie.runtime}</LabelledLine>
+
         <LabelledLine label="Release Date">{movie.release_date}</LabelledLine>
+
         <LabelledLine label="Genres">{displayList(movie.genres)}</LabelledLine>
+
         <LabelledLine label="Director">{displayList(movie.directors)}</LabelledLine>
+
         <LabelledLine label="Actors">{displayList(movie.actors)}</LabelledLine>
+
         <LabelledLine label="Plot">
           <span className="movie-plot">{movie.plot}</span>
         </LabelledLine>
