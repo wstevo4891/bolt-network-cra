@@ -3,20 +3,33 @@ import { useHistory } from 'react-router-dom'
 
 import { API } from 'store'
 
-export function useLocationUpdate(firstLocation) {
+export function useLocationUpdate(pathname) {
   const history = useHistory()
 
   return (query = null) => {
     if (query && query !== '') {
       history.push(`/search?q=${encodeURIComponent(query)}`)
     
-    } else if (firstLocation === '/search') {
+    } else if (pathname === '/search') {
       history.push('/')
     
     } else {
-      history.push(firstLocation)
+      history.push(pathname)
     }
   }
+}
+
+export function useAPI() {
+  const dispatch = useDispatch()
+
+  const fetchSearchResults = (query) => dispatch(API.search.fetchResults(query))
+
+  const resetSuggestions = () => dispatch(API.suggestions.reset())
+
+  return [
+    fetchSearchResults,
+    resetSuggestions,
+  ]
 }
 
 export function clickHandler(resetFunc, updateFunc) {
@@ -35,19 +48,17 @@ export function keyUpHandler(fetchFunc, resetFunc, updateFunc) {
   }
 }
 
-export function useEventHandlers(updateLocation) {
-  const dispatch = useDispatch()
+export function useEventHandlers(pathname) {
+  const updateLocation = useLocationUpdate(pathname)
 
-  const fetchSearchResults = (query) => dispatch(API.search.fetchResults(query))
-
-  const resetSuggestions = () => dispatch(API.suggestions.reset())
+  const [fetchSearchResults, resetSuggestions] = useAPI()
 
   const handleClick = clickHandler(resetSuggestions, updateLocation)
 
   const handleKeyUp = keyUpHandler(fetchSearchResults, resetSuggestions, updateLocation)
 
-  return {
+  return [
     handleClick,
     handleKeyUp,
-  }
+  ]
 }
