@@ -1,7 +1,7 @@
 export * from './actions'
 
-export { API_URL } from './api'
+export { API_URL } from './API'
 
-export { default as API } from './api'
+export { default as API } from './API'
 
 export { default } from './store'

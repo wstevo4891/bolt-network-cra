@@ -17,7 +17,7 @@ export default function Recent() {
     if (movies === null) {
       dispatch(API.movies.fetchRecent())
     }
-  }, [dispatch, movies])
+  })
 
   if (movies === null) return null
 

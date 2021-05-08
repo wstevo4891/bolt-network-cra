@@ -1,5 +1,3 @@
-// Service for building translate3d container style for slides container
-
 const TRANSFORMATIONS = {
   2: -150,
   3: -133.33333333333334,
@@ -8,18 +6,8 @@ const TRANSFORMATIONS = {
   6: -116.66666666666667
 }
 
-export function translateFactory(params) {
-  if (params.start) {
-    if (params.next) return translate3D(-100)
-
-    return translate3D()
-  }
-
-  return transformStyle(params)
-}
-
-export function translate3D(x = 0) {
-  return { transform: `translate3d(${x}%, 0px, 0px)` }
+export function translate3D(translateX = 0) {
+  return { transform: `translate3d(${translateX}%, 0px, 0px)` }
 }
 
 export function transformStyle(params) {
@@ -32,4 +20,14 @@ export function transformStyle(params) {
     return translate3D(translateX + 100)
 
   } else return translate3D(translateX)
+}
+
+export function translateFactory(params) {
+  if (params.start) {
+    if (params.next) return translate3D(-100)
+
+    return translate3D()
+  }
+
+  return transformStyle(params)
 }

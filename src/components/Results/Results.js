@@ -5,6 +5,8 @@ import { Col, Row } from 'reactstrap'
 
 import { API } from 'store'
 
+import { STATIC } from 'utils'
+
 import PosterList from '../PosterList'
 
 import { buildMovieRows } from './utils'
@@ -19,23 +21,22 @@ const Results = ({ movies, name }) => {
   const rows = buildMovieRows(movies, slideLength)
 
   return (
-    <Row>
+    <>
       {rows.map((row, index) => (
-        <Col
-          key={`static_slide_${index}`}
-          className="static_column"
-        >
-          <div className="sliderContent">
-            <PosterList
-              movies={row}
-              name={name}
-              slideLength={slideLength}
-              type="static"
-            />
-          </div>
-        </Col>
+        <Row key={`static_slide_${index}`} >
+          <Col>
+            <div className="sliderContent">
+              <PosterList
+                movies={row}
+                name={name}
+                slideLength={slideLength}
+                type={STATIC}
+              />
+            </div>
+          </Col>
+        </Row>
       ))}
-    </Row>
+    </>
   )
 }
 

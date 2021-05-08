@@ -1,7 +1,10 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 
+// Utils
 import { SLIDER, STATIC } from 'utils'
+
+import { useMouseEventHandlers } from './hooks'
 
 // Services
 import { PosterDataFactory } from 'services'
@@ -9,60 +12,37 @@ import { PosterDataFactory } from 'services'
 // Components
 import Poster from '../Poster'
 
-class PosterList extends Component {
-  state = {
-    hoverItem: null
-  }
+const PosterList = (props) => {
+  const { movies, name } = props
 
-  _mounted = false
+  const [hoverItem, setHoverItem] = useState(null)
 
-  render() {
-    const { movies } = this.props
+  const mountedRef = useRef(false)
 
-    if (movies === null) return null
+  useEffect(() => {
+    mountedRef.current = true
+    return () => { mountedRef.current = false }
+  }, [])
 
-    const factory = new PosterDataFactory({...this.state, ...this.props })
+  const [handleMouseLeave, handleMouseOver] = useMouseEventHandlers(mountedRef, setHoverItem)
 
-    return movies.map((movie, index) => {
-      const posterData = factory.build(movie, index)
+  if (movies === null) return null
 
-      return(
-        <Poster
-          key={`${this.props.name}_Poster_${movie.id}`}
-          mouseLeave={this.handleMouseLeave}
-          mouseOver={this.handleMouseOver}
-          posterData={posterData}
-        />
-      )
-    })
-  }
+  const factory = new PosterDataFactory({ ...props, hoverItem })
 
-  handleMouseOver = (event) => {
-    let mouseOut = false
-    const target = event.target.closest('.poster-container')
+  return movies.map((movie, index) => {
+    const posterData = factory.build(movie, index)
 
-    target.onmouseout = () => { mouseOut = true }
-
-    setTimeout(() => {
-      if (mouseOut) return
-
-      const hoverItem = Number(target.dataset.index)
-
-      this._mounted && this.setState({ hoverItem })
-    }, 500)
-  }
-
-  handleMouseLeave = () => {
-    this._mounted && this.setState({ hoverItem: null })
-  }
-
-  componentDidMount() {
-    this._mounted = true
-  }
-
-  componentWillUnmount() {
-    this._mounted = false
-  }
+    return(
+      <Poster
+        key={`${name}_Poster_${movie.id}`}
+        hoverItem={hoverItem}
+        handleMouseLeave={handleMouseLeave}
+        handleMouseOver={handleMouseOver}
+        posterData={posterData}
+      />
+    )
+  })
 }
 
 PosterList.propTypes = {

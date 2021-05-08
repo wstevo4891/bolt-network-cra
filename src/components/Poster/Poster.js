@@ -9,16 +9,15 @@ import { PosterControls, PosterControlsWrapper } from './components'
 
 import './Poster.styles.scss'
 
-const Poster = ({ mouseOver, mouseLeave, posterData }) => {
-  // const { container, hoverItem, movie, posterImage, slideItem } = posterData
+const Poster = ({ hoverItem, handleMouseLeave, handleMouseOver, posterData }) => {
   const { container, movie, posterImage } = posterData
 
   return (
     <div
       className={`poster-container ${container.className}`}
       data-index={container.slideIndex}
-      onMouseOver={mouseOver}
-      onMouseLeave={mouseLeave}
+      onMouseLeave={handleMouseLeave}
+      onMouseOver={handleMouseOver}
       style={container.style}
     >
       <Link to={`/movies/${movie.id}`}>
@@ -27,11 +26,11 @@ const Poster = ({ mouseOver, mouseLeave, posterData }) => {
       </Link>
   
       <PosterControlsWrapper
-        hoverItem={container.hoverItem}
+        hoverItem={hoverItem}
         slideItem={container.slideIndex}
       >
         <PosterControls
-          hoverItem={container.hoverItem}
+          hoverItem={hoverItem}
           movie={movie}
           slideItem={container.slideIndex}
         />
@@ -41,8 +40,8 @@ const Poster = ({ mouseOver, mouseLeave, posterData }) => {
 }
 
 Poster.propTypes = {
-  mouseOver: PropTypes.func.isRequired,
-  mouseLeave: PropTypes.func.isRequired,
+  handleMouseOver: PropTypes.func.isRequired,
+  handleMouseLeave: PropTypes.func.isRequired,
   posterData: PropTypes.shape({
     container: PropTypes.shape({
       className: PropTypes.string,

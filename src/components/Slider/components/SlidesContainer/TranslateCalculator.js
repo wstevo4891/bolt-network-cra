@@ -1,6 +1,3 @@
-// Service for building translate3d container style
-// for slides container
-
 const TRANSFORMATIONS = {
   2: -150,
   3: -133.33333333333334,
@@ -29,7 +26,7 @@ export default class TranslateCalculator {
     if (this.next) {
       return this.translate3D(-100)
     } else {
-      return this.translate3D(0)
+      return this.translate3D()
     }
   }
 
@@ -47,7 +44,7 @@ export default class TranslateCalculator {
     }
   }
 
-  translate3D(translateX) {
+  translate3D(translateX = 0) {
     return { transform: `translate3d(${translateX}%, 0px, 0px)` }
   }
 }
