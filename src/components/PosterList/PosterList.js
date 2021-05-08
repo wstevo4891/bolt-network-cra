@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 // Utils
@@ -17,14 +17,7 @@ const PosterList = (props) => {
 
   const [hoverItem, setHoverItem] = useState(null)
 
-  const mountedRef = useRef(false)
-
-  useEffect(() => {
-    mountedRef.current = true
-    return () => { mountedRef.current = false }
-  }, [])
-
-  const [handleMouseLeave, handleMouseOver] = useMouseEventHandlers(mountedRef, setHoverItem)
+  const [handleMouseLeave, handleMouseOver] = useMouseEventHandlers(setHoverItem)
 
   if (movies === null) return null
 
