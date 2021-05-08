@@ -14,8 +14,10 @@ const Movie = ({ match }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(API.movies.fetch(movieId))
-  }, [dispatch, movieId])
+    if (movie === null) {
+      dispatch(API.movies.fetch(movieId))
+    }
+  }, [])
 
   if (movie === null) return null
 

@@ -8,10 +8,10 @@ import { ToggleIconButton, ToggleListButton } from 'components'
 import './CircleIconButton.styles.scss'
 
 const CircleIconButton = (props) => {
-  const buttonProps = { buttonClass: 'circle-btn' }
+  const buttonProps = { buttonClass: 'circle-icon-btn' }
 
   if (props.status && props.type) {
-    buttonProps.buttonClass = `circle-btn ${props.type} ${props.status}`
+    buttonProps.buttonClass = `circle-icon-btn ${props.type} ${props.status}`
   }
 
   if (props.listName === null) {
