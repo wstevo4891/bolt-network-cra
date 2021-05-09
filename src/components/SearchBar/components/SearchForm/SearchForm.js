@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 
-import { SearchClose, SearchInput } from '..'
+import { ClearSearchButton, SearchInput } from '..'
 
 import { useEventHandlers } from './hooks'
 
@@ -37,7 +37,7 @@ const SearchForm = ({ location }) => {
         query={query}
       />
   
-      <SearchClose query={query} handleClick={clearSearch} />
+      <ClearSearchButton query={query} handleClick={clearSearch} />
     </div>
   )
 }

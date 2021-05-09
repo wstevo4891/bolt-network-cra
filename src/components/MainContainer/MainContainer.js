@@ -1,23 +1,10 @@
 import PropTypes from 'prop-types'
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 
-import { API } from 'store'
+import { useSlideLengthManager } from './hooks'
 
-const MainContainer = ({ children, slideLength }) => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    const setSlideLength = () => {
-      dispatch(API.slideLength.set())
-    }
-
-    setSlideLength()
-
-    window.addEventListener('resize', setSlideLength)
-
-    return () => window.removeEventListener('resize', setSlideLength)
-  }, [dispatch])
+const MainContainer = ({ children }) => {
+  const slideLength = useSlideLengthManager()
 
   if (slideLength === 0) return null
 
@@ -29,8 +16,10 @@ const MainContainer = ({ children, slideLength }) => {
 }
 
 MainContainer.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  slideLength: PropTypes.number.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.object,
+  ]),
 }
 
 MainContainer.defaultProps = {

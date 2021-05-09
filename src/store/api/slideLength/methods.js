@@ -15,8 +15,6 @@ export function setSlideLength() {
       const slideLength = currentSlideLength()
 
       dispatch(setSlideLengthSuccess(slideLength))
-
-      return slideLength
     } catch(error) {
       dispatch(setSlideLengthFailure(error))
     }

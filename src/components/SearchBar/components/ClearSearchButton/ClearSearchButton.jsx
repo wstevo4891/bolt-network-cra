@@ -5,9 +5,9 @@ import { IconButton } from 'components'
 
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
-import './SearchClose.styles.scss'
+import './ClearSearchButton.styles.scss'
 
-const SearchClose = ({ query, handleClick }) => {
+const ClearSearchButton = ({ query, handleClick }) => {
   if (query === '') return null
 
   const buttonProps = {
@@ -18,13 +18,13 @@ const SearchClose = ({ query, handleClick }) => {
   return <IconButton buttonProps={buttonProps} icon={faTimes} />
 }
 
-SearchClose.propTypes = {
-  setQuery: PropTypes.func.isRequired,
+ClearSearchButton.propTypes = {
+  handleClick: PropTypes.func.isRequired,
   query: PropTypes.string,
 }
 
-SearchClose.defaultProps = {
+ClearSearchButton.defaultProps = {
   query: '',
 }
 
-export default SearchClose
+export default ClearSearchButton

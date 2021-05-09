@@ -1,4 +1,4 @@
-export { default as SearchClose } from './SearchClose'
+export { default as ClearSearchButton } from './ClearSearchButton'
 
 export { default as SearchForm } from './SearchForm'
 
