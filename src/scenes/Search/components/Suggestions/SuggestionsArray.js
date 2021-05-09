@@ -10,17 +10,18 @@ export default class SuggestionsArray {
 
     const genreLinks = this.buildSuggestions(genres, 'category')
     const movieLinks = this.buildSuggestions(movies, 'title')
-    const peopleLinks = this.buildSuggestions(people)
+    const peopleLinks = this.buildSuggestions(people, 'name')
 
     return [...genreLinks, ...peopleLinks, ...movieLinks]
   }
 
-  buildSuggestions(list, nameKey = 'name') {
+  buildSuggestions(list, nameKey) {
     if (list.length === 0) return []
 
     return list.map(item => ({
       name: item[nameKey],
-      link: this.suggestionLink(item.suggestionId)
+      link: this.suggestionLink(item.suggestionId),
+      dataType: item.suggestionId.split('_')[1],
     }))
   }
 

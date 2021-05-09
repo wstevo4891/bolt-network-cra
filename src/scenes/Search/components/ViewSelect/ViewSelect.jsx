@@ -1,24 +1,23 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+
+import { API } from 'store'
 
 // Components
-import NotFound from '../NotFound'
-import MobileView from '../MobileView'
-import DesktopView from '../DesktopView'
+import { DesktopView, MobileView, NotFound } from '..'
 
 const ViewSelect = (props) => {
-  const { genres, handleClick, movies, suggestionProps, query } = props
+  const { genres, movies } = useSelector(API.search.selectResults)
 
   if (genres.length === 0 && movies.length === 0) {
-    return <NotFound query={query} />
+    return <NotFound query={props.query} />
   }
 
-  const viewProps = { handleClick, suggestionProps, query }
-
   if (window.innerWidth < 768) {
-    return <MobileView {...viewProps} />
+    return <MobileView {...props} />
 
   } else {
-    return <DesktopView {...viewProps} />
+    return <DesktopView {...props} />
   }
 }
 

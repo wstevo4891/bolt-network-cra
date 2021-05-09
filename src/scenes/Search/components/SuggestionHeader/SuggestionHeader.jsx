@@ -5,10 +5,10 @@ import { headerText } from './utils'
 
 import './SuggestionHeader.styles.scss'
 
-const SuggestionHeader = ({ suggestionId, suggestion }) => {
-  if (!suggestionId) return null
+const SuggestionHeader = ({ suggestion }) => {
+  if (!suggestion) return null
 
-  const text = headerText(suggestionId, suggestion)
+  const text = headerText(suggestion)
 
   return(
     <div className="col-12">

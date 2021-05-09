@@ -4,15 +4,15 @@ import SearchResults from '../SearchResults'
 import Suggestions from '../Suggestions'
 import SuggestionHeader from '../SuggestionHeader'
 
-const DesktopView = ({ handleClick, suggestionProps, query }) => (
+const DesktopView = ({ handleClick, suggestion, query }) => (
   <>
     <div className="row">
       <Suggestions handleClick={handleClick} query={query} />
 
-      <SuggestionHeader {...suggestionProps} />
+      <SuggestionHeader suggestion={suggestion} />
     </div>
 
-    <SearchResults {...suggestionProps} />
+    <SearchResults suggestion={suggestion} />
   </>
 )
 

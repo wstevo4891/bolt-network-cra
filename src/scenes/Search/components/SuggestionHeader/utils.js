@@ -8,16 +8,14 @@
  * 
  * @returns {string}
  */
-export function headerText(suggestionId, suggestion) {
-  const type = suggestionId.split('_')[1]
-
+export function headerText({ text, type }) {
   if (type === 'genre') {
-    return `Titles in: ${suggestion}`
+    return `Titles in: ${text}`
 
   } else if (type === 'person') {
-    return `Results for ${suggestion} and more fan favorites`
+    return `Results for ${text} and more fan favorites`
 
   } else if (type === 'movie') {
-    return `Titles related to ${suggestion}`
+    return `Titles related to ${text}`
   }
 }

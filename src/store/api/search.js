@@ -24,6 +24,25 @@ function fetchResults(query) {
   }
 }
 
+export function mapStateToProps(state) {
+  const { genres, movies, people } = state.search
+
+  return {
+    results: {
+      genres,
+      movies,
+      people,
+    },
+  }
+}
+
+function selectResults(state) {
+  const { genres, movies, people } = state.search
+
+  return { genres, movies, people }
+}
+
 export default {
   fetchResults,
+  selectResults,
 }

@@ -7,7 +7,7 @@ import Suggestions from '../Suggestions'
 
 import SuggestionsLabel from '../SuggestionsLabel'
 
-const MobileView = ({ handleClick, suggestionProps, query }) => (
+const MobileView = ({ handleClick, suggestion, query }) => (
   <>
     <div className="row">
       <div className="col-12 mb-2">
@@ -17,7 +17,7 @@ const MobileView = ({ handleClick, suggestionProps, query }) => (
       </div>
     </div>
 
-    <SearchResults {...suggestionProps} />
+    <SearchResults suggestion={suggestion} />
 
     <div className="row">
       <Suggestions handleClick={handleClick} query={query} />

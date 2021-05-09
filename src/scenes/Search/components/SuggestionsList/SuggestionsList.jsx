@@ -8,10 +8,10 @@ const SuggestionsList = ({ suggestions, handleClick }) => (
   <ul className="suggestions_list">
     {suggestions.map((suggestion, index) => (
       <li
-        key={index.toString()}
+        key={`suggestion_${index}`}
         onClick={handleClick}
       >
-        <Link to={suggestion.link}>
+        <Link to={suggestion.link} data-type={suggestion.dataType}>
           {suggestion.name}
         </Link>
       </li>

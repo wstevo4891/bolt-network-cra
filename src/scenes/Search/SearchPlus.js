@@ -1,33 +1,24 @@
 import PropTypes from 'prop-types'
-import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-
-import { API } from 'store'
+import React from 'react'
 
 import { SearchContainer, ViewSelect } from './components'
 
 import { parseParams } from './utils'
 
-const Search = (props) => {
-  const dispatch = useDispatch()
+import { useSuggestionManager, useUpdateSuggestionsEffect } from './hooks'
 
-  const [suggestion, setSuggestion] = useState(null)
+const Search = ({ location }) => {
+  const { query, suggestionId } = parseParams(location.search)
 
-  const handleClick = (event) => setSuggestion(event.target.text)
+  const [suggestion, updateSuggestion] = useSuggestionManager()
 
-  const { query, suggestionId } = parseParams(props.location.search)
-
-  const suggestionProps = { suggestion, suggestionId }
-
-  useEffect(() => {
-    dispatch(API.suggestions.fetch(suggestionId))
-  }, [dispatch, suggestionId])
+  useUpdateSuggestionsEffect(suggestionId)
 
   return (
     <SearchContainer>
       <ViewSelect
-        handleClick={handleClick}
-        suggestionProps={suggestionProps}
+        handleClick={updateSuggestion}
+        suggestion={suggestion}
         query={query}
       />
     </SearchContainer>

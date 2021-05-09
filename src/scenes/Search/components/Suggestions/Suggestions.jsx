@@ -1,14 +1,18 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
-import SuggestionsLabel from '../SuggestionsLabel'
-import SuggestionsList from '../SuggestionsList'
+import { API } from 'store'
+
+import { SuggestionsLabel, SuggestionsList } from '..'
 
 import SuggestionsArray from './SuggestionsArray'
 
 import './Suggestions.styles.scss'
 
-const Suggestions = ({ handleClick, results, query }) => {
+const Suggestions = ({ handleClick, query }) => {
+  const results = useSelector(API.search.selectResults)
+
   const suggestions = new SuggestionsArray(results, query)
 
   return (
@@ -29,20 +33,10 @@ const Suggestions = ({ handleClick, results, query }) => {
 
 Suggestions.propTypes = {
   handleClick: PropTypes.func.isRequired,
-  results: PropTypes.shape({
-    genres: PropTypes.array,
-    movies: PropTypes.array,
-    people: PropTypes.array,
-  }),
   query: PropTypes.string,
 }
 
 Suggestions.defaultProps = {
-  results: {
-    genres: [],
-    movies: [],
-    people: [],
-  },
   query: null,
 }
 

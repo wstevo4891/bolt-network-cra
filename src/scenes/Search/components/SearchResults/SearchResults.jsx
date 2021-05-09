@@ -6,7 +6,7 @@ import { Results } from 'components'
 const SearchResults = (props) => {
   let results
 
-  if (props.suggestionId) {
+  if (props.suggestion && props.suggestedMovies) {
     results = props.suggestedMovies
   } else {
     results = props.searchMovies
@@ -25,13 +25,3 @@ SearchResults.propTypes = {
 }
 
 export default SearchResults
-
-// searchMoviesList() {
-//   const { suggestionId, suggestions, results: { movies } } = this.props
-
-//   if (suggestionId && this.state.suggestion) {
-//     return suggestions
-//   }
-
-//   return movies
-// }

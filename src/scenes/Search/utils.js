@@ -8,3 +8,11 @@ export function parseParams(query) {
     suggestionId: parsed.suggestionId,
   }
 }
+
+export function parseQuery(search) {
+  return decodeURIComponent(queryString.parse(search).q)
+}
+
+export function parseSuggestionId(search) {
+  return queryString.parse(search).suggestionId
+}
