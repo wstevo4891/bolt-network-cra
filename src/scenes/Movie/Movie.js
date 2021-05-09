@@ -17,7 +17,7 @@ const Movie = ({ match }) => {
     if (movie === null) {
       dispatch(API.movies.fetch(movieId))
     }
-  }, [])
+  })
 
   if (movie === null) return null
 

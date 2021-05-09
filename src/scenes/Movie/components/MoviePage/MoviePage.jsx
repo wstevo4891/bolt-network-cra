@@ -20,7 +20,7 @@ const MoviePage = ({ movie }) => (
 
         <LabelledLine label="Rated">{movie.rating}</LabelledLine>
 
-        <LabelledLine label="Runtime">{movie.runtime}</LabelledLine>
+        <LabelledLine label="Runtime">{`${movie.runtime} minutes`}</LabelledLine>
 
         <LabelledLine label="Release Date">{movie.release_date}</LabelledLine>
 
@@ -42,9 +42,9 @@ MoviePage.propTypes = {
   movie: PropTypes.shape({
     poster: PropTypes.string,
     title: PropTypes.string,
-    year: PropTypes.number,
+    year: PropTypes.string,
     rated: PropTypes.string,
-    run_time: PropTypes.string,
+    runtime: PropTypes.number,
     release_date: PropTypes.string,
     genres: PropTypes.array,
     directors: PropTypes.array,
