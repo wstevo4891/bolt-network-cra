@@ -29,7 +29,16 @@ function reset() {
   return async (dispatch) => dispatch(resetSuggestions())
 }
 
+function selectSuggestions(state) {
+  const { suggestions } = state
+
+  if (!suggestions) return null
+
+  return suggestions.list
+}
+
 export default {
   reset,
   fetch: fetchSuggestions,
+  select: selectSuggestions,
 }

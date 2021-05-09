@@ -20,21 +20,40 @@
     box-shadow: none;
     color: white;
   }
-}
 
-.desktop_input {
-  width: 90% !important;
-  left: 10%;
-
-  @include on_narrow($breakpoint_768) {
-    display: none !important;
+  &.desktop_input {
+    display: none;
+  
+    @include on_wide($breakpoint_800) {
+      display: block;
+      width: 90%;
+      left: 10%;
+    }
+  }
+  
+  &.mobile_input {
+    width: 100%;
+  
+    @include on_wide($breakpoint_800) {
+      display: none;
+    }
   }
 }
 
-.mobile_input {
-  width: 100% !important;
+// .desktop_input {
+//   display: none;
 
-  @include on_wide($breakpoint_768) {
-    display: none !important;
-  }
-}
+//   @include on_wide($breakpoint_800) {
+//     display: block !important;
+//     width: 90% !important;
+//     left: 10%;
+//   }
+// }
+
+// .mobile_input {
+//   width: 100% !important;
+
+//   @include on_wide($breakpoint_800) {
+//     display: none !important;
+//   }
+// }

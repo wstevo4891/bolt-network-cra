@@ -1,7 +1,7 @@
 @import "styles/core";
 
 .search_button {
-  display: inline-block;
+  display: none;
   border: none;
   background: 0 0;
   color: white;
@@ -11,7 +11,7 @@
     border: none;
   }
 
-  @include on_narrow($breakpoint_768) {
-    display: none;
+  @include on_wide($breakpoint_800) {
+    display: inline-block;
   }
 }

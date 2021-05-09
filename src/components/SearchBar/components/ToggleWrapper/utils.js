@@ -1,48 +1,61 @@
 import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
-import { BREAKPOINT_768 } from 'utils'
+import { BREAKPOINT_800 } from 'utils'
 
 import { MIN_WIDTH } from './constants'
 
-export function targetIsSearchBar(target) {
-  const container = target.closest('.search_bar_toggle')
-  const mobileContainer = target.closest('.mobile_nav')
-  const suggestionsList = target.closest('.suggestions_list')
+const SEARCH_CLASSES = [
+  '.mobile_nav',
+  '.search_bar_toggle',
+  '.suggestions_list',
+]
 
-  if (
-    container === null &&
-    mobileContainer === null &&
-    suggestionsList === null
-  ) return false
+export function targetInvalid(target) {
+  const elements = []
 
-  return true
+  SEARCH_CLASSES.forEach((className) => {
+    elements.push(target.closest(className))
+  })
+
+  const result = elements.reduce((memo, item) => memo + item)
+
+  return result === 0 ? false : true
 }
 
-export function mouseUpHandler(setDisplay, setWidth) {
+export function mouseUpHandler(setDisplay, setWidth, search) {
   return (event) => {
-    if (targetIsSearchBar(event.target)) return
+    if (window.innerWidth < BREAKPOINT_800 || search.length > 0) return
+
+    const invalidTarget = targetInvalid(event.target)
+
+    if (invalidTarget) return
   
     setWidth(MIN_WIDTH)
     setTimeout(() => setDisplay(false), 400)
   }
 }
 
-export function resizeHandler(setWidth) {
+export function resizeHandler(setDisplay, setWidth) {
   return () => {
     const { innerWidth } = window
 
-    if (innerWidth < BREAKPOINT_768) {
+    if (innerWidth < BREAKPOINT_800) {
+      setDisplay(true)
       setWidth('auto')
-    } else if (innerWidth >= BREAKPOINT_768) {
+    } else if (innerWidth >= BREAKPOINT_800) {
+      setDisplay(false)
       setWidth(MIN_WIDTH)
     }
   }
 }
 
 export function useEventListeners(setDisplay, setWidth) {
-  const handleMouseUp = mouseUpHandler(setDisplay, setWidth)
+  const { search } = useLocation()
 
-  const handleResize = resizeHandler(setWidth)
+  const handleMouseUp = mouseUpHandler(setDisplay, setWidth, search)
+
+  const handleResize = resizeHandler(setDisplay, setWidth)
 
   useEffect(() => {
     document.addEventListener('mouseup', handleMouseUp)

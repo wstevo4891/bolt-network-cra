@@ -22,13 +22,11 @@ const SuggestionHeader = ({ suggestion }) => {
 }
 
 SuggestionHeader.propTypes = {
-  suggestion: PropTypes.string,
-  suggestionId: PropTypes.string,
+  suggestion: PropTypes.object,
 }
 
 SuggestionHeader.defaultProps = {
   suggestion: null,
-  suggestionId: undefined,
 }
 
 export default SuggestionHeader

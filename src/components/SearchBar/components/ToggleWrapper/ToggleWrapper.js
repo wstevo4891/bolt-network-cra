@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react'
 
 import { ToggleButton } from '..'
 
-import { MAX_WIDTH, MIN_WIDTH } from './constants'
+import { MAX_WIDTH } from './constants'
 
 import { useEventListeners } from './utils'
 
@@ -17,21 +17,16 @@ const ToggleWrapper = ({ children }) => {
 
   useEventListeners(setDisplay, setWidth)
 
-  const toggleDisplay = () => {
-    if (display) {
-      setWidth(MIN_WIDTH)
-      setTimeout(() => setDisplay(false), 400)
-    } else {
-      setDisplay(true)
-      setTimeout(() => setWidth(MAX_WIDTH), 100)
-    }
+  const displaySearchBar = () => {
+    setDisplay(true)
+    setTimeout(() => setWidth(MAX_WIDTH), 100)
   }
 
   const wrapperStyle = { display: display ? 'flex' : 'none', }
 
   return (
     <div className="search_bar_toggle">
-      <ToggleButton display={display} handleClick={toggleDisplay} />
+      <ToggleButton display={display} handleClick={displaySearchBar} />
 
       <div className="toggle_wrapper" ref={toggleRef} style={wrapperStyle}>
         {children}

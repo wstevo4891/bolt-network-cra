@@ -6,7 +6,7 @@
   color: white;
   font-size: 1.3em;
 
-  @include on_wide($breakpoint_768) {
+  @include on_wide($breakpoint_800) {
     display: inline-block;
   }
 }

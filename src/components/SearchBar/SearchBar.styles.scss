@@ -12,7 +12,7 @@
   overflow: hidden;
   z-index: 10;
 
-  @include on_wide($breakpoint_768) {
+  @include on_wide($breakpoint_800) {
     width: 100%;
   }
 }

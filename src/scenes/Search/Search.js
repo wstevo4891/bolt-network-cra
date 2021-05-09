@@ -1,61 +1,32 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React from 'react'
 
-import SearchContainer from './components/SearchContainer'
+import { SearchContainer, ViewSelect } from './components'
 
-import ViewSelect from './components/ViewSelect'
+import { parseParams } from './utils'
 
-class Search extends Component {
-  state = {
-    suggestion: null
-  }
+import { useSuggestionManager, useUpdateSuggestionsEffect } from './hooks'
 
-  render() {
-    const { suggestionId, query } = this.props
+const Search = ({ location }) => {
+  const { query, suggestionId } = parseParams(location.search)
 
-    const suggestionProps = {
-      suggestionId,
-      suggestion: this.state.suggestion,
-    }
+  const [suggestion, updateSuggestion] = useSuggestionManager()
 
-    return (
-      <SearchContainer>
-        <ViewSelect
-          handleClick={this.handleClick}
-          suggestionProps={suggestionProps}
-          query={query}
-        />
-      </SearchContainer>
-    )
-  }
+  useUpdateSuggestionsEffect(suggestionId)
 
-  handleClick = (event) => {
-    this.setState({
-      suggestion: event.target.text
-    })
-  }
-
-  componentDidUpdate(prevProps) {
-    const { fetchSuggestions, suggestionId } = this.props
-
-    if (suggestionId === prevProps.suggestionId) return
-
-    if (suggestionId) {
-      fetchSuggestions(suggestionId)
-    } else {
-      this.setState({ suggestion: null })
-    }
-  }
+  return (
+    <SearchContainer>
+      <ViewSelect
+        handleClick={updateSuggestion}
+        suggestion={suggestion}
+        query={query}
+      />
+    </SearchContainer>
+  )
 }
 
 Search.propTypes = {
-  fetchSuggestions: PropTypes.func.isRequired,
-  suggestionId: PropTypes.number,
-  query: PropTypes.string,
-}
-
-Search.defaultProps = {
-  suggestionId: null,
+  location: PropTypes.object.isRequired,
 }
 
 export default Search

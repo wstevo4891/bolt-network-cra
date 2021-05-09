@@ -1,7 +1,9 @@
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 
-import { mapStateToProps } from './mappings'
+// import { mapStateToProps } from './mappings'
 
-import SearchResults from './SearchResults'
+// import SearchResults from './SearchResults'
 
-export default connect(mapStateToProps)(SearchResults)
+// export default connect(mapStateToProps)(SearchResults)
+
+export { default } from './SearchResults'

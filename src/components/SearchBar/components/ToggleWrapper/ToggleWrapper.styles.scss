@@ -2,8 +2,4 @@
 
 .toggle_wrapper {
   transition: width 0.4s;
-
-  @include on_narrow($breakpoint_768) {
-    display: flex !important;
-  }
 }

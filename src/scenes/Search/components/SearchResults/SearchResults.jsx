@@ -3,14 +3,10 @@ import React from 'react'
 
 import { Results } from 'components'
 
-const SearchResults = (props) => {
-  let results
+import { useResultsManager } from './hooks'
 
-  if (props.suggestion && props.suggestedMovies) {
-    results = props.suggestedMovies
-  } else {
-    results = props.searchMovies
-  }
+const SearchResults = ({ suggestion }) => {
+  const results = useResultsManager(suggestion)
 
   if (results === null) return null
 
@@ -18,10 +14,7 @@ const SearchResults = (props) => {
 }
 
 SearchResults.propTypes = {
-  searchMovies: PropTypes.array,
-  suggestedMovies: PropTypes.array,
-  suggestion: PropTypes.string,
-  suggestionId: PropTypes.string,
+  suggestion: PropTypes.object,
 }
 
 export default SearchResults
