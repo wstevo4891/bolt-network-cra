@@ -16,7 +16,7 @@ const Navbar = () => {
 
   if (genres === null) return null
 
-  const genreLinks = genres.map(({ title, url }) => ({ url, text: title }))
+  const genreLinks = genres.map(({ title, url }) => ({ text: title, url }))
 
   return (
     <NavContainer>

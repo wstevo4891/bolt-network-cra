@@ -10,7 +10,10 @@ const SuggestionsLabel = ({ children }) => (
 )
 
 SuggestionsLabel.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.string).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]).isRequired,
 }
 
 export default SuggestionsLabel

@@ -3,12 +3,19 @@ import React, { useState } from 'react'
 
 import { SearchClose, SearchInput } from '..'
 
-const SearchForm = ({ handleClick, handleKeyUp }) => {
+import { useEventHandlers } from './hooks'
+
+const SearchForm = ({ location }) => {
   const [query, setQuery] = useState('')
 
   const handleChange = (event) => setQuery(event.target.value)
 
-  const clearSearch = () => setQuery('')
+  const [handleClick, handleKeyUp, updateLocation] = useEventHandlers(location)
+
+  const clearSearch = () => {
+    setQuery('')
+    updateLocation()
+  }
 
   return (
     <div className="form-inline">
@@ -30,14 +37,13 @@ const SearchForm = ({ handleClick, handleKeyUp }) => {
         query={query}
       />
   
-      <SearchClose handleClick={clearSearch} query={query} />
+      <SearchClose query={query} handleClick={clearSearch} />
     </div>
   )
 }
 
 SearchForm.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  handleKeyUp: PropTypes.func.isRequired,
+  location: PropTypes.string.isRequired,
 }
 
 export default SearchForm

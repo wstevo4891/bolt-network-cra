@@ -14,7 +14,10 @@ const SearchContainer = ({ children }) => (
 )
 
 SearchContainer.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.arrayOf(PropTypes.element),
+  ]).isRequired,
 }
 
 export default SearchContainer

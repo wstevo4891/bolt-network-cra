@@ -7,7 +7,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 import './SearchClose.styles.scss'
 
-const SearchClose = ({ handleClick, query }) => {
+const SearchClose = ({ query, handleClick }) => {
   if (query === '') return null
 
   const buttonProps = {
@@ -19,7 +19,7 @@ const SearchClose = ({ handleClick, query }) => {
 }
 
 SearchClose.propTypes = {
-  handleClick: PropTypes.func.isRequired,
+  setQuery: PropTypes.func.isRequired,
   query: PropTypes.string,
 }
 
