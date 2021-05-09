@@ -1,8 +1,16 @@
+export function setSearchValue(movies) {
+  return (movies && movies.length > 0) ? movies : null
+}
+
 export function mapStateToProps(state) {
-  const { movies } = state.search
+  const { search, suggestions } = state
+
+  const searchMovies = setSearchValue(search.movies)
+
+  const suggestedMovies = setSearchValue(suggestions.list)
 
   return {
-    searchMovies: movies,
-    suggestedMovies: state.suggestions.list,
+    searchMovies,
+    suggestedMovies,
   }
 }

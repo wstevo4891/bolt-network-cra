@@ -7,16 +7,18 @@ import {
 
 import { API_URL } from './constants'
 
+const URI = `${API_URL}/search/suggestions`
+
 function fetchSuggestions(suggestionId) {
   return async (dispatch) => {
     try {
       dispatch(fetchSuggestionsBegin())
 
-      const response = await fetch(`${API_URL}/search/suggestions/${suggestionId}`)
+      const response = await fetch(`${URI}/${suggestionId}`)
 
       const data = await response.json()
 
-      dispatch(fetchSuggestionsSuccess(data))    
+      dispatch(fetchSuggestionsSuccess(data))
     } catch(error) {
       dispatch(fetchSuggestionsFailure(error))
     }

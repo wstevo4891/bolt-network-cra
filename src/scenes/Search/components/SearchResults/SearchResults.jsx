@@ -6,11 +6,13 @@ import { Results } from 'components'
 const SearchResults = (props) => {
   let results
 
-  if (props.suggestionId && props.suggestion) {
+  if (props.suggestionId) {
     results = props.suggestedMovies
   } else {
     results = props.searchMovies
   }
+
+  if (results === null) return null
 
   return <Results movies={results} name="Search_Results" />
 }
