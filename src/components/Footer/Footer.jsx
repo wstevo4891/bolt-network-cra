@@ -1,38 +1,40 @@
 import React from 'react'
 
+import { Col, Container, Row } from 'reactstrap'
+
 import './Footer.styles.scss'
 
 const Footer = () => (
   <footer>
-    <div className="container">
-      <div className="row">
-        <div className="col-3">
+    <Container>
+      <Row>
+        <Col xs="3">
           <h3>Bolt</h3>
           <ul>
             <li>Careers</li>
             <li>Terms</li>
             <li>Help</li>
           </ul>
-        </div>
-        <div className="col-4 col-sm-3">
+        </Col>
+        <Col xs="4" sm="3">
           <h3>More Bolt</h3>
           <ul>
             <li>Gift Cards</li>
             <li>Trailers</li>
           </ul>
-        </div>
-        <div className="col-4 col-sm-3">
+        </Col>
+        <Col xs="4" sm="3">
           <h3>News</h3>
           <ul>
             <li>Blog</li>
             <li>Twitter</li>
-            <li>YouTube</li>
-            <li>Google+</li>
             <li>Facebook</li>
+            <li>Instagram</li>
+            <li>YouTube</li>
           </ul>
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Row>
+    </Container>
   </footer>
 )
 

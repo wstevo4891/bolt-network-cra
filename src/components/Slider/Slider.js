@@ -1,70 +1,37 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
-import { noop } from 'utils'
-
-import { PREV, NEXT } from 'utils'
+import { PREV, NEXT, noop } from 'utils'
 
 import { SliderArrow, SlidesContainer } from './components'
 
+import { useSliderEffects, useSliderState } from './hooks'
+
 import './Slider.styles.scss'
 
-export const CLEAR_STATE = {
-  start: false,
-  next: false,
-  prev: false,
-}
+const Slider = ({ fetchSlides, name, slides }) => {
+  const [handleArrowClick, sliderState] = useSliderState(fetchSlides)
 
-class Slider extends Component {
-  state = {
-    start: true,
-    next: false,
-    prev: false
-  }
+  useSliderEffects(sliderState)
 
-  set pointerEvents(value) {
-    document.getElementById('root').style['pointer-events'] = value
-  }
-
-  render() {
-    const { next, prev, start } = this.state
-    const { name, slides } = this.props
-
-    return(
-      <div className='slider'>
-        <SliderArrow
-          direction={PREV}
-          handleClick={() => this.handleArrowClick(PREV)}
-          start={start}
-        />
-        <SlidesContainer
-          name={name}
-          next={next}
-          prev={prev}
-          slides={slides}
-          start={start}
-        />
-        <SliderArrow
-          direction={NEXT}
-          handleClick={() => this.handleArrowClick(NEXT)}
-        />
-      </div>
-    )
-  }
-
-  handleArrowClick = (direction) => {
-    this.pointerEvents = 'none'
-
-    this.setState({ [direction]: true }, () => {
-      setTimeout(() => {
-        this.props.fetchNextSlides(direction, () => this.handleTransitionEnd())
-      }, 1000)
-    })
-  }
-
-  handleTransitionEnd() {
-    this.setState(CLEAR_STATE, () => { this.pointerEvents = 'auto' })
-  }
+  return (
+    <div className='slider'>
+      <SliderArrow
+        direction={PREV}
+        handleClick={() => handleArrowClick(PREV)}
+        start={sliderState.start}
+      />
+      <SlidesContainer
+        {...sliderState}
+        name={name}
+        slides={slides}
+      />
+      <SliderArrow
+        direction={NEXT}
+        handleClick={() => handleArrowClick(NEXT)}
+      />
+    </div>
+  )
 }
 
 Slider.propTypes = {
@@ -74,7 +41,7 @@ Slider.propTypes = {
 }
 
 Slider.defaultProps = {
-  fetchNextSlides: noop,
+  fetchSlides: noop,
 }
 
 export default Slider
