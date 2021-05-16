@@ -1,37 +1,37 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
+import { LEFT, RIGHT, noop } from 'utils'
+
 import IconButton from './IconButton'
 
-import { LEFT, RIGHT } from './constants'
-
-const ToggleIconButton = (props) => {
-  const [status, setStatus] = useState(props.status)
+const ToggleIconButton = ({ buttonProps, callback, options, status, text, textPlacement }) => {
+  const [iconStatus, setIconStatus] = useState(status)
 
   const handleClick = () => {
-    setStatus(!status)
-    props.callback()
+    setIconStatus(!iconStatus)
+    callback()
   }
 
-  const icon = status ? props.options[0] : props.options[1]
+  const icon = iconStatus ? options[0] : options[1]
 
   return (
     <IconButton
       buttonProps={{
-        ...props.buttonProps,
+        ...buttonProps,
         handleClick,
       }}
       icon={icon}
-      text={props.text}
-      textPlacement={props.textPlacement}
+      text={text}
+      textPlacement={textPlacement}
     />
   )
 }
 
 ToggleIconButton.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
   buttonProps: PropTypes.object,
   callback: PropTypes.func,
+  options: PropTypes.arrayOf(PropTypes.object).isRequired,
   status: PropTypes.bool,
   text: PropTypes.string,
   textPlacement: PropTypes.oneOf([LEFT, RIGHT]),
@@ -39,7 +39,7 @@ ToggleIconButton.propTypes = {
 
 ToggleIconButton.defaultProps = {
   buttonProps: {},
-  callback: () => void {},
+  callback: noop,
   status: true,
   text: null,
   textPlacement: RIGHT,

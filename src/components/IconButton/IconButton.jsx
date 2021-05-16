@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { LEFT, RIGHT } from 'utils'
+
 import Button from '../Button'
 
-import { LEFT, RIGHT } from './constants'
-
-const IconButton = (props) => (
-  <Button {...props.buttonProps}>
-    {props.textPlacement === LEFT && props.text}
-    <FontAwesomeIcon icon={props.icon} />
-    {props.textPlacement === RIGHT && props.text}
+const IconButton = ({ buttonProps, icon, text, textPlacement }) => (
+  <Button {...buttonProps}>
+    {textPlacement === LEFT && text}
+    <FontAwesomeIcon icon={icon} />
+    {textPlacement === RIGHT && text}
   </Button>
 )
 

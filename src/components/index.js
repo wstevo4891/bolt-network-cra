@@ -8,7 +8,7 @@ export { default as Footer } from './Footer'
 
 export { default as GenreSlider } from './GenreSlider'
 
-export * from './IconButton'
+export { default as IconButton } from './IconButton'
 
 export { default as MainContainer } from './MainContainer'
 
@@ -33,5 +33,7 @@ export { default as SearchBar } from './SearchBar'
 export { default as Slider } from './Slider'
 
 export { default as TitleRow } from './TitleRow'
+
+export { default as ToggleIconButton } from './ToggleIconButton'
 
 export { default as ToggleListButton } from './ToggleListButton'

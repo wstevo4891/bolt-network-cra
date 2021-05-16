@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { noop } from 'utils'
+import { LEFT, RIGHT, noop } from 'utils'
 
-import { ToggleIconButton } from '../IconButton'
+import { ToggleIconButton } from '..'
 
 import { useListState } from './hooks'
 
@@ -37,13 +37,13 @@ ToggleListButton.propTypes = {
   buttonProps: PropTypes.object,
   updateContainer: PropTypes.func,
   text: PropTypes.string,
-  textPlacement: PropTypes.string
+  textPlacement: PropTypes.oneOf([LEFT, RIGHT]),
 }
 
 ToggleListButton.defaultProps = {
   buttonProps: {},
   text: null,
-  textPlacement: 'left',
+  textPlacement: LEFT,
   updateContainer: noop,
 }
 
