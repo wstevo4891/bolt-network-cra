@@ -1,10 +1,6 @@
-import PropTypes from 'prop-types'
-import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 
-import { API } from 'store'
-
-import { randomIndex } from './utils'
+import { useRandomBannerMovie } from './hooks'
 
 import Overlay from '../Overlay'
 
@@ -12,24 +8,10 @@ import { BackgroundImage, MovieContent } from './components'
 
 import './Banner.styles.scss'
 
-const MOVIE_TITLES = [
-  'Pirates of the Caribbean: The Curse of the Black Pearl',
-  'The Avengers',
-  'Skyfall'
-]
+const Banner = () => {
+  const movie = useRandomBannerMovie()
 
-const Banner = ({ movies }) => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(API.bannerMovies.fetch(MOVIE_TITLES))
-  }, [dispatch])
-
-  if (movies.length === 0) return null
-
-  const index = randomIndex(MOVIE_TITLES.length)
-
-  const movie = movies[index]
+  if (movie === null) return null
 
   return (
     <section className="banner">
@@ -39,10 +21,6 @@ const Banner = ({ movies }) => {
       </BackgroundImage>
     </section>
   )
-}
-
-Banner.propTypes = {
-  movies: PropTypes.array.isRequired,
 }
 
 export default Banner

@@ -8,14 +8,12 @@ import { useEventHandlers } from './hooks'
 const SearchForm = ({ location }) => {
   const [query, setQuery] = useState('')
 
-  const handleChange = (event) => setQuery(event.target.value)
-
-  const [handleClick, handleKeyUp, updateLocation] = useEventHandlers(location)
-
-  const clearSearch = () => {
-    setQuery('')
-    updateLocation()
-  }
+  const [
+    clearSearch,
+    handleChange,
+    handleClick,
+    handleKeyUp
+  ] = useEventHandlers(location, setQuery)
 
   return (
     <div className="form-inline">
