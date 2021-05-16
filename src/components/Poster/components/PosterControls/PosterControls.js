@@ -1,70 +1,25 @@
 import PropTypes from 'prop-types'
-import React, { Component } from 'react'
+import React from 'react'
 
-// Services
-import { SessionListAPI } from 'services'
-
-// Components
 import { ButtonsList, MovieInfo } from '..'
 
-// Constants
-const LIKED_LIST = 'LikedList'
+import { useLikeState } from './hooks'
 
-const UNLIKED_LIST = 'UnlikedList'
+const PosterControls = ({ hoverItem, movie }) => {
+  const [likeState, toggleLike, toggleUnlike] = useLikeState(movie)
 
-class PosterControls extends Component {
-  state = {
-    likeState: undefined
-  }
+  return(
+    <div className="poster-controls">
+      <MovieInfo movie={movie} hoverItem={hoverItem} />
 
-  render() {
-    const { likeState } = this.state
-    const { hoverItem, movie } = this.props
-
-    if (likeState === undefined) return null
-
-    return(
-      <div className="poster-controls">
-        <MovieInfo movie={movie} hoverItem={hoverItem} />
-
-        <ButtonsList
-          movie={movie}
-          likeState={likeState}
-          toggleLike={this.toggleLike}
-          toggleUnlike={this.toggleUnlike}
-        />
-      </div>
-    )
-  }
-
-  toggleLike = () => {
-    this.setState(prevState => {
-      const likeState = prevState.likeState ? null : true
-      return { likeState }
-    })
-  }
-
-  toggleUnlike = () => {
-    this.setState(prevState => {
-      const likeState = (prevState.likeState === false) ? null : false
-      return { likeState }
-    })
-  }
-
-  componentDidMount() {
-    const likeState = this.getLikeState()
-    this.setState({ likeState })
-  }
-
-  getLikeState() {
-    const { movie } = this.props
-
-    if (SessionListAPI.findMovie(movie, LIKED_LIST)) return true
-
-    if (SessionListAPI.findMovie(movie, UNLIKED_LIST)) return false
-
-    return null
-  }
+      <ButtonsList
+        movie={movie}
+        likeState={likeState}
+        toggleLike={toggleLike}
+        toggleUnlike={toggleUnlike}
+      />
+    </div>
+  )
 }
 
 PosterControls.propTypes = {
