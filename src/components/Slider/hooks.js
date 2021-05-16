@@ -12,30 +12,31 @@ const INITIAL_STATE = {
   prev: false,
 }
 
-export function arrowClickHandler(fetchSlides, sliderState, setSliderState) {
+export function arrowClickHandler(fetchSlides, state, setState) {
   return (direction) => {
-    setSliderState({ ...sliderState, [direction]: true })
+    setState({ ...state, [direction]: true })
+
     setTimeout(() => {
-      fetchSlides(direction, () => setSliderState(CLEAR_STATE))
+      fetchSlides(direction).then(() => setState(CLEAR_STATE))
     }, 1000)
   }
 }
 
 export function useSliderState(fetchSlides) {
-  const [sliderState, setSliderState] = useState(INITIAL_STATE)
+  const [state, setState] = useState(INITIAL_STATE)
 
-  const handleArrowClick = arrowClickHandler(fetchSlides, sliderState, setSliderState)
+  const handleArrowClick = arrowClickHandler(fetchSlides, state, setState)
 
-  return [handleArrowClick, sliderState]
+  return [handleArrowClick, state]
 }
 
 export function setPointerEvents(value) {
   document.getElementById('root').style['pointer-events'] = value
 }
 
-export function useSliderEffects(sliderState) {
+export function useSliderEffects(state) {
   useEffect(() => {
-    const { start, next, prev } = sliderState
+    const { start, next, prev } = state
 
     if (start) return
 
@@ -44,5 +45,5 @@ export function useSliderEffects(sliderState) {
     } else {
       setPointerEvents('auto')
     }
-  }, [sliderState])
+  }, [state])
 }

@@ -16,7 +16,9 @@ export function findNextPage(currentPage, direction, slideLength) {
     return 1
   } else if (page === 0) {
     return limit
-  } else return page
+  } else {
+    return page
+  }
 }
 
 export function nextPage(currentPage, direction) {
@@ -24,5 +26,7 @@ export function nextPage(currentPage, direction) {
     return currentPage + 1
   } else if (direction === PREV) {
     return currentPage - 1
-  } else return currentPage
+  } else {
+    return currentPage
+  }
 }

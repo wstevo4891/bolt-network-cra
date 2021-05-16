@@ -10,19 +10,19 @@ import { useSliderEffects, useSliderState } from './hooks'
 import './Slider.styles.scss'
 
 const Slider = ({ fetchSlides, name, slides }) => {
-  const [handleArrowClick, sliderState] = useSliderState(fetchSlides)
+  const [handleArrowClick, state] = useSliderState(fetchSlides)
 
-  useSliderEffects(sliderState)
+  useSliderEffects(state)
 
   return (
     <div className='slider'>
       <SliderArrow
         direction={PREV}
         handleClick={() => handleArrowClick(PREV)}
-        start={sliderState.start}
+        start={state.start}
       />
       <SlidesContainer
-        {...sliderState}
+        {...state}
         name={name}
         slides={slides}
       />
@@ -35,7 +35,7 @@ const Slider = ({ fetchSlides, name, slides }) => {
 }
 
 Slider.propTypes = {
-  fetchNextSlides: PropTypes.func,
+  fetchSlides: PropTypes.func,
   name: PropTypes.string.isRequired,
   slides: PropTypes.array.isRequired,
 }

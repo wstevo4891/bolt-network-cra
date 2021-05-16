@@ -9,6 +9,20 @@ import {
 
 import { API_URL } from './constants'
 
+async function fetchByGenre(id, page, slideLength) {
+  const url = `${API_URL}/movies/paginated-list/${id}/${slideLength}/${page}`
+  
+  try {
+    const response = await fetch(url)
+
+    const movies = await response.json()
+
+    return movies
+  } catch(error) {
+    console.error(error.message)
+  }
+}
+
 function fetchRecentMovies() {
   return async (dispatch) => {
     try {
@@ -69,6 +83,7 @@ function selectRecentMovies(state) {
 }
 
 export default {
+  fetchByGenre,
   selectMovie,
   selectRecentMovies,
   fetch: fetchMovie,
