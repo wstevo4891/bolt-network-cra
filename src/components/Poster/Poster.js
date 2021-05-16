@@ -40,8 +40,8 @@ const Poster = ({ hoverItem, handleMouseLeave, handleMouseOver, posterData }) =>
 }
 
 Poster.propTypes = {
-  handleMouseOver: PropTypes.func.isRequired,
   handleMouseLeave: PropTypes.func.isRequired,
+  handleMouseOver: PropTypes.func.isRequired,
   posterData: PropTypes.shape({
     container: PropTypes.shape({
       className: PropTypes.string,
