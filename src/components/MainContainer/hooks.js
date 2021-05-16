@@ -3,18 +3,20 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { API } from 'store'
 
-export function useAPI() {
+export function useSlideLengthAPI() {
+  const slideLength = useSelector(API.slideLength.get)
+
   const dispatch = useDispatch()
 
-  return () => {
+  const setSlideLength = () => {
     dispatch(API.slideLength.set())
   }
+
+  return [slideLength, setSlideLength]
 }
 
 export function useSlideLengthManager() {
-  const slideLength = useSelector(API.slideLength.get)
-
-  const setSlideLength = useAPI()
+  const [slideLength, setSlideLength] = useSlideLengthAPI()
 
   useEffect(() => {
     setSlideLength()

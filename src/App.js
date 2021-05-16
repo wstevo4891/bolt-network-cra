@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import { API } from 'store'
@@ -14,24 +14,18 @@ import {
 
 import './App.styles.scss'
 
-export const mapStateToProps = (state) => {
-  const { genres } = state
+const App = () => {
+  const genres = useSelector(API.genres.selectList)
 
-  if (genres === undefined) {
-    return { genres: [] }
-  } else {
-    return { genres: genres.list }
-  }
-}
-
-const App = ({ genres }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(API.genres.fetch())
-  }, [dispatch])
+    if (genres === null) {
+      dispatch(API.genres.fetch())
+    }
+  })
 
-  if (genres.length === 0) return null
+  if (genres === null) return null
 
   return(
     <Router>
@@ -48,4 +42,4 @@ App.propTypes = {
   genres: PropTypes.array.isRequired,
 }
 
-export default connect(mapStateToProps)(App)
+export default App
