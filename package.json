@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^11.2.6",
+    "@testing-library/react-hooks": "^5.1.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",

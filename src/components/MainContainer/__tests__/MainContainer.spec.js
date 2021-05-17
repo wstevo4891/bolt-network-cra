@@ -1,62 +1,50 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import thunk from 'redux-thunk';
+import configureStore from "redux-mock-store";
+import { Provider } from "react-redux";
+import { render, screen } from '@testing-library/react'
 
 import MainContainer from "../MainContainer";
 
+const mockStore = configureStore([thunk]);
+
 describe("<MainContainer />", () => {
-  let props, wrapper;
+  let element, store;
+
+  const renderComponent = () => render(
+    <Provider store={store}>
+      <MainContainer>
+        <p>Hello World</p>
+      </MainContainer>
+    </Provider>
+  );
 
   beforeEach(() => {
-    props = {
-      children: [],
-      setSlideLength: jest.fn(),
-      slideLength: null,
-    };
+    store = mockStore({
+      slideLength: {
+        value: null,
+      },
+    });
   });
 
-  describe("with default props", () => {
-    beforeEach(() => {
-      wrapper = shallow(<MainContainer {...props} />);
-    });
-
+  describe("when slideLength is null", () => {
     it("should not render", () => {
-      expect(wrapper.exists("#main-container")).toBe(false);
-    });
-
-    it("should call setSlideLength", () => {
-      expect(props.setSlideLength).toHaveBeenCalled();
+      renderComponent();
+      element = screen.queryByTestId("main-container");
+      expect(element).toBeNull();
     });
   });
 
   describe("when slideLength is defined", () => {
-    beforeEach(() => {
-      wrapper = shallow(<MainContainer {...props} slideLength={6} />);
-    });
-
     it("should render", () => {
-      expect(wrapper.exists("#main-container")).toBe(true);
-    });
-
-    it("should not call setSlideLength", () => {
-      expect(props.setSlideLength).not.toHaveBeenCalled();
-    });
-
-    it("should match inline snapshot", () => {
-      expect(wrapper).toMatchInlineSnapshot(`
-        <div
-          id="main-container"
-        />
-      `);
+      store = mockStore({
+        slideLength: {
+          value: 6,
+        },
+      });
+      renderComponent();
+      element = screen.getByTestId("main-container");
+      expect(element).not.toBeNull();
     });
   });
-
-  describe('when window size changes', () => {
-    it('should call setSlideLength', () => {
-      mount(<MainContainer {...props} slideLength={6} />);
-      global.innerWidth = 500
-      global.dispatchEvent(new Event('resize'))
-
-      expect(props.setSlideLength).toHaveBeenCalled();
-    })
-  })
 });

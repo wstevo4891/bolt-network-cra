@@ -22,20 +22,12 @@ describe("<MobileView />", () => {
 
   beforeEach(() => {
     props = {
-      resultsProps: {
-        name: "Search_Results",
-        movies: MOVIES,
-        slideLength: 6,
+      handleClick: jest.fn(),
+      suggestion: {
+        text: 'action',
+        type: 'genre',
       },
-      suggestionsProps: {
-        data: {
-          genres: GENRES,
-          movies: MOVIES,
-          people: PEOPLE,
-          query: "foo",
-        },
-        handleClick: jest.fn(),
-      },
+      query: 'action',
     };
   });
 

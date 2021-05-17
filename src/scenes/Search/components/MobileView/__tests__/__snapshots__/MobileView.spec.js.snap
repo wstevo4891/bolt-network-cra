@@ -1,84 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MobileView /> should match snapshot 1`] = `
-<div
-  className="search-results"
->
-  <DisplayContainer>
+<Fragment>
+  <div
+    className="row"
+  >
     <div
-      className="row"
+      className="col-12 mb-2"
     >
-      <div
-        className="col-12 mb-2"
-      >
-        <span
-          className="suggestionsLabel"
-        >
-          Results for "
-          foo
-          "
-        </span>
-      </div>
+      <SuggestionsLabel>
+        Results for "
+        action
+        "
+      </SuggestionsLabel>
     </div>
-    <Connect(Results)
-      movies={
-        Array [
-          Object {
-            "title": "The Avengers",
-          },
-          Object {
-            "title": "Alien",
-          },
-          Object {
-            "title": "Avatar",
-          },
-        ]
+  </div>
+  <SearchResults
+    suggestion={
+      Object {
+        "text": "action",
+        "type": "genre",
       }
-      name="Search_Results"
-      slideLength={6}
+    }
+  />
+  <div
+    className="row"
+  >
+    <Suggestions
+      handleClick={[MockFunction]}
+      query="action"
     />
-    <div
-      className="row"
-    >
-      <Suggestions
-        data={
-          Object {
-            "genres": Array [
-              Object {
-                "title": "Action",
-              },
-              Object {
-                "title": "Sci-Fi",
-              },
-            ],
-            "movies": Array [
-              Object {
-                "title": "The Avengers",
-              },
-              Object {
-                "title": "Alien",
-              },
-              Object {
-                "title": "Avatar",
-              },
-            ],
-            "people": Array [
-              Object {
-                "name": "Ridley Scott",
-              },
-              Object {
-                "name": "James Cameron",
-              },
-              Object {
-                "name": "Joss Whedon",
-              },
-            ],
-            "query": "foo",
-          }
-        }
-        handleClick={[MockFunction]}
-      />
-    </div>
-  </DisplayContainer>
-</div>
+  </div>
+</Fragment>
 `;

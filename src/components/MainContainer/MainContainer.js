@@ -9,7 +9,7 @@ const MainContainer = ({ children }) => {
   if (slideLength === null) return null
 
   return (
-    <div id="main-container">
+    <div id="main-container" data-testid="main-container">
       {children}
     </div>
   )

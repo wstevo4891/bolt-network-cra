@@ -26,8 +26,9 @@ const MobileView = ({ handleClick, suggestion, query }) => (
 )
 
 MobileView.propTypes = {
-  resultsProps: PropTypes.object.isRequired,
-  suggestionsProps: PropTypes.object.isRequired,
+  handleClick: PropTypes.func.isRequired,
+  suggestion: PropTypes.object.isRequired,
+  query: PropTypes.string.isRequired,
 }
 
 export default MobileView

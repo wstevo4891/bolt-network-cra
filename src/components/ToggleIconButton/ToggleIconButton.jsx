@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { LEFT, RIGHT, noop } from 'utils'
 
-import IconButton from './IconButton'
+import IconButton from '../IconButton'
 
 const ToggleIconButton = ({ buttonProps, callback, options, status, text, textPlacement }) => {
   const [iconStatus, setIconStatus] = useState(status)
