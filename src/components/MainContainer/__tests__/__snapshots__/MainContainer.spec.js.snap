@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MainContainer /> when slideLength is defined should match snapshot 1`] = `
+<div>
+  <div
+    data-testid="main-container"
+    id="main-container"
+  >
+    <p>
+      Hello World
+    </p>
+  </div>
+</div>
+`;
