@@ -4,15 +4,11 @@ import {
   FETCH_MOVIE_FAILURE
 } from '../types'
 
-import { errorState, loadingState } from './utils'
+import { errorState, loadingState } from '../utils'
 
-const initialState = {
-  error: null,
-  index: {},
-  loading: false
-}
+import { INITIAL_STATE } from './constants'
 
-export default function moviesIndexReducer(state = initialState, action) {
+export default function indexReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_MOVIE_BEGIN:
       return loadingState(state)

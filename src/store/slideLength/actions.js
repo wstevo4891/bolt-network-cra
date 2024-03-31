@@ -2,7 +2,7 @@ import {
   SET_SLIDE_LENGTH_BEGIN,
   SET_SLIDE_LENGTH_SUCCESS,
   SET_SLIDE_LENGTH_FAILURE,
-} from '../types'
+} from './types'
 
 export const setSlideLengthBegin = () => ({
   type: SET_SLIDE_LENGTH_BEGIN

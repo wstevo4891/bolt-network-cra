@@ -1,12 +1,12 @@
+import { API_URL } from '../../constants'
+
 import {
   fetchSearchResultsBegin,
   fetchSearchResultsFailure,
   fetchSearchResultsSuccess
 } from '../actions'
 
-import { API_URL } from './constants'
-
-function fetchResults(query) {
+export default function fetchSearchResults(query) {
   return async (dispatch) => {
     try {
       if (query === '') return
@@ -22,15 +22,4 @@ function fetchResults(query) {
       dispatch(fetchSearchResultsFailure(error))
     }
   }
-}
-
-function selectResults(state) {
-  const { genres, movies, people } = state.search
-
-  return { genres, movies, people }
-}
-
-export default {
-  fetchResults,
-  selectResults,
 }

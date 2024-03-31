@@ -1,5 +1,3 @@
-// Genres Types
-
 export const FETCH_GENRES_BEGIN = 'FETCH_GENRES_BEGIN'
 
 export const FETCH_GENRES_SUCCESS = 'FETCH_GENRES_SUCCESS'
